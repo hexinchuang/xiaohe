@@ -87,8 +87,15 @@
             <article class="bg-white p-10 rounded-3xl shadow-sm border border-slate-100 prose prose-slate max-w-none">
                 <div class="lang-zh">
                     <h1 class="text-3xl font-black text-slate-900 leading-tight mb-6">2026 全球个人财务管理蓝皮书：从汇率对冲到税务筹划</h1>
-                    <p class="text-slate-600 leading-relaxed mb-4">在2026年的宏观经济背景下，个人财务管理的边界已无限扩展。FinanceHub 2026 提供精准的<b>实时汇率转换</b>、<b>个税计算</b>和<b>房贷规划</b>工具，助力用户在复杂的金融环境中做出科学决策。</p>
-                    <h3 class="text-xl font-bold mt-8 text-blue-600">为什么选择我们的金融工具？</h3>
+                    <p class="text-slate-600 leading-relaxed mb-4">在2026年的宏观经济背景下，个人财务管理的边界已无限扩展。FinanceHub 2026 提供精准的<b>实时汇率转换</b>、<b>个税计算</b>和<b>房贷规划</b>工具。</p>
+                    
+                    <h3 class="text-xl font-bold mt-8 text-blue-600 underline">深度专题资讯 (New)</h3>
+                    <ul class="mt-4 space-y-3">
+                        <li><a href="/currency-trends.html" class="text-blue-600 hover:text-blue-800">· 2026 全球货币体系的波动与机会分析</a></li>
+                        <li><a href="/mortgage-guide.html" class="text-blue-600 hover:text-blue-800">· 中国家庭资产配置：房贷利率市场化下的新思路</a></li>
+                    </ul>
+
+                    <h3 class="text-xl font-bold mt-8 text-slate-800">为什么选择我们的金融工具？</h3>
                     <ul class="list-disc pl-5 space-y-2 text-slate-600">
                         <li><b>实时数据：</b> 汇率接口每小时同步全球各大银行报价。</li>
                         <li><b>合规准绳：</b> 紧跟2026年最新税务政策与LPR利率变动。</li>
@@ -97,13 +104,20 @@
                 </div>
                 
                 <div class="lang-en hidden">
-                    <h1 class="text-3xl font-black text-slate-900 leading-tight mb-6">2026 Global Personal Finance Strategy: From Exchange Rates to Tax Planning</h1>
-                    <p class="text-slate-600 leading-relaxed mb-4">In the 2026 macroeconomic context, the boundaries of personal financial management have expanded. FinanceHub 2026 provides precise <b>real-time currency conversion</b>, <b>income tax calculation</b>, and <b>mortgage planning</b> tools.</p>
-                    <h3 class="text-xl font-bold mt-8 text-blue-600">Why Choose FinanceHub 2026?</h3>
+                    <h1 class="text-3xl font-black text-slate-900 leading-tight mb-6">2026 Global Personal Finance Strategy</h1>
+                    <p class="text-slate-600 leading-relaxed mb-4">In 2026, personal financial management boundaries expand. FinanceHub 2026 provides <b>real-time currency</b>, <b>tax</b>, and <b>mortgage</b> tools.</p>
+                    
+                    <h3 class="text-xl font-bold mt-8 text-blue-600 underline">Featured Insights (New)</h3>
+                    <ul class="mt-4 space-y-3">
+                        <li><a href="/currency-trends.html" class="text-blue-600 hover:text-blue-800">· 2026 Global Currency Trends & Opportunities</a></li>
+                        <li><a href="/mortgage-guide.html" class="text-blue-600 hover:text-blue-800">· Household Asset Allocation: New Ideas for Mortgage</a></li>
+                    </ul>
+
+                    <h3 class="text-xl font-bold mt-8 text-slate-800">Why Choose Us?</h3>
                     <ul class="list-disc pl-5 space-y-2 text-slate-600">
-                        <li><b>Real-time Data:</b> Exchange rates synced with global bank quotes hourly.</li>
-                        <li><b>Policy Alignment:</b> Updated with 2026 tax regulations and LPR rate changes.</li>
-                        <li><b>Privacy First:</b> All calculations are done locally on your device.</li>
+                        <li><b>Real-time:</b> Rates synced with global bank quotes hourly.</li>
+                        <li><b>Aligned:</b> Updated with 2026 tax and LPR changes.</li>
+                        <li><b>Secure:</b> Local calculation, no data uploaded.</li>
                     </ul>
                 </div>
 
@@ -116,14 +130,13 @@
 
     <footer class="bg-white border-t py-10 text-center">
         <div class="text-sm font-bold text-slate-400 space-x-6 mb-4">
-            <a href="#" class="hover:text-blue-600 transition">Privacy Policy</a>
+            <a href="/privacy-policy.html" class="hover:text-blue-600 transition">Privacy Policy (隐私政策)</a>
             <a href="#" class="hover:text-blue-600 transition">Disclaimer</a>
         </div>
         <p class="text-[10px] text-slate-300">© 2026 FinanceHub Pro. Market data provided by Open Exchange API.</p>
     </footer>
 
     <script>
-        // 语言切换逻辑
         let currentLang = 'zh';
         function toggleLang() {
             currentLang = currentLang === 'zh' ? 'en' : 'zh';
@@ -131,17 +144,14 @@
             document.querySelectorAll('.lang-en').forEach(el => el.classList.toggle('hidden', currentLang !== 'en'));
         }
 
-        // 切换导航
         function switchTab(tabId) {
             document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
             document.querySelectorAll('nav button').forEach(b => b.classList.remove('nav-active'));
             document.getElementById(tabId).classList.add('active');
-            // 兼容中英文按钮高亮
             if(currentLang === 'zh') document.getElementById('btn-' + tabId).classList.add('nav-active');
             else document.getElementById('btn-' + tabId + '-en').classList.add('nav-active');
         }
 
-        // 初始化汇率货币
         const curs = ['CNY', 'USD', 'EUR', 'HKD', 'JPY', 'GBP', 'AUD', 'BTC'];
         curs.forEach(c => {
             document.getElementById('fromCurrency').innerHTML += `<option value="${c}">${c}</option>`;
@@ -150,7 +160,6 @@
         document.getElementById('fromCurrency').value = 'CNY';
         document.getElementById('toCurrency').value = 'USD';
 
-        // 汇率换算逻辑
         async function convertCurrency() {
             const amt = document.getElementById('rateAmount').value;
             const from = document.getElementById('fromCurrency').value;
@@ -165,7 +174,6 @@
             } catch (e) { alert(currentLang === 'zh' ? "数据同步失败" : "Sync Failed"); }
         }
 
-        // 个税逻辑 (2026 简化模型)
         function calculateTax() {
             const inc = document.getElementById('taxIncome').value;
             const resBox = document.getElementById('taxResult');
@@ -179,7 +187,6 @@
             resBox.classList.remove('hidden');
         }
 
-        // 房贷逻辑
         function calculateLoan() {
             const m = document.getElementById('loanAmount').value * 10000;
             const y = document.getElementById('loanYear').value * 12;
