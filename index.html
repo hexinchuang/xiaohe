@@ -21,10 +21,15 @@
             <div class="flex items-center space-x-2 font-black text-2xl text-blue-600">
                 <a href="/index.html"><span>FinanceHub</span><span class="text-slate-400">2026</span></a>
             </div>
-            <div class="flex items-center space-x-6 text-sm font-bold">
-                <a href="/index.html" class="nav-active pb-1">汇率转换</a>
-                <a href="/tax-calculator.html" class="pb-1 hover:text-blue-600 transition">个税计算</a>
-                <a href="/mortgage-calculator.html" class="pb-1 hover:text-blue-600 transition">房贷计算</a>
+            <div class="flex items-center space-x-4 md:space-x-8">
+                <div class="hidden md:flex space-x-6 text-sm font-bold">
+                    <a href="/index.html" class="nav-active pb-1">汇率转换</a>
+                    <a href="/tax-calculator.html" class="pb-1 hover:text-blue-600 transition">个税计算</a>
+                    <a href="/mortgage-calculator.html" class="pb-1 hover:text-blue-600 transition">房贷计算</a>
+                </div>
+                <button onclick="toggleLang()" class="bg-slate-100 px-4 py-2 rounded-full text-[10px] font-black hover:bg-blue-50 hover:text-blue-600 transition uppercase tracking-tighter border border-slate-200">
+                    EN / 中文
+                </button>
             </div>
         </div>
     </nav>
@@ -41,6 +46,10 @@
                     </div>
                     <button onclick="convertCurrency()" class="w-full bg-blue-600 text-white py-4 rounded-xl font-bold shadow-lg hover:bg-blue-700 transition">获取实时报价</button>
                     <div id="rateResult" class="hidden mt-4 p-4 bg-blue-50 text-blue-700 rounded-xl text-center font-black text-2xl animate-pulse"></div>
+                </div>
+                <div class="mt-8 pt-8 border-t border-dashed border-slate-200">
+                    <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-2700554011244473" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
+                    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
                 </div>
             </div>
         </div>
@@ -76,8 +85,31 @@
         </div>
     </main>
 
-    <footer class="bg-white border-t py-10 text-center">
-        <p class="text-[10px] text-slate-300">© 2026 FinanceHub Pro. 数据由 Open Exchange API 提供。</p>
+    <section class="max-w-6xl mx-auto px-6 mb-10">
+        <div class="bg-slate-900 rounded-3xl p-8 flex flex-col md:flex-row items-center justify-between gap-6 shadow-2xl">
+            <div class="space-y-2 text-center md:text-left">
+                <h3 class="text-white text-xl font-black italic">FinanceHub 2026 资源中心</h3>
+                <p class="text-slate-400 text-xs">探索更多深度金融工具与历史研报</p>
+            </div>
+            <div class="flex flex-wrap justify-center gap-3">
+                <a href="/index.html" class="px-5 py-2 bg-white/10 text-white rounded-full hover:bg-white/20 transition text-sm">汇率终端</a>
+                <a href="/tax-calculator.html" class="px-5 py-2 bg-white/10 text-white rounded-full hover:bg-white/20 transition text-sm">个税筹划</a>
+                <a href="/mortgage-calculator.html" class="px-5 py-2 bg-white/10 text-white rounded-full hover:bg-white/20 transition text-sm">房贷配置</a>
+                <a href="/archive.html" class="px-5 py-2 bg-blue-600 text-white rounded-full hover:bg-blue-700 transition text-sm font-bold">文章存档</a>
+                <a href="/about.html" class="px-5 py-2 bg-slate-700 text-white rounded-full hover:bg-slate-600 transition text-sm">关于本站</a>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-white border-t py-12 text-center">
+        <div class="max-w-6xl mx-auto px-6">
+            <div class="text-sm font-bold text-slate-400 space-x-6 mb-6">
+                <a href="/privacy-policy.html" class="hover:text-blue-600 transition">隐私政策</a>
+                <a href="/disclaimer.html" class="hover:text-blue-600 transition">免责声明</a>
+                <a href="/about.html" class="hover:text-blue-600 transition">联系我们</a>
+            </div>
+            <p class="text-[10px] text-slate-300">© 2026 FinanceHub Pro. 数据由 Open Exchange API 提供。</p>
+        </div>
     </footer>
 
     <script>
@@ -86,6 +118,7 @@
         const toSel = document.getElementById('toCurrency');
         curs.forEach(c => { fromSel.innerHTML += `<option value="${c}">${c}</option>`; toSel.innerHTML += `<option value="${c}">${c}</option>`; });
         fromSel.value = 'CNY'; toSel.value = 'USD';
+        
         async function convertCurrency() {
             const amt = document.getElementById('rateAmount').value;
             const resBox = document.getElementById('rateResult');
@@ -96,7 +129,15 @@
                 resBox.classList.remove('hidden');
             } catch (e) { alert("同步失败"); }
         }
-        function expandArticle() { document.getElementById('article-wrapper').classList.add('expanded'); document.getElementById('read-more-btn').style.display = 'none'; }
+
+        function expandArticle() { 
+            document.getElementById('article-wrapper').classList.add('expanded'); 
+            document.getElementById('read-more-btn').style.display = 'none'; 
+        }
+
+        function toggleLang() {
+            alert("多语言同步功能正在更新，目前请参考中文深度分析以确保审核合规。");
+        }
     </script>
 </body>
 </html>
