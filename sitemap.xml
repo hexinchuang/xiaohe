@@ -36,4 +36,8 @@
     <loc>https://3333777.xyz/disclaimer.html</loc>
     <priority>0.4</priority>
   </url>
+  <url>
+    <loc>https://3333777.xyz/interest-rate-2026.html</loc>
+    <priority>0.7</priority>
+  </url>
 </urlset>
