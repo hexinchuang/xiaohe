@@ -12,7 +12,15 @@
     <style>
         body { background: #f8fafc; font-family: 'Inter', system-ui, sans-serif; }
         .nav-active { color: #2563eb; border-bottom: 2px solid #2563eb; }
-        .glass-card { background: rgba(255, 255, 255, 0.9); backdrop-filter: blur(10px); }
+        
+        /* 阅读全文交互样式 */
+        #article-wrapper { max-height: 900px; overflow: hidden; position: relative; transition: max-height 0.5s ease; }
+        #article-wrapper.expanded { max-height: 6000px; }
+        .read-more-overlay {
+            position: absolute; bottom: 0; left: 0; width: 100%; height: 200px;
+            background: linear-gradient(transparent, white); pointer-events: none;
+        }
+        #article-wrapper.expanded .read-more-overlay { display: none; }
     </style>
 </head>
 <body class="text-slate-800">
@@ -20,13 +28,15 @@
     <nav class="bg-white shadow-sm sticky top-0 z-50">
         <div class="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
             <div class="flex items-center space-x-2 font-black text-2xl text-blue-600">
-                <a href="/index.html"><span>FinanceHub</span><span class="text-slate-400">2026</span></a>
+                <a href="/index.html" class="flex items-center">
+                    <span>FinanceHub</span><span class="text-slate-400">2026</span>
+                </a>
             </div>
             <div class="flex items-center space-x-6">
                 <div class="hidden md:flex space-x-6 text-sm font-bold">
                     <a href="/index.html" class="nav-active pb-1">汇率转换</a>
-                    <a href="/tax-calculator.html" class="pb-1 hover:text-blue-600">个税计算</a>
-                    <a href="/mortgage-calculator.html" class="pb-1 hover:text-blue-600">房贷计算</a>
+                    <a href="/tax-calculator.html" class="pb-1 hover:text-blue-600 transition">个税计算</a>
+                    <a href="/mortgage-calculator.html" class="pb-1 hover:text-blue-600 transition">房贷计算</a>
                 </div>
             </div>
         </div>
@@ -38,45 +48,106 @@
             <div class="bg-white p-8 rounded-3xl shadow-xl border border-slate-100 sticky top-24">
                 <h2 class="text-xl font-black mb-6">实时汇率转换器</h2>
                 <div class="space-y-4">
-                    <input type="number" id="rateAmount" value="100" class="w-full p-4 bg-slate-50 border rounded-2xl text-xl font-bold focus:ring-2 focus:ring-blue-500 outline-none">
-                    <div class="grid grid-cols-2 gap-4">
-                        <select id="fromCurrency" class="p-4 bg-slate-100 rounded-xl font-bold"></select>
-                        <select id="toCurrency" class="p-4 bg-slate-100 rounded-xl font-bold"></select>
+                    <div class="relative">
+                        <label class="block text-[10px] font-bold text-slate-400 uppercase mb-1 ml-1">输入金额</label>
+                        <input type="number" id="rateAmount" value="100" class="w-full p-4 bg-slate-50 border rounded-2xl text-xl font-bold focus:ring-2 focus:ring-blue-500 outline-none transition">
                     </div>
-                    <button onclick="convertCurrency()" class="w-full bg-blue-600 text-white py-4 rounded-xl font-bold shadow-lg hover:bg-blue-700 transition">获取实时报价</button>
+                    <div class="grid grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-[10px] font-bold text-slate-400 uppercase mb-1 ml-1">从</label>
+                            <select id="fromCurrency" class="w-full p-4 bg-slate-100 rounded-xl font-bold appearance-none cursor-pointer"></select>
+                        </div>
+                        <div>
+                            <label class="block text-[10px] font-bold text-slate-400 uppercase mb-1 ml-1">至</label>
+                            <select id="toCurrency" class="w-full p-4 bg-slate-100 rounded-xl font-bold appearance-none cursor-pointer"></select>
+                        </div>
+                    </div>
+                    <button onclick="convertCurrency()" class="w-full bg-blue-600 text-white py-4 rounded-xl font-bold shadow-lg hover:bg-blue-700 active:scale-[0.98] transition-all">获取实时报价</button>
                     <div id="rateResult" class="hidden mt-4 p-4 bg-blue-50 text-blue-700 rounded-xl text-center font-black text-2xl animate-pulse"></div>
                 </div>
                 
                 <div class="mt-8 pt-8 border-t border-dashed border-slate-200">
-                    <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-2700554011244473" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
+                    <ins class="adsbygoogle"
+                         style="display:block"
+                         data-ad-client="ca-pub-2700554011244473"
+                         data-ad-slot="auto"
+                         data-ad-format="auto"
+                         data-full-width-responsive="true"></ins>
                     <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
                 </div>
             </div>
         </div>
 
         <div class="lg:col-span-7 space-y-8">
-            <article class="bg-white p-10 rounded-3xl shadow-sm border border-slate-100 prose max-w-none">
-                <h1 class="text-3xl font-black text-slate-900 leading-tight mb-6">2026 全球货币体系重构：后高利率时代的汇率对冲深度解析</h1>
-                
-                <p class="text-slate-600 mb-4 leading-relaxed">
-                    进入 2026 年，全球宏观经济环境发生了深刻变革。随着美联储正式结束长达数年的紧缩周期，全球货币政策进入了高度分化期。对于跨境投资者和普通家庭而言，理解这一时期的汇率波动逻辑是资产保值的关键。
-                </p>
+            <div class="bg-white p-8 lg:p-10 rounded-3xl shadow-sm border border-slate-100 relative">
+                <div id="article-wrapper">
+                    <article class="prose max-w-none">
+                        <h1 class="text-3xl font-black text-slate-900 leading-tight mb-2">2026 全球货币体系重构：后高利率时代的汇率对冲深度解析</h1>
+                        <p class="text-blue-600 font-bold mb-8 italic">多维博弈下的全球财富导航指南</p>
 
-                <h2 class="text-xl font-bold text-slate-800 mt-8 mb-4">一、美元指数的结构性回调与人民币资产韧性</h2>
-                <p class="text-slate-600 mb-4 leading-relaxed">
-                    在 2026 年的全球贸易框架下，美元指数不再维持单一走强的态势。随着离岸人民币（CNH）在国际结算中占比的进一步提升，人民币汇率的双向波动特征愈发明显。通过本站提供的实时汇率工具，用户可以观察到短期流动性与中长期基本面的博弈...（此处应继续填充至 800 字以上内容）
-                </p>
+                        <div class="bg-blue-50 p-6 rounded-2xl mb-8 border-l-4 border-blue-500">
+                            <p class="text-slate-700 leading-relaxed m-0 text-sm">
+                                <strong>核心综述：</strong> 进入 2026 年，全球宏观经济的主旋律正从“抗击通胀”转向“信用重构”。在美联储降息与地缘博弈的交织下，货币体系呈现出前所未有的分化态势。理解这一逻辑已成为资产保值的必修课。
+                            </p>
+                        </div>
 
-                <h2 class="text-xl font-bold text-slate-800 mt-8 mb-4">二、如何利用汇率工具进行家庭财务对冲</h2>
-                <p class="text-slate-600 mb-4 leading-relaxed">
-                    对于有海外留学或旅游需求的家庭，分批次换汇策略在 2026 年显得尤为重要。利用我们集成的 API 接口，用户可以捕捉到极窄的汇率波动区间，从而降低交易成本。
-                </p>
-                
-                <div class="bg-blue-50 p-6 rounded-2xl border-l-4 border-blue-500 my-8">
-                    <h3 class="font-bold text-blue-800 mb-2">专业建议：</h3>
-                    <p class="text-sm text-blue-700">不要试图预测汇率的最低点，而应通过定投式换汇来平摊成本，这是 2026 年资产配置的稳健策略。</p>
+                        <h2 class="text-xl font-bold text-slate-800 mt-10 mb-4 flex items-center">
+                            <span class="bg-blue-600 text-white w-8 h-8 rounded-full flex items-center justify-center mr-3 text-sm font-mono">01</span>
+                            体系重构：旧秩序瓦解与新力量崛起
+                        </h2>
+                        <p class="text-slate-600 mb-4 leading-relaxed">
+                            2026 年的货币格局正经历一场深度的“信用压力测试”。长期以来，美元的地位建立在“美国国债是全球最安全资产”的共识之上。然而，随着美国联邦政府债务占 GDP 比重突破 123%，且高企的利息支出持续消耗财政资源，这一基石正被动摇。
+                        </p>
+                        <p class="text-slate-600 mb-4 leading-relaxed">
+                            其次，重构表现为国际治理的“碎片化”。各国在经济上更倾向于“本土优先”，推动全球供应链从效率优先的“大循环”转向安全优先的“区域小循环”。与之对称的是，货币结算网络的区域化聚集：在欧亚及东盟地区，本币结算占比显著提升，正在蚕食美元的网络外部性。
+                        </p>
+
+                        <h2 class="text-xl font-bold text-slate-800 mt-10 mb-4 flex items-center">
+                            <span class="bg-blue-600 text-white w-8 h-8 rounded-full flex items-center justify-center mr-3 text-sm font-mono">02</span>
+                            汇率波动：分化世界中的货币众生相
+                        </h2>
+                        <p class="text-slate-600 mb-4 leading-relaxed">
+                            <strong>美元：结构性回调与政治不确定。</strong> 随着美联储降息周期开启，美元指数波动中枢进一步下移。虽然美国 AI 投资带来的韧性支撑了其底色，但 2026 年美国中期选举的政治不确定性构成了持续扰动。
+                        </p>
+                        <p class="text-slate-600 mb-4 leading-relaxed">
+                            <strong>人民币：韧性增强与双向波动。</strong> 2026 年人民币汇率的关键在于对美元走势的“脱敏”。尽管外部存在不确定性，但在中国出口韧性与稳健金融市场的支撑下，人民币有望保持温和升值倾向，双向波动仍是常态。
+                        </p>
+
+                        <h2 class="text-xl font-bold text-slate-800 mt-10 mb-4 flex items-center">
+                            <span class="bg-blue-600 text-white w-8 h-8 rounded-full flex items-center justify-center mr-3 text-sm font-mono">03</span>
+                            家庭财务对冲：在不确定性中构建防御工事
+                        </h2>
+                        <p class="text-slate-600 mb-4 leading-relaxed">
+                            对于普通家庭，目标不应是精准预测拐点，而是构建防御体系：
+                        </p>
+                        <ul class="list-disc pl-5 text-slate-600 space-y-3 mb-6">
+                            <li><strong>分批定投换汇：</strong> 针对留学等确定的海外开支，将金额分散到 12 个月中执行，平摊兑换成本，避免择时幻想。</li>
+                            <li><strong>资产差异化对冲：</strong> 海外债券建议全额对冲以锁定回报；股票资产通常建议保留汇率敞口，以避免对冲成本侵蚀收益。</li>
+                            <li><strong>零成本期权保护：</strong> 针对大额头寸，利用风险逆转期权组合锁定未来汇率区间。</li>
+                        </ul>
+
+                        <div class="bg-orange-50 p-6 rounded-2xl border-l-4 border-orange-500 my-8">
+                            <h3 class="font-bold text-orange-800 mb-2">深度提示：</h3>
+                            <p class="text-sm text-orange-700 leading-relaxed m-0">
+                                在 2026 年信用重构的环境下，适当配置与法定货币弱相关的实物资产（如黄金、能源或高现金流资产），本身就是对法币购买力长期不确定性的一种根本性对冲。
+                            </p>
+                        </div>
+
+                        <h2 class="text-xl font-bold text-slate-800 mt-10 mb-4 flex items-center">
+                            <span class="bg-blue-600 text-white w-8 h-8 rounded-full flex items-center justify-center mr-3 text-sm font-mono">04</span>
+                            未来展望：构建财富韧性
+                        </h2>
+                        <p class="text-slate-600 leading-relaxed mb-6">
+                            全球货币体系重构是一场马拉松。聪明的家庭财务官不押注单一货币的胜利，而是通过纪律、分散和工具应用，确保财富航船在任何风浪中行稳致远。
+                        </p>
+                    </article>
+                    <div class="read-more-overlay"></div>
                 </div>
-            </article>
+                
+                <div class="text-center mt-6">
+                    <button onclick="expandArticle()" id="read-more-btn" class="bg-blue-600 text-white px-10 py-3 rounded-full font-bold shadow-lg hover:bg-blue-700 active:scale-95 transition-all">展开阅读全文</button>
+                </div>
+            </div>
         </div>
     </main>
 
@@ -89,7 +160,7 @@
     </footer>
 
     <script>
-        // 汇率转换逻辑
+        // 汇率转换核心逻辑
         const curs = ['CNY', 'USD', 'EUR', 'HKD', 'JPY', 'GBP', 'AUD', 'BTC'];
         const fromSel = document.getElementById('fromCurrency');
         const toSel = document.getElementById('toCurrency');
@@ -107,12 +178,24 @@
             const to = toSel.value;
             const resBox = document.getElementById('rateResult');
             try {
+                resBox.innerText = "数据同步中...";
+                resBox.classList.remove('hidden');
                 const r = await fetch(`https://open.er-api.com/v6/latest/${from}`);
                 const d = await r.json();
                 const res = (amt * d.rates[to]).toFixed(2);
                 resBox.innerText = `${res} ${to}`;
-                resBox.classList.remove('hidden');
-            } catch (e) { alert("数据获取失败，请稍后重试"); }
+            } catch (e) { 
+                alert("汇率同步失败，请检查网络连接"); 
+                resBox.classList.add('hidden');
+            }
+        }
+
+        // 阅读全文展开逻辑
+        function expandArticle() {
+            const wrapper = document.getElementById('article-wrapper');
+            const btn = document.getElementById('read-more-btn');
+            wrapper.classList.add('expanded');
+            btn.style.display = 'none';
         }
     </script>
 </body>
