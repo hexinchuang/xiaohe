@@ -10,7 +10,7 @@
         body { background: #f8fafc; font-family: 'Inter', system-ui, sans-serif; }
         .nav-active { color: #2563eb; border-bottom: 2px solid #2563eb; }
         #article-wrapper { max-height: 800px; overflow: hidden; position: relative; transition: max-height 0.5s ease; }
-        #article-wrapper.expanded { max-height: 5000px; }
+        #article-wrapper.expanded { max-height: 8000px; }
         .read-more-overlay { position: absolute; bottom: 0; left: 0; width: 100%; height: 200px; background: linear-gradient(transparent, white); pointer-events: none; }
         #article-wrapper.expanded .read-more-overlay { display: none; }
         table { font-size: 0.75rem; border-collapse: collapse; width: 100%; }
@@ -23,10 +23,15 @@
             <div class="flex items-center space-x-2 font-black text-2xl text-blue-600">
                 <a href="/index.html"><span>FinanceHub</span><span class="text-slate-400">2026</span></a>
             </div>
-            <div class="flex items-center space-x-6 text-sm font-bold">
-                <a href="/index.html" class="pb-1 hover:text-blue-600 transition">汇率转换</a>
-                <a href="/tax-calculator.html" class="pb-1 hover:text-blue-600 transition">个税计算</a>
-                <a href="/mortgage-calculator.html" class="nav-active pb-1">房贷计算</a>
+            <div class="flex items-center space-x-4 md:space-x-8">
+                <div class="hidden md:flex space-x-6 text-sm font-bold">
+                    <a href="/index.html" class="pb-1 hover:text-blue-600 transition">汇率转换</a>
+                    <a href="/tax-calculator.html" class="pb-1 hover:text-blue-600 transition">个税计算</a>
+                    <a href="/mortgage-calculator.html" class="nav-active pb-1">房贷计算</a>
+                </div>
+                <button onclick="toggleLang()" class="bg-slate-100 px-4 py-2 rounded-full text-[10px] font-black hover:bg-blue-50 hover:text-blue-600 transition uppercase tracking-tighter border border-slate-200">
+                    EN / 中文
+                </button>
             </div>
         </div>
     </nav>
@@ -34,13 +39,17 @@
     <main class="max-w-6xl mx-auto px-6 py-10 grid lg:grid-cols-12 gap-10">
         <div class="lg:col-span-5">
             <div class="bg-white p-8 rounded-3xl shadow-xl border border-slate-100 sticky top-24">
-                <h2 class="text-xl font-black mb-6 italic">房贷月供试算</h2>
+                <h2 class="text-xl font-black mb-6 italic text-blue-600">房贷月供试算</h2>
                 <div class="space-y-4">
-                    <input type="number" id="mAmount" placeholder="贷款总额(万)" class="w-full p-4 bg-slate-50 border rounded-2xl">
+                    <input type="number" id="mAmount" placeholder="贷款总额(万)" class="w-full p-4 bg-slate-50 border rounded-2xl text-lg font-bold outline-none focus:ring-2 focus:ring-blue-500">
                     <input type="number" id="mYear" placeholder="年限(如 30)" class="w-full p-4 bg-slate-50 border rounded-2xl">
                     <input type="number" id="mRate" placeholder="年利率%(如 3.2)" class="w-full p-4 bg-slate-50 border rounded-2xl">
-                    <button onclick="calculateM()" class="w-full bg-blue-600 text-white py-4 rounded-xl font-bold shadow-lg transition">开始计算</button>
-                    <div id="mResult" class="hidden mt-4 p-4 bg-orange-50 text-orange-700 rounded-xl"></div>
+                    <button onclick="calculateM()" class="w-full bg-blue-600 text-white py-4 rounded-xl font-bold shadow-lg hover:bg-blue-700 active:scale-95 transition-all">开始计算</button>
+                    <div id="mResult" class="hidden mt-4 p-4 bg-orange-50 text-orange-700 rounded-xl space-y-2"></div>
+                </div>
+                <div class="mt-8 pt-8 border-t border-dashed border-slate-200">
+                    <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-2700554011244473" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
+                    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
                 </div>
             </div>
         </div>
@@ -48,41 +57,94 @@
         <div class="lg:col-span-7">
             <div class="bg-white p-10 rounded-3xl shadow-sm border border-slate-100 relative">
                 <div id="article-wrapper">
-                    <article class="prose max-w-none text-sm text-slate-600">
-                        <h1 class="text-2xl font-black text-slate-900 mb-6">2026 房贷利率市场化全解析：优化家庭资产负债表</h1>
+                    <article class="prose max-w-none text-sm text-slate-600 leading-relaxed">
+                        <h1 class="text-3xl font-black text-slate-900 leading-tight mb-2">2026 房贷利率市场化全解析</h1>
+                        <p class="text-blue-600 font-bold mb-8 italic">优化家庭资产负债表：从利率“双降”中获益</p>
+
+                        <div class="bg-blue-50 p-6 rounded-2xl mb-8 border-l-4 border-blue-500">
+                            <p class="text-slate-700 text-sm m-0">
+                                <strong>核心导读：</strong> 2026年房贷利率步入市场化深度改革期，商业贷款与公积金利率实现“双降”格局。理解重定价周期与提前还贷策略，已成为中产家庭理财的必修课。
+                            </p>
+                        </div>
+
+                        <h2 class="text-xl font-bold text-slate-800 mb-4 font-mono">01 2026 利率市场全景</h2>
+                        <p class="mb-4">进入 2026 年，全国范围内存量房贷迎来显著调整周期。选择年初重定价的客户，新利率可低至 3.05% 左右。这种降幅不仅反映了 LPR 报价机制的灵活性，更通过降低利息支出，切实优化了居民的现金流状况。</p>
+
+                        <div class="overflow-x-auto rounded-xl border border-slate-200 my-6">
+                            <table>
+                                <thead class="bg-slate-50">
+                                    <tr><th>加点类型</th><th>调整前</th><th>2026调整后</th><th>月供减少(百万贷款)</th></tr>
+                                </thead>
+                                <tbody>
+                                    <tr><td>LPR-45BP</td><td>3.15%</td><td>3.05%</td><td>约 59 元</td></tr>
+                                    <tr><td>LPR-30BP</td><td>3.30%</td><td>3.20%</td><td>约 95 元</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <h2 class="text-xl font-bold text-slate-800 mb-4 font-mono">02 还款模型与资金时间价值</h2>
+                        <p class="mb-4">等额本息与等额本金的选择，本质上是现金流压力与利息总成本的博弈。在当前低利率背景下，资金的“时间价值”愈发珍贵。若家庭具备年化收益高于 3.5% 的稳健投资渠道，保持流动性往往比急于降低本金更为理智。</p>
+
+                        <h2 class="text-xl font-bold text-slate-800 mb-4 font-mono">03 商转公与组合贷款优化</h2>
+                        <p class="mb-6">公积金利率目前低至 2.6%（5年以上首套房）。多地推行的“顺位抵押”模式显著降低了商转公的门槛。通过利用 FinanceHub 的房贷计算工具，您可以精准测算置换后的利息节省额度，为家庭资产负债表减负。</p>
                         
-                        <p class="mb-6 font-bold text-blue-600">从 2026 年 1 月 1 日起，全国存量房贷实现商贷与公积金“双降”。</p>
-
-                        <h2 class="font-bold text-slate-800 mb-4 font-mono">01 利率调整示例</h2>
-                        <table>
-                            <thead class="bg-slate-50"><tr><th>加点类型</th><th>调整前</th><th>2026调整后</th><th>月供减少(百万贷款)</th></tr></thead>
-                            <tbody>
-                                <tr><td>LPR-45BP</td><td>3.15%</td><td>3.05%</td><td>约 59 元</td></tr>
-                                <tr><td>LPR-30BP</td><td>3.30%</td><td>3.20%</td><td>约 95 元</td></tr>
-                            </tbody>
-                        </table>
-
-                        <h2 class="font-bold text-slate-800 mt-8 mb-4 font-mono">02 商转公策略</h2>
-                        <p>5 年以上首套个人公积金贷款利率调整为 2.6%。通过“顺位抵押”无需自筹垫资即可冲还原商贷。</p>
+                        <div class="bg-orange-50 p-6 rounded-2xl border-l-4 border-orange-500 mb-8 italic text-xs text-orange-700">
+                            <strong>理财建议：</strong> 决策核心在于对比“投资年化收益率”与“房贷利率”。若您的房贷利率低于 3.5%，保持适度负债以对冲通胀，通常是更优选择。
+                        </div>
                     </article>
                     <div class="read-more-overlay"></div>
                 </div>
                 <div class="text-center mt-6">
-                    <button onclick="expandArticle()" id="read-more-btn" class="bg-blue-600 text-white px-10 py-3 rounded-full font-bold shadow-lg hover:bg-blue-700 transition">阅读全文</button>
+                    <button onclick="expandArticle()" id="read-more-btn" class="bg-blue-600 text-white px-10 py-3 rounded-full font-bold shadow-lg hover:bg-blue-700 active:scale-95 transition-all">展开阅读全文</button>
                 </div>
             </div>
         </div>
     </main>
+
+    <section class="max-w-6xl mx-auto px-6 mb-10">
+        <div class="bg-slate-900 rounded-3xl p-8 flex flex-col md:flex-row items-center justify-between gap-6 shadow-2xl">
+            <div class="text-center md:text-left">
+                <h3 class="text-white text-xl font-black italic">FinanceHub 2026 资源中心</h3>
+                <p class="text-slate-400 text-xs">探索更多深度金融工具与历史研报</p>
+            </div>
+            <div class="flex flex-wrap justify-center gap-3">
+                <a href="/archive.html" class="px-5 py-2 bg-blue-600 text-white rounded-full hover:bg-blue-700 transition text-sm font-bold">文章存档</a>
+                <a href="/about.html" class="px-5 py-2 bg-white/10 text-white rounded-full hover:bg-white/20 transition text-sm">关于本站</a>
+                <a href="/index.html" class="px-5 py-2 bg-white/10 text-white rounded-full hover:bg-white/20 transition text-sm">汇率终端</a>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-white border-t py-12 text-center text-[10px] text-slate-300">
+        <div class="max-w-6xl mx-auto px-6 mb-6 flex justify-center space-x-6 text-slate-400 font-bold">
+            <a href="/privacy-policy.html" class="hover:text-blue-600">隐私政策</a>
+            <a href="/disclaimer.html" class="hover:text-blue-600">免责声明</a>
+            <a href="/about.html" class="hover:text-blue-600">联系我们</a>
+        </div>
+        <p>© 2026 FinanceHub Pro. 数据支持由 Open Exchange API 提供。致力于提供原创且具实质价值的金融资讯。</p>
+    </footer>
+
     <script>
         function calculateM() {
             const m = document.getElementById('mAmount').value * 10000;
             const y = document.getElementById('mYear').value * 12;
             const r = document.getElementById('mRate').value / 100 / 12;
+            const resBox = document.getElementById('mResult');
+            
+            if(!m || !y || !r) return alert("请填写完整贷款信息");
+            
             const res = (m * r * Math.pow(1 + r, y)) / (Math.pow(1 + r, y) - 1);
-            document.getElementById('mResult').innerHTML = `<div class='font-bold'>月供: ¥${res.toFixed(2)}</div>`;
-            document.getElementById('mResult').classList.remove('hidden');
+            resBox.innerHTML = `
+                <div class='font-bold text-lg text-orange-600'>参考月供: ¥${res.toFixed(2)}</div>
+                <div class='text-xs opacity-70 mt-1'>* 基于2026最新LPR利率基准演示</div>
+            `;
+            resBox.classList.remove('hidden');
         }
-        function expandArticle() { document.getElementById('article-wrapper').classList.add('expanded'); document.getElementById('read-more-btn').style.display = 'none'; }
+        function expandArticle() { 
+            document.getElementById('article-wrapper').classList.add('expanded'); 
+            document.getElementById('read-more-btn').style.display = 'none'; 
+        }
+        function toggleLang() { alert("多语言同步功能正在更新，目前请参考中文深度分析以确保审核合规。"); }
     </script>
 </body>
 </html>
