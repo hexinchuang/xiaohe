@@ -3,14 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>2026 个税计算器与专项扣除指南 - FinanceHub</title>
-    <meta name="description" content="2026最新个税计算工具，深度解析新规下的起征点、税率表及七项专项附加扣除，助力家庭科学节税。">
-    
+    <title>2026 个税优化实战手册：家庭现金流提升指南 - FinanceHub</title>
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2700554011244473" crossorigin="anonymous"></script>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         body { background: #f8fafc; font-family: 'Inter', system-ui, sans-serif; }
         .nav-active { color: #2563eb; border-bottom: 2px solid #2563eb; }
+        /* 阅读全文交互样式 */
+        #article-wrapper { max-height: 900px; overflow: hidden; position: relative; transition: max-height 0.5s ease; }
+        #article-wrapper.expanded { max-height: 6000px; }
+        .read-more-overlay {
+            position: absolute; bottom: 0; left: 0; width: 100%; height: 200px;
+            background: linear-gradient(transparent, white); pointer-events: none;
+        }
+        #article-wrapper.expanded .read-more-overlay { display: none; }
+        /* 表格微调 */
+        table td, table th { padding: 12px 8px; border-bottom: 1px solid #f1f5f9; font-size: 0.75rem; line-height: 1.4; }
     </style>
 </head>
 <body class="text-slate-800">
@@ -21,27 +29,24 @@
                 <a href="/index.html"><span>FinanceHub</span><span class="text-slate-400">2026</span></a>
             </div>
             <div class="flex items-center space-x-6 text-sm font-bold">
-                <a href="/index.html" class="pb-1 hover:text-blue-600">汇率转换</a>
+                <a href="/index.html" class="pb-1 hover:text-blue-600 transition">汇率转换</a>
                 <a href="/tax-calculator.html" class="nav-active pb-1">个税计算</a>
-                <a href="/mortgage-calculator.html" class="pb-1 hover:text-blue-600">房贷计算</a>
+                <a href="/mortgage-calculator.html" class="pb-1 hover:text-blue-600 transition">房贷计算</a>
             </div>
         </div>
     </nav>
 
     <main class="max-w-6xl mx-auto px-6 py-10 grid lg:grid-cols-12 gap-10">
-        
         <div class="lg:col-span-5">
             <div class="bg-white p-8 rounded-3xl shadow-xl border border-slate-100 sticky top-24">
-                <h2 class="text-xl font-black mb-6">2026 个税试算 (新规)</h2>
+                <h2 class="text-xl font-black mb-6 italic text-blue-600">2026 个税试算 (新规)</h2>
                 <div class="space-y-4">
-                    <label class="block text-xs font-bold text-slate-400 uppercase">月收入 (起征点 5000)</label>
-                    <input type="number" id="taxIncome" value="15000" class="w-full p-4 bg-slate-50 border rounded-2xl text-xl font-bold focus:ring-2 focus:ring-blue-500 outline-none">
-                    
-                    <button onclick="calculateTax()" class="w-full bg-blue-600 text-white py-4 rounded-xl font-bold shadow-lg hover:bg-blue-700 transition">计算税后收入</button>
-                    
+                    <label class="block text-xs font-bold text-slate-400 uppercase ml-1">月收入 (起征点 5000)</label>
+                    <input type="number" id="taxIncome" value="15000" class="w-full p-4 bg-slate-50 border rounded-2xl text-xl font-bold focus:ring-2 focus:ring-blue-500 outline-none transition">
+                    <button onclick="calculateTax()" class="w-full bg-blue-600 text-white py-4 rounded-xl font-bold shadow-lg hover:bg-blue-700 active:scale-95 transition-all">计算税后收入</button>
                     <div id="taxResult" class="hidden mt-4 p-4 bg-green-50 text-green-700 rounded-xl space-y-2"></div>
                 </div>
-
+                
                 <div class="mt-8 pt-8 border-t border-dashed border-slate-200">
                     <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-2700554011244473" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
                     <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
@@ -49,43 +54,117 @@
             </div>
         </div>
 
-        <div class="lg:col-span-7 space-y-8">
-            <article class="bg-white p-10 rounded-3xl shadow-sm border border-slate-100 prose max-w-none">
-                <h1 class="text-3xl font-black text-slate-900 mb-6">2026 新规解读：如何通过个税优化提升家庭净现金流</h1>
+        <div class="lg:col-span-7">
+            <div class="bg-white p-8 lg:p-10 rounded-3xl shadow-sm border border-slate-100 relative">
+                <div id="article-wrapper">
+                    <article class="prose max-w-none">
+                        <h1 class="text-3xl font-black text-slate-900 leading-tight mb-2">个税优化实战手册：2026 家庭现金流提升指南</h1>
+                        <p class="text-blue-600 font-bold mb-8 italic">让每一分“隐形财富”落入家庭口袋</p>
+
+                        <div class="bg-blue-50 p-6 rounded-2xl mb-8 border-l-4 border-blue-500">
+                            <p class="text-slate-700 leading-relaxed m-0 text-sm italic">
+                                <strong>核心摘要：</strong> 2026年，个税已从固定扣除项转变为需要主动规划的财务变量。理解专项附加扣除与全球收入合规申报，是提升家庭净现金流的关键。
+                            </p>
+                        </div>
+
+                        <h2 class="text-xl font-bold text-slate-800 mt-8 mb-4">一、2026年个税优化核心逻辑</h2>
+                        <p class="text-slate-600 mb-4 leading-relaxed text-sm">
+                            2026年的个税体系优化建立在三个支点上：每月5000元的固定起征点、七项直指民生的专项附加扣除，以及通过次年3-6月汇算清缴实现的“多退少补”。
+                        </p>
+
+                        <h2 class="text-xl font-bold text-slate-800 mt-8 mb-4">二、专项附加扣除深度解析：保留表格排版</h2>
+                        
+                        <div class="overflow-x-auto rounded-xl border border-slate-200 my-6">
+                            <table class="min-w-full bg-white leading-normal">
+                                <thead class="bg-slate-50 text-slate-900 font-bold">
+                                    <tr>
+                                        <th class="text-left">扣除项目</th>
+                                        <th class="text-left">2026标准</th>
+                                        <th class="text-left">关键规则</th>
+                                        <th class="text-left">策略建议</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="text-slate-600">
+                                    <tr>
+                                        <td class="font-bold">子女教育</td>
+                                        <td>2000元/月/孩</td>
+                                        <td>境内外均可；父母协商扣除比例。</td>
+                                        <td>建议由高收入方100%扣除以最大化节税。</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="font-bold">婴幼儿照护</td>
+                                        <td>2000元/月/婴</td>
+                                        <td>出生当月至满3周岁前一月。</td>
+                                        <td>起算时间节点需精准录入APP。</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="font-bold">赡养老人</td>
+                                        <td>3000元/月</td>
+                                        <td>年满60岁；非独生子女需分摊（每人≤1500）。</td>
+                                        <td>与兄弟姐妹约定分摊协议。</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="font-bold">住房利息</td>
+                                        <td>1000元/月</td>
+                                        <td>首套房贷；最长240个月；与租金互斥。</td>
+                                        <td>婚后约定由一方扣除。</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="font-bold">大病医疗</td>
+                                        <td>8万限额/年</td>
+                                        <td>医保后个人负担超1.5万部分；年度汇总。</td>
+                                        <td>仅限本人/配偶/子女，不含父母。</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <h2 class="text-xl font-bold text-slate-800 mt-10 mb-4">三、跨境创作者与投资者的合规之道</h2>
+                        <p class="text-slate-600 mb-4 leading-relaxed text-sm">
+                            随着中国参与 CRS 及 CARF 框架，税务机关对居民全球所得的掌控力空前。跨境稿酬或投资收益需纳入次年汇算清缴。稿酬所得通常可享受减除20%费用后再打7折的优惠（实际税负约5.6折），且境外已缴税款可依法抵免。
+                        </p>
+
+                        <div class="bg-orange-50 p-6 rounded-2xl border-l-4 border-orange-500 my-8">
+                            <h3 class="font-bold text-orange-800 mb-2">合规警示：</h3>
+                            <p class="text-xs text-orange-700 leading-relaxed m-0 italic">
+                                任何侥幸心理都可能带来滞纳金风险。税务机关已推行“五步工作法”（提示、约谈、稽查等）精准监管大额补税案例。
+                            </p>
+                        </div>
+
+                        <h2 class="text-xl font-bold text-slate-800 mt-10 mb-4">四、构建 2026 家庭个税优化时间表</h2>
+                        <p class="text-slate-600 mb-4 leading-relaxed text-sm">
+                            <strong>全年日常：</strong> 保留录取通知、租房合同、大病结算单。<br>
+                            <strong>每年12月：</strong> 登录 APP 确认专项附加扣除，及时处理满额或到期项。<br>
+                            <strong>次年3-6月：</strong> 汇算清缴，利用大病扣除和境外税收抵免完成最终申报。
+                        </p>
+                    </article>
+                    <div class="read-more-overlay"></div>
+                </div>
                 
-                <p class="text-slate-600 mb-6 leading-relaxed">
-                    在 2026 年的财税环境下，个税不再仅仅是一项被动扣除的开支，更是家庭财务规划的重要变量。通过合理利用年度汇算清缴和专项附加扣除，中等收入家庭往往能实现显著的税后收益增长。
-                </p>
-
-                <h2 class="text-xl font-bold text-slate-800 mb-4">一、理解 2026 个税计算的底层逻辑</h2>
-                <p class="text-slate-600 mb-4">
-                    本工具基于最新的年度综合所得计税逻辑。根据政策，起征点维持在 5000 元/月，但七项专项附加扣除的标准在 2026 年得到了进一步优化，尤其是针对“一老一小”的照顾力度进一步加大。这意味着，同样的税前月薪，通过合理的合规抵扣，税后实发金额可能存在数百元的差异。
-                </p>
-
-                <h2 class="text-xl font-bold text-slate-800 mb-4">二、专项附加扣除：您可能遗漏的“隐形财富”</h2>
-                <ul class="list-disc pl-5 text-slate-600 space-y-2 mb-6">
-                    <li><strong>婴幼儿照护与子女教育</strong>：支持 2026 最新额度标准，直接抵减应纳税所得额。</li>
-                    <li><strong>赡养老人</strong>：根据家庭成员分摊比例进行动态调整。</li>
-                    <li><strong>住房贷款利息与住房租金</strong>：针对一线城市与新兴城市实行差异化抵扣政策。</li>
-                </ul>
-
-                <h2 class="text-xl font-bold text-slate-800 mb-4">三、写给创作者的建议</h2>
-                <p class="text-slate-600">
-                    如果您像我一样是一名 YouTube 创作者，在处理海外收入报税时，务必关注双边避税协议的更新。保持财务透明和合规是长期经营的基石。
-                </p>
-            </article>
+                <div class="text-center mt-6">
+                    <button onclick="expandArticle()" id="read-more-btn" class="bg-blue-600 text-white px-10 py-3 rounded-full font-bold shadow-lg hover:bg-blue-700 active:scale-95 transition-all">展开阅读全文</button>
+                </div>
+            </div>
         </div>
     </main>
 
     <script>
+        function expandArticle() {
+            document.getElementById('article-wrapper').classList.add('expanded');
+            document.getElementById('read-more-btn').style.display = 'none';
+        }
+
         function calculateTax() {
             const inc = document.getElementById('taxIncome').value;
             const resBox = document.getElementById('taxResult');
             let taxable = inc - 5000;
-            // 简单逻辑：超过部分按 10% 试算，实际需根据税率表分级
+            // 简单计税演示逻辑
             let tax = taxable > 0 ? taxable * 0.1 : 0; 
-            const html = `<div>应纳税额: ¥${tax.toFixed(2)}</div><div class='font-bold text-xl'>税后实发: ¥${(inc - tax).toFixed(2)}</div>`;
-            resBox.innerHTML = html;
+            resBox.innerHTML = `
+                <div class='text-sm'>应纳税所得额预估: ¥${taxable.toFixed(2)}</div>
+                <div class='font-bold text-xl'>税后实发参考: ¥${(inc - tax).toFixed(2)}</div>
+                <div class='text-[10px] mt-2 opacity-70'>* 未计入五险一金及专项附加扣除，仅供参考</div>
+            `;
             resBox.classList.remove('hidden');
         }
     </script>
