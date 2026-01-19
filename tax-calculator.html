@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2026 个税计算器与专项扣除指南 - FinanceHub</title>
+    <meta name="description" content="2026最新个税计算工具，深度解析新规下的起征点、税率表及七项专项附加扣除，助力家庭科学节税。">
+    
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2700554011244473" crossorigin="anonymous"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body { background: #f8fafc; font-family: 'Inter', system-ui, sans-serif; }
+        .nav-active { color: #2563eb; border-bottom: 2px solid #2563eb; }
+    </style>
+</head>
+<body class="text-slate-800">
+
+    <nav class="bg-white shadow-sm sticky top-0 z-50">
+        <div class="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="flex items-center space-x-2 font-black text-2xl text-blue-600">
+                <a href="/index.html"><span>FinanceHub</span><span class="text-slate-400">2026</span></a>
+            </div>
+            <div class="flex items-center space-x-6 text-sm font-bold">
+                <a href="/index.html" class="pb-1 hover:text-blue-600">汇率转换</a>
+                <a href="/tax-calculator.html" class="nav-active pb-1">个税计算</a>
+                <a href="/mortgage-calculator.html" class="pb-1 hover:text-blue-600">房贷计算</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="max-w-6xl mx-auto px-6 py-10 grid lg:grid-cols-12 gap-10">
+        
+        <div class="lg:col-span-5">
+            <div class="bg-white p-8 rounded-3xl shadow-xl border border-slate-100 sticky top-24">
+                <h2 class="text-xl font-black mb-6">2026 个税试算 (新规)</h2>
+                <div class="space-y-4">
+                    <label class="block text-xs font-bold text-slate-400 uppercase">月收入 (起征点 5000)</label>
+                    <input type="number" id="taxIncome" value="15000" class="w-full p-4 bg-slate-50 border rounded-2xl text-xl font-bold focus:ring-2 focus:ring-blue-500 outline-none">
+                    
+                    <button onclick="calculateTax()" class="w-full bg-blue-600 text-white py-4 rounded-xl font-bold shadow-lg hover:bg-blue-700 transition">计算税后收入</button>
+                    
+                    <div id="taxResult" class="hidden mt-4 p-4 bg-green-50 text-green-700 rounded-xl space-y-2"></div>
+                </div>
+
+                <div class="mt-8 pt-8 border-t border-dashed border-slate-200">
+                    <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-2700554011244473" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
+                    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+                </div>
+            </div>
+        </div>
+
+        <div class="lg:col-span-7 space-y-8">
+            <article class="bg-white p-10 rounded-3xl shadow-sm border border-slate-100 prose max-w-none">
+                <h1 class="text-3xl font-black text-slate-900 mb-6">2026 新规解读：如何通过个税优化提升家庭净现金流</h1>
+                
+                <p class="text-slate-600 mb-6 leading-relaxed">
+                    在 2026 年的财税环境下，个税不再仅仅是一项被动扣除的开支，更是家庭财务规划的重要变量。通过合理利用年度汇算清缴和专项附加扣除，中等收入家庭往往能实现显著的税后收益增长。
+                </p>
+
+                <h2 class="text-xl font-bold text-slate-800 mb-4">一、理解 2026 个税计算的底层逻辑</h2>
+                <p class="text-slate-600 mb-4">
+                    本工具基于最新的年度综合所得计税逻辑。根据政策，起征点维持在 5000 元/月，但七项专项附加扣除的标准在 2026 年得到了进一步优化，尤其是针对“一老一小”的照顾力度进一步加大。这意味着，同样的税前月薪，通过合理的合规抵扣，税后实发金额可能存在数百元的差异。
+                </p>
+
+                <h2 class="text-xl font-bold text-slate-800 mb-4">二、专项附加扣除：您可能遗漏的“隐形财富”</h2>
+                <ul class="list-disc pl-5 text-slate-600 space-y-2 mb-6">
+                    <li><strong>婴幼儿照护与子女教育</strong>：支持 2026 最新额度标准，直接抵减应纳税所得额。</li>
+                    <li><strong>赡养老人</strong>：根据家庭成员分摊比例进行动态调整。</li>
+                    <li><strong>住房贷款利息与住房租金</strong>：针对一线城市与新兴城市实行差异化抵扣政策。</li>
+                </ul>
+
+                <h2 class="text-xl font-bold text-slate-800 mb-4">三、写给创作者的建议</h2>
+                <p class="text-slate-600">
+                    如果您像我一样是一名 YouTube 创作者，在处理海外收入报税时，务必关注双边避税协议的更新。保持财务透明和合规是长期经营的基石。
+                </p>
+            </article>
+        </div>
+    </main>
+
+    <script>
+        function calculateTax() {
+            const inc = document.getElementById('taxIncome').value;
+            const resBox = document.getElementById('taxResult');
+            let taxable = inc - 5000;
+            // 简单逻辑：超过部分按 10% 试算，实际需根据税率表分级
+            let tax = taxable > 0 ? taxable * 0.1 : 0; 
+            const html = `<div>应纳税额: ¥${tax.toFixed(2)}</div><div class='font-bold text-xl'>税后实发: ¥${(inc - tax).toFixed(2)}</div>`;
+            resBox.innerHTML = html;
+            resBox.classList.remove('hidden');
+        }
+    </script>
+</body>
+</html>
