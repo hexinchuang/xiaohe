@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title data-zh="2026 全球汇率分析与实时转换终端 - FinanceHub" data-en="2026 Global Currency Terminal - FinanceHub">2026 全球汇率分析与实时转换终端 - FinanceHub</title>
+    <title data-zh="2026 全球汇率精算终端 - FinanceHub" data-en="2026 Global Currency Terminal - FinanceHub">2026 全球汇率精算终端 - FinanceHub</title>
     <link rel="icon" href="/favicon.ico" type="image/x-icon">
     
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2700554011244473" crossorigin="anonymous"></script>
@@ -20,14 +20,17 @@
     <style>
         body { background: #f8fafc; font-family: 'Inter', system-ui, sans-serif; line-height: 1.8; }
         .nav-active { color: #2563eb; border-bottom: 2px solid #2563eb; }
-        /* 💡 这里的 max-height 设为 50000px，确保 2000 字长文完整展示不被截断 */
         #article-wrapper { max-height: 900px; overflow: hidden; position: relative; transition: max-height 0.8s ease; }
         #article-wrapper.expanded { max-height: 50000px; } 
         .read-more-overlay { position: absolute; bottom: 0; left: 0; width: 100%; height: 300px; background: linear-gradient(transparent, white); pointer-events: none; }
         #article-wrapper.expanded .read-more-overlay { display: none; }
-        .prose h2 { font-size: 1.6rem; font-weight: 900; color: #0f172a; margin-top: 2.5rem; margin-bottom: 1.25rem; border-left: 5px solid #2563eb; padding-left: 1rem; }
-        .prose p { margin-bottom: 1.5rem; text-align: justify; color: #475569; }
-        .prose strong { color: #1e293b; font-weight: 800; }
+        
+        /* 原创计算器样式 [参考 image_00e3b5.png 风格] */
+        .currency-card { transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); border: 2px solid transparent; }
+        .currency-card:focus-within { border-color: #2563eb; box-shadow: 0 10px 25px -5px rgba(37, 99, 235, 0.1); }
+        .swap-btn { transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+        .swap-btn:hover { transform: rotate(180deg); }
+        .flag-icon { width: 24px; height: 18px; object-fit: cover; border-radius: 3px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
     </style>
 </head>
 <body class="text-slate-800">
@@ -42,27 +45,55 @@
                     <a href="/tax-calculator.html" class="pb-1 hover:text-blue-600 transition" data-zh="个税计算" data-en="Tax">个税计算</a>
                     <a href="/mortgage-calculator.html" class="pb-1 hover:text-blue-600 transition" data-zh="房贷计算" data-en="Mortgage">房贷计算</a>
                 </div>
-                <button id="langSwitcher" onclick="toggleLang()" class="bg-slate-100 px-4 py-2 rounded-full text-[10px] font-black hover:bg-blue-50 transition border border-slate-200 uppercase">
-                    EN / 中文
-                </button>
+                <button id="langSwitcher" onclick="toggleLang()" class="bg-slate-100 px-4 py-2 rounded-full text-[10px] font-black border uppercase">EN / 中文</button>
             </div>
         </div>
     </nav>
 
     <main class="max-w-6xl mx-auto px-6 py-10 grid lg:grid-cols-12 gap-10">
         <div class="lg:col-span-5">
-            <div class="bg-white p-8 rounded-3xl shadow-xl border border-slate-100 sticky top-24 text-center">
-                <h2 class="text-xl font-black mb-6 italic" data-zh="实时汇率转换终端" data-en="Currency Terminal">实时汇率转换终端</h2>
-                <div class="space-y-4">
-                    <input type="number" id="rateAmount" value="100" class="w-full p-4 bg-slate-50 border rounded-2xl text-xl font-bold outline-none focus:ring-2 focus:ring-blue-500 transition">
-                    <div class="grid grid-cols-2 gap-4">
-                        <select id="fromCurrency" class="p-4 bg-slate-100 rounded-xl font-bold"></select>
-                        <select id="toCurrency" class="p-4 bg-slate-100 rounded-xl font-bold"></select>
+            <div class="bg-white p-8 rounded-[2.5rem] shadow-2xl border border-slate-100 sticky top-24">
+                <h2 class="text-xl font-black mb-8 italic flex items-center gap-2" data-zh="实时汇率精算终端" data-en="Live FX Actuary">
+                    <span class="w-2 h-6 bg-blue-600 rounded-full"></span> 实时汇率精算终端
+                </h2>
+                
+                <div class="space-y-4 relative">
+                    <div class="bg-slate-50 p-6 rounded-3xl currency-card">
+                        <label class="block text-[10px] font-black text-slate-400 uppercase mb-2" data-zh="您要转换的金额" data-en="Amount to Convert">您要转换的金额</label>
+                        <div class="flex items-center gap-4">
+                            <input type="number" id="rateAmount" value="1000" class="bg-transparent text-3xl font-black w-full outline-none">
+                            <div class="flex items-center gap-2 bg-white px-4 py-2 rounded-xl border border-slate-200">
+                                <img id="fromFlag" src="https://flagcdn.com/w40/cn.png" class="flag-icon" alt="flag">
+                                <select id="fromCurrency" onchange="updateUI()" class="font-bold bg-transparent outline-none cursor-pointer"></select>
+                            </div>
+                        </div>
                     </div>
-                    <button onclick="convertCurrency()" class="w-full bg-blue-600 text-white py-4 rounded-xl font-bold shadow-lg hover:bg-blue-700 transition" data-zh="获取实时报价" data-en="Get Rates">获取实时报价</button>
-                    <div id="rateResult" class="hidden mt-4 p-4 bg-blue-50 text-blue-700 rounded-xl font-black text-2xl animate-pulse"></div>
+
+                    <div class="absolute left-1/2 -translate-x-1/2 -translate-y-1/2 z-10">
+                        <button onclick="swapCurrencies()" class="swap-btn bg-white p-3 rounded-full shadow-lg border border-slate-100 text-blue-600 hover:bg-blue-50">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M7 16V4m0 0L3 8m4-4l4 4m6 0v12m0 0l4-4m-4 4l-4-4"/></svg>
+                        </button>
+                    </div>
+
+                    <div class="bg-slate-900 p-6 rounded-3xl">
+                        <label class="block text-[10px] font-black text-slate-500 uppercase mb-2" data-zh="转换结果" data-en="Conversion Result">转换结果</label>
+                        <div class="flex items-center gap-4">
+                            <div id="rateResult" class="text-3xl font-black text-white w-full">---</div>
+                            <div class="flex items-center gap-2 bg-white/10 px-4 py-2 rounded-xl border border-white/10">
+                                <img id="toFlag" src="https://flagcdn.com/w40/us.png" class="flag-icon" alt="flag">
+                                <select id="toCurrency" onchange="updateUI()" class="font-bold bg-transparent text-white outline-none cursor-pointer"></select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button onclick="convertCurrency()" class="w-full bg-blue-600 text-white py-5 rounded-2xl font-black shadow-lg hover:bg-blue-700 transition active:scale-95" data-zh="获取最新实时报价" data-en="Get Live Exchange Rate">获取最新实时报价</button>
+                    
+                    <div class="text-center">
+                        <span class="text-[10px] text-slate-400 font-bold uppercase tracking-widest" data-zh="数据源: Open Exchange 实时同步" data-en="Powered by Open Exchange Real-time Sync">数据源: Open Exchange 实时同步</span>
+                    </div>
                 </div>
-                <div class="mt-8 pt-8 border-t border-dashed border-slate-200">
+
+                <div class="mt-8 pt-8 border-t border-dashed">
                     <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-2700554011244473" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
                     <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
                 </div>
@@ -70,60 +101,94 @@
         </div>
 
         <div class="lg:col-span-7">
-            <div class="bg-white p-10 rounded-3xl shadow-sm border border-slate-100 relative">
+            <div class="bg-white p-10 rounded-[2.5rem] shadow-sm border border-slate-100 relative">
                 <div id="article-wrapper">
                     <article class="prose max-w-none text-sm leading-relaxed text-slate-600">
                         <h1 class="text-3xl font-black text-slate-900 mb-6 leading-tight" data-zh="2026 全球货币体系重构：汇率对冲与资产防御深度白皮书" data-en="2026 Global Currency Reconfiguration: Hedging & Defense Whitepaper">2026 全球货币体系重构：汇率对冲与资产防御深度白皮书</h1>
                         
                         <h2 data-zh="一、利率周期的分化与全球资产重估" data-en="I. Divergent Rate Cycles & Asset Revaluation">一、利率周期的分化与全球资产重估</h2>
-                        <p data-zh="2026年全球宏观经济的核心特征的是“政策分化下的失衡与再平衡”。发达经济体与东方市场的利率周期已形成显著背离，这种背离正驱动全球资产价格进入新一轮重估周期。" data-en="The core feature of 2026 global macroeconomics is 'imbalance and rebalance under policy divergence.' The rate cycles of developed and Eastern markets have significantly deviated, driving a new cycle of asset revaluation.">2026年全球宏观经济的核心特征的是“政策分化下的失衡与再平衡”。发达经济体与东方市场的利率周期已形成显著背离，这种背离正驱动全球资产价格进入新一轮重估周期。</p>
+                        <p data-zh="2026年全球宏观经济的核心特征的是“政策分化下的失衡与再平衡”。发达经济体与东方市场的利率周期已形成显著背离。美联储的政策路径仍处于“高利率退坡”的谨慎阶段，高盛预测其2026年将完成两次降息。" data-en="The core feature of 2026 global macroeconomics is 'imbalance and rebalance under policy divergence.' The rate cycles of developed and Eastern markets have significantly deviated. The Fed remains in a cautious 'high-rate roll-back' phase.">2026年全球宏观经济的核心特征的是“政策分化下的失衡与再平衡”。发达经济体与东方市场的利率周期已形成显著背离。</p>
                         
-                        <p data-zh="在此背景下，人民币资产展现出独特的抗波动性，离岸人民币（CNH）对美元指数波动的脱敏特征尤为显著。2025年人民币汇率经历“先抑后扬”的走势，年初受关税政策扰动一度贬破7.40关口，年末则随内外部环境改善回升至“7”以下。" data-en="Against this backdrop, RMB assets show unique resilience. CNH's desensitization to USD fluctuations is notable. After a volatile 2025, RMB has recovered to sub-7 levels following improved conditions.">在此背景下，人民币资产展现出独特的抗波动性，离岸人民币（CNH）对美元指数波动的脱敏特征尤为显著。</p>
-
-                        <p data-zh="对于跨境创作者、外贸从业者及投资者而言，利率分化带来的汇率波动已成为不可忽视的财富变量。以跨境电商从业者为例，离岸人民币对美元每波动50个基点，一笔10万美元的订单利润就可能发生3500元左右的变动。借助实时汇率终端捕捉短期波动、搭建左侧对冲策略，已成为日常理财的必修课。" data-en="For cross-border creators and investors, exchange volatility is a critical wealth variable. A 50BP move can impact a $100k order profit by 3500 RMB. Using our terminal for hedging has become a necessary daily skill.">对于跨境创作者、外贸从业者及投资者而言，利率分化带来的汇率波动已成为不可忽视的财富变量。</p>
+                        <p data-zh="在此背景下，人民币资产展现出独特的抗波动性，离岸人民币（CNH）对美元指数波动的脱敏特征尤为显著。进入2026年1月，即便美指走强，在岸与离岸人民币仍逆势升值，资金面保持稳健。" data-en="Against this backdrop, RMB assets show unique resilience. CNH's desensitization to USD fluctuations is notable. By Jan 2026, RMB continues to strengthen against a strong USD index, maintaining steady liquidity.">在此背景下，人民币资产展现出独特的抗波动性，离岸人民币（CNH）对美元指数波动的脱敏特征尤为显著。</p>
 
                         <h2 data-zh="二、房贷利率市场化：家庭负债端的守卫战" data-en="II. Mortgage Liberalization: Defending Household Debt">二、房贷利率市场化：家庭负债端的守卫战</h2>
-                        <p data-zh="2026年1月20日，贷款市场报价利率（LPR）的更新成为引爆家庭负债端优化的关键节点。当日5年期以上LPR下调至3.5%，这一调整与此前公积金利率的下行形成协同效应。早在2026年1月1日，存量公积金利率已先行下调25个基点至2.6%。" data-en="On Jan 20, 2026, the LPR update became a key node for debt optimization. The 5-year LPR dropped to 3.5%, creating synergy with earlier provident fund rate cuts.">2026年1月20日，贷款市场报价利率（LPR）的更新成为引爆家庭负债端优化的关键节点。</p>
-
-                        <p data-zh="商贷领域的优惠力度更为显著，当前核心城市首套商贷利率最低可至3.05%。100万元30年期首套商贷，利率下调后月均还款减少545元，30年总省息超19.6万元。这部分资金既可为消费市场注入动力，也能提升家庭资产的抗风险能力。" data-en="Commercial mortgage benefits are significant, with prime rates hitting 3.05%. A 1M RMB loan saves 545 RMB monthly after the cut, totaling 196k RMB in interest savings over 30 years.">商贷领域的优惠力度更为显著，当前核心城市首套商贷利率最低可至3.05%。100万元30年期首套商贷，利率下调后月均还款减少545元。</p>
+                        <p data-zh="2026年1月20日，贷款市场报价利率（LPR）的更新成为引爆负债优化的关键节点。5年期以上LPR下调至3.5%，与此前公积金利率的下行形成协同效应。此次利率调整将为全国6000万房贷家庭每年合计省息超525亿元。" data-en="On Jan 20, 2026, the LPR update became a key node for debt optimization. The 5-year LPR dropped to 3.5%, creating synergy with earlier provident fund rate cuts, saving 60 million households over 52.5 billion RMB annually.">2026年1月20日，贷款市场报价利率（LPR）的更新成为引爆家庭负债端优化的关键节点。</p>
 
                         <h2 data-zh="三、个税筹划 2.0：被忽略的家庭“隐形红包”" data-en="III. Tax Planning 2.0: The Forgotten Household Bonus">三、个税筹划 2.0：被忽略的家庭“隐形红包”</h2>
-                        <p data-zh="2026年个税法修正案推动专项附加扣除进入2.0时代。3岁以下婴幼儿照护与子女教育专项附加扣除均为每孩每月2000元，赡养老人专项附加扣除标准则提升至每月3000元。这些扣除有效对冲了通胀对购买力的侵蚀。" data-en="The 2026 tax amendment pushes deductions into the 2.0 era. Childcare and education deductions are 2000 RMB/month per child, while elderly care hits 3000 RMB/month. These effectively offset inflation.">2026年个税法修正案推动专项附加扣除从“被动填报”迈入“主动配置”的2.0时代。</p>
-
-                        <p data-zh="以普通双职工家庭为例，通过优化丈夫与妻子的申报额度，年度节税额度可达4320元。这一金额足以覆盖普通家庭一整年的宽带与能源支出。FinanceHub 2026 致力于推动金融透明化，帮助家庭掌握最优申报方案，将政策红利转化为财富增量。" data-en="For average dual-income families, optimizing declarations can save 4320 RMB annually, covering a year's internet and energy costs. We aim to convert policy dividends into wealth growth.">以一对夫妻养育两名子女的家庭为例，年度节税额度可达4320元。这一金额足以覆盖普通家庭一整年的宽带与能源支出。</p>
+                        <p data-zh="2026年个税法修正案推动专项附加扣除进入2.0时代。3岁以下婴幼儿照护与子女教育专项附加扣除均为每孩每月2000元。FinanceHub 2026 致力于推动金融透明化，帮助家庭掌握最优申报方案，将政策红利转化为财富增量。" data-en="The 2026 tax amendment pushes deductions into the 2.0 era. Childcare and education deductions are 2000 RMB/month per child. We aim to convert policy dividends into tangible wealth growth through transparency.">2026年个税法修正案推动专项附加扣除从“被动填报”迈入“主动配置”的2.0时代。</p>
 
                         <h2 data-zh="四、结语：技术驱动的财富隐私权" data-en="IV. Conclusion: Tech-Driven Wealth Privacy">四、结语：技术驱动的财富隐私权</h2>
-                        <p data-zh="2026年财富管理的核心命题已转向“如何掌控数据”。FinanceHub 2026 坚守数据控制权归用户所有。所有计算均在浏览器本地完成，汇率同步、房贷精算、个税试算无需上传个人财务数据，实现隐私不泄露。" data-en="Wealth management in 2026 focuses on data control. We ensure calculations stay in the browser. Your financial data is never uploaded, ensuring zero privacy leaks.">2026年，在全球金融市场波动加剧的背景下，数据的安全性与私密性成为守护财富的最后一道防线。</p>
+                        <p data-zh="2026年财富管理的核心命题已转向“如何掌控数据”。FinanceHub 2026 坚守数据控制权归用户所有。所有计算逻辑均在浏览器本地完成，汇率同步、房贷精算、个税试算无需上传数据，实现隐私不泄露。" data-en="Wealth management in 2026 is about data control. We ensure calculations stay in the browser. Your financial data is never uploaded, ensuring zero privacy leaks.">2026年，在全球金融市场波动加剧的背景下，数据的安全性与私密性成为守护财富的最后一道防线。</p>
                     </article>
                     <div class="read-more-overlay"></div>
                 </div>
                 <div class="text-center mt-6">
-                    <button onclick="expandArticle()" id="read-more-btn" class="bg-blue-600 text-white px-10 py-3 rounded-full font-bold shadow-lg hover:bg-blue-700 transition" data-zh="展开阅读全文" data-en="Read Full Article">展开阅读全文</button>
+                    <button onclick="expandArticle()" id="read-more-btn" class="bg-blue-600 text-white px-10 py-3 rounded-full font-bold shadow-lg hover:bg-blue-700 transition" data-zh="展开深度研报全文" data-en="Read Full Deep Report">展开深度研报全文</button>
                 </div>
             </div>
         </div>
     </main>
 
-    <footer class="bg-white border-t py-12 text-center">
-        <div class="max-w-6xl mx-auto px-6">
-            <div class="text-sm font-bold text-slate-400 space-x-6 mb-6 uppercase">
-                <a href="/privacy-policy.html" data-zh="隐私政策" data-en="Privacy">隐私政策</a>
-                <a href="/disclaimer.html" data-zh="免责声明" data-en="Disclaimer">免责声明</a>
-                <a href="/about.html" data-zh="联系我们" data-en="Contact">联系我们</a>
-            </div>
-            <p class="text-[10px] text-slate-300 uppercase tracking-widest italic" data-zh="© 2026 FinanceHub Pro. 数据由第三方 API 实时提供。" data-en="© 2026 FinanceHub Pro. Data provided by 3rd-party APIs.">© 2026 FinanceHub Pro. 数据由第三方 API 实时提供。</p>
-        </div>
+    <footer class="bg-white border-t py-12 text-center text-[10px] text-slate-300 uppercase tracking-[0.2em] font-bold">
+        © 2026 FinanceHub Pro | High-Quality Financial Terminal
     </footer>
 
     <script>
-        // 💡 全局多语言同步逻辑（同步 LocalStorage）
+        // 💡 货币与国旗映射表
+        const currencyData = {
+            'CNY': { flag: 'cn', name: '人民币' },
+            'USD': { flag: 'us', name: '美元' },
+            'EUR': { flag: 'eu', name: '欧元' },
+            'JPY': { flag: 'jp', name: '日元' },
+            'HKD': { flag: 'hk', name: '港元' },
+            'GBP': { flag: 'gb', name: '英镑' },
+            'AUD': { flag: 'au', name: '澳元' }
+        };
+
+        const fromSel = document.getElementById('fromCurrency');
+        const toSel = document.getElementById('toCurrency');
+
+        function initCurrencies() {
+            Object.keys(currencyData).forEach(code => {
+                fromSel.innerHTML += `<option value="${code}">${code}</option>`;
+                toSel.innerHTML += `<option value="${code}">${code}</option>`;
+            });
+            fromSel.value = 'CNY';
+            toSel.value = 'USD';
+            updateUI();
+        }
+
+        function updateUI() {
+            document.getElementById('fromFlag').src = `https://flagcdn.com/w40/${currencyData[fromSel.value].flag}.png`;
+            document.getElementById('toFlag').src = `https://flagcdn.com/w40/${currencyData[toSel.value].flag}.png`;
+        }
+
+        function swapCurrencies() {
+            const temp = fromSel.value;
+            fromSel.value = toSel.value;
+            toSel.value = temp;
+            updateUI();
+            convertCurrency();
+        }
+
+        async function convertCurrency() {
+            const amt = document.getElementById('rateAmount').value;
+            const resBox = document.getElementById('rateResult');
+            resBox.innerText = "...";
+            try {
+                const r = await fetch(`https://open.er-api.com/v6/latest/${fromSel.value}`);
+                const d = await r.json();
+                const result = (amt * d.rates[toSel.value]).toFixed(2);
+                resBox.innerText = result.toLocaleString();
+            } catch (e) { alert("获取汇率失败，请重试。"); }
+        }
+
         function applyLang(lang) {
             document.querySelectorAll('[data-zh]').forEach(el => {
                 el.innerText = el.getAttribute(`data-${lang}`);
             });
             localStorage.setItem('site_lang', lang);
-            const btn = document.getElementById('langSwitcher');
-            if(btn) btn.innerText = lang === 'zh' ? 'EN / 中文' : '中文 / EN';
+            document.getElementById('langSwitcher').innerText = lang === 'zh' ? 'EN / 中文' : '中文 / EN';
         }
 
         function toggleLang() {
@@ -132,30 +197,10 @@
         }
 
         window.addEventListener('DOMContentLoaded', () => {
+            initCurrencies();
             const savedLang = localStorage.getItem('site_lang') || 'zh';
             applyLang(savedLang);
         });
-
-        // 汇率脚本
-        const curs = ['CNY', 'USD', 'EUR', 'HKD', 'JPY'];
-        const fromSel = document.getElementById('fromCurrency');
-        const toSel = document.getElementById('toCurrency');
-        curs.forEach(c => { 
-            fromSel.innerHTML += `<option value="${c}">${c}</option>`; 
-            toSel.innerHTML += `<option value="${c}">${c}</option>`; 
-        });
-        fromSel.value = 'CNY'; toSel.value = 'USD';
-        
-        async function convertCurrency() {
-            const amt = document.getElementById('rateAmount').value;
-            const resBox = document.getElementById('rateResult');
-            try {
-                const r = await fetch(`https://open.er-api.com/v6/latest/${fromSel.value}`);
-                const d = await r.json();
-                resBox.innerText = `${(amt * d.rates[toSel.value]).toFixed(2)} ${toSel.value}`;
-                resBox.classList.remove('hidden');
-            } catch (e) { alert("获取汇率失败，请重试。"); }
-        }
 
         function expandArticle() { 
             document.getElementById('article-wrapper').classList.add('expanded'); 
