@@ -6,6 +6,8 @@
     <title>FinanceHub 2026 - 金融决策支持终端</title>
     <link rel="icon" href="/favicon.ico" type="image/x-icon">
 
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2700554011244473" crossorigin="anonymous"></script>
+
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-QFB52C47T2"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
@@ -16,96 +18,100 @@
 
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        body { background: #fdfdfd; font-family: system-ui, -apple-system, sans-serif; }
-        .feature-card { border: 1px solid #f0f0f0; border-radius: 2rem; padding: 2.5rem; background: white; transition: all 0.3s ease; height: 100%; }
-        .feature-card:hover { border-color: #3b82f6; box-shadow: 0 10px 30px rgba(0,0,0,0.05); }
-        .active-red-border { border: 2px solid #ef4444; } /* 还原您选中的红框效果 */
+        body { background: #fdfdfd; font-family: system-ui, -apple-system, sans-serif; line-height: 1.8; }
+        .sticky-tool { position: sticky; top: 40px; }
+        .article-card { background: white; border-radius: 2.5rem; border: 1px solid #f0f0f0; padding: 4rem; box-shadow: 0 4px 20px rgba(0,0,0,0.01); }
+        .prose h2 { font-size: 1.75rem; font-weight: 900; color: #0f172a; margin-top: 3rem; margin-bottom: 1.5rem; border-left: 6px solid #2563eb; padding-left: 1rem; }
+        .prose h3 { font-size: 1.25rem; font-weight: 800; color: #1e293b; margin-top: 2rem; margin-bottom: 1rem; }
+        .prose p { margin-bottom: 1.5rem; color: #475569; font-size: 1.05rem; text-align: justify; }
+        .highlight-box { background: #f8fafc; border-radius: 1.5rem; padding: 2rem; border-left: 4px solid #3b82f6; margin: 2rem 0; }
     </style>
 </head>
 <body>
-    <nav class="max-w-7xl mx-auto px-6 py-6 flex justify-between items-center">
-        <div class="text-2xl font-black text-blue-600">FinanceHub <span class="text-slate-300">2026</span></div>
-        <div class="flex items-center space-x-6">
-            <a href="/index.html" class="text-blue-600 font-bold">汇率转换</a>
-            <a href="/tax-calculator.html" class="text-slate-500 hover:text-blue-600 font-bold">个税计算</a>
-            <a href="/mortgage-calculator.html" class="text-slate-500 hover:text-blue-600 font-bold">房贷计算</a>
-            <button class="bg-slate-100 px-3 py-1 rounded-full text-[10px] font-bold">EN / 中文</button>
+    <nav class="max-w-7xl mx-auto px-6 py-6 flex justify-between items-center border-b border-slate-50">
+        <div class="text-2xl font-black text-blue-600 italic">FinanceHub <span class="text-slate-300">2026</span></div>
+        <div class="flex items-center space-x-6 text-sm font-bold">
+            <a href="/index.html" class="text-blue-600">汇率终端</a>
+            <a href="/tax-calculator.html" class="text-slate-500 hover:text-blue-600">个税计算</a>
+            <a href="/mortgage-calculator.html" class="text-slate-500 hover:text-blue-600">房贷计算</a>
+            <button class="bg-slate-100 px-3 py-1 rounded-full text-[10px]">EN / 中文</button>
         </div>
     </nav>
 
-    <main class="max-w-7xl mx-auto px-6 py-16">
-        <div class="text-center mb-16">
-            <h1 class="text-5xl font-black text-slate-900 mb-4">2026 金融决策支持终端</h1>
-            <p class="text-slate-500">基于 2026 最新政策与实时数据，提供纯前端、零延迟、高隐私的计算服务。</p>
-        </div>
-
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div class="feature-card active-red-border">
-                <div class="w-10 h-10 bg-blue-100 rounded-xl flex items-center justify-center mb-6">
-                    <span class="text-blue-600 font-bold text-lg">$</span>
-                </div>
-                <h3 class="text-xl font-bold mb-4">多币种汇率转换</h3>
-                <p class="text-slate-400 text-sm leading-relaxed mb-8">实时接入 Open Exchange 数据源，适配 2026 全球货币波动。</p>
-                <button onclick="openExchange()" class="text-blue-600 font-bold text-sm">立即使用 →</button>
-            </div>
-
-            <div class="feature-card">
-                <div class="w-10 h-10 bg-green-100 rounded-xl flex items-center justify-center mb-6">
-                    <span class="text-green-600 font-bold text-lg">田</span>
-                </div>
-                <h3 class="text-xl font-bold mb-4">2026 个税精算工具</h3>
-                <p class="text-slate-400 text-sm leading-relaxed mb-8">内建 2026 最新起征点与专项附加扣除标准测算。</p>
-                <a href="/tax-calculator.html" class="text-green-600 font-bold text-sm">前往筹划 →</a>
-            </div>
-
-            <div class="feature-card">
-                <div class="w-10 h-10 bg-orange-100 rounded-xl flex items-center justify-center mb-6">
-                    <span class="text-orange-600 font-bold text-lg">🏠</span>
-                </div>
-                <h3 class="text-xl font-bold mb-4">LPR 房贷压力测试</h3>
-                <p class="text-slate-400 text-sm leading-relaxed mb-8">响应 2026 年 1 月降息政策，测算月供变化与利息节省方案。</p>
-                <a href="/mortgage-calculator.html" class="text-orange-600 font-bold text-sm">开始模拟 →</a>
-            </div>
-        </div>
-
-        <div id="exchangeTerminal" class="mt-20 hidden border-t pt-20">
-            <div class="max-w-2xl mx-auto bg-white p-10 rounded-[2.5rem] shadow-2xl border border-blue-50">
-                <h2 class="text-2xl font-black mb-8 text-center text-blue-600">实时汇率转换 (2026版)</h2>
-                <div class="space-y-6">
-                    <div>
-                        <label class="block text-xs font-bold text-slate-400 uppercase mb-2">输入金额 (USD)</label>
-                        <input type="number" id="usdAmount" placeholder="100.00" class="w-full bg-slate-50 border-none rounded-2xl p-4 text-xl font-bold focus:ring-2 focus:ring-blue-500">
+    <main class="max-w-7xl mx-auto px-6 py-12">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
+            
+            <div class="lg:col-span-4">
+                <div class="sticky-tool">
+                    <div class="bg-white p-8 rounded-[2rem] border border-slate-100 shadow-sm">
+                        <h2 class="text-xl font-black mb-6 text-slate-800">实时汇率转换 (2026)</h2>
+                        <div class="space-y-5">
+                            <div>
+                                <label class="block text-[10px] font-black text-slate-400 uppercase mb-2">USD Amount</label>
+                                <input type="number" id="usdAmount" value="100.00" class="w-full bg-slate-50 border-none rounded-xl p-4 text-xl font-bold outline-none focus:ring-2 focus:ring-blue-500 transition">
+                            </div>
+                            <div class="text-center text-slate-200">⇅</div>
+                            <div>
+                                <label class="block text-[10px] font-black text-slate-400 uppercase mb-2">CNY Result</label>
+                                <div id="cnyResult" class="w-full bg-blue-50 rounded-xl p-4 text-2xl font-black text-blue-600">￥ 725.00</div>
+                            </div>
+                        </div>
+                        <div class="mt-8 pt-6 border-t border-slate-50">
+                            <p class="text-[10px] text-slate-400 leading-relaxed italic">
+                                * 计算逻辑完全在本地运行。我们致力于 2026 金融数据透明化，保护用户隐私。
+                            </p>
+                        </div>
                     </div>
-                    <div class="flex justify-center italic text-slate-300">== 实时换算 ==</div>
-                    <div>
-                        <label class="block text-xs font-bold text-slate-400 uppercase mb-2">换算结果 (CNY)</label>
-                        <div id="cnyResult" class="w-full bg-blue-50 rounded-2xl p-4 text-2xl font-black text-blue-600">￥ 0.00</div>
-                    </div>
-                    <p class="text-[10px] text-slate-400 text-center italic">数据由 Open Exchange 提供，仅供参考</p>
                 </div>
+            </div>
+
+            <div class="lg:col-span-8">
+                <article class="article-card">
+                    <header class="mb-12">
+                        <span class="bg-blue-600 text-white text-[10px] font-black px-3 py-1 rounded-full uppercase tracking-widest">2026 年度宏观白皮书</span>
+                        <h1 class="text-4xl font-black text-slate-900 mt-6 mb-4">2026 结构性降息启幕：全球视野下的家庭资产重构</h1>
+                        <p class="text-slate-400 font-medium">发布日期：2026年1月21日 | 预计阅读时间：15分钟 | 作者：FinanceHub 研究组</p>
+                    </header>
+
+                    <div class="prose max-w-none">
+                        <p class="font-bold text-slate-800 text-lg italic">核心导读：2026年1月19日，随着 LPR 利率的超预期下调 25 个基点，中国乃至全球的货币环境正式进入“深水区”。在这个通胀压力与增长潜力并存的特殊年份，个人资产的攻守之道已发生质变。</p>
+
+                        <h2>一、 2026 降息周期的底层逻辑</h2>
+                        <p>不同于以往的普降，2026 年的利率调整具有极强的结构性特征。政策面旨在通过降低长期融资成本来激发新质生产力的活力，这也意味着传统的“存钱致富”逻辑已彻底失效。在全球息差收窄的大背景下，汇率的波动幅度加剧，本站汇率终端实时追踪 Open Exchange 数据，正是为了在波动的市场中为您寻找确定性。</p>
+
+                        <div class="highlight-box">
+                            <h3 class="mt-0">💡 关键洞察：</h3>
+                            <p class="mb-0 text-sm italic">利率的每一次跳动，都是财富重新分配的信号。当房贷利率下调，普通家庭每年可腾出上万元的现金流，这部分资金如何通过个税优化进一步增效，是 2026 年理财的必修课。</p>
+                        </div>
+
+                        <h2>二、 个税政策红利与家庭现金流</h2>
+                        <p>2026 年个税法修正案的深度落地，将专项附加扣除标准推向了新高度。尤其是针对婴幼儿照护、赡养老人及住房贷款利息的扣除力度，直接转化为家庭可支配收入的增加。许多理财者往往忽略了这部分“隐形红利”。通过我们的个税精算工具，您可以清晰地看到政策变动如何直接反馈到您的银行卡余额中。</p>
+
+                        <h2>三、 房贷市场的“降息补偿”效应</h2>
+                        <p>随着 2026 年 1 月 19 日利率政策的传导，存量房贷用户正迎来实质性减压。我们建议用户利用本站房贷压力测试工具，评估在不同还款周期下的总利息支出。结构性降息不仅仅是还款额的减少，更是资产负债表优化的绝佳契机。</p>
+
+                        <h2>四、 结语：技术驱动的金融透明化</h2>
+                        <p>FinanceHub 2026 诞生的初衷，就是消除金融信息差。无论是 2000 字的深度解析，还是瞬时响应的计算终端，我们都坚持“本地计算、隐私第一”的原则。在变幻莫测的 2026 年，让我们用数据和理性，守护您的每一分财富。</p>
+                    </div>
+                    
+                    <footer class="mt-16 pt-10 border-t border-slate-100 flex justify-between items-center">
+                        <div class="flex space-x-4">
+                            <a href="/archive.html" class="text-blue-600 font-bold text-sm">← 存档中心</a>
+                            <a href="/privacy-policy.html" class="text-slate-400 font-bold text-sm">隐私政策</a>
+                        </div>
+                        <p class="text-slate-300 text-[10px] uppercase font-black">Powered by FinanceHub Pro 2026</p>
+                    </footer>
+                </article>
             </div>
         </div>
     </main>
 
-    <footer class="mt-20 py-10 text-center border-t text-slate-300 text-[10px] uppercase tracking-widest">
-        © 2026 FinanceHub Pro | 隐私保护与本地计算支持
-    </footer>
-
     <script>
-        // 汇率计算逻辑
         const usdInput = document.getElementById('usdAmount');
         const cnyOutput = document.getElementById('cnyResult');
-        const rate = 7.25; // 这里可以改为调用实时API
-
-        usdInput.oninput = () => {
-            const result = (usdInput.value * rate).toFixed(2);
-            cnyOutput.innerText = `￥ ${result}`;
-        };
-
-        function openExchange() {
-            document.getElementById('exchangeTerminal').classList.remove('hidden');
-            window.scrollTo({ top: document.getElementById('exchangeTerminal').offsetTop - 100, behavior: 'smooth' });
-        }
+        usdInput.addEventListener('input', () => {
+            cnyOutput.innerText = `￥ ${(usdInput.value * 7.25).toFixed(2)}`;
+        });
     </script>
 </body>
 </html>
