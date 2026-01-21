@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>2026 个税优化实战手册 - FinanceHub</title>
+    <title data-zh="2026 个税优化实战手册 - FinanceHub" data-en="2026 Tax Optimization Guide - FinanceHub">2026 个税优化实战手册 - FinanceHub</title>
     <link rel="icon" href="/favicon.ico" type="image/x-icon">
     
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2700554011244473" crossorigin="anonymous"></script>
@@ -20,12 +20,15 @@
     <style>
         body { background: #f8fafc; font-family: 'Inter', system-ui, sans-serif; }
         .nav-active { color: #2563eb; border-bottom: 2px solid #2563eb; }
-        #article-wrapper { max-height: 800px; overflow: hidden; position: relative; transition: max-height 0.5s ease; }
-        #article-wrapper.expanded { max-height: 8000px; }
+        #article-wrapper { max-height: 800px; overflow: hidden; position: relative; transition: max-height 0.8s ease; }
+        #article-wrapper.expanded { max-height: 50000px; } 
         .read-more-overlay { position: absolute; bottom: 0; left: 0; width: 100%; height: 200px; background: linear-gradient(transparent, white); pointer-events: none; }
         #article-wrapper.expanded .read-more-overlay { display: none; }
-        table { font-size: 0.75rem; width: 100%; border-collapse: collapse; }
-        table th, table td { padding: 12px 8px; border-bottom: 1px solid #f1f5f9; text-align: left; }
+        table { font-size: 0.75rem; width: 100%; border-collapse: collapse; margin: 1.5rem 0; }
+        table th, table td { padding: 12px 8px; border: 1px solid #f1f5f9; text-align: left; }
+        .prose h1 { font-size: 1.875rem; font-weight: 900; color: #0f172a; margin-bottom: 1.5rem; }
+        .prose h2 { font-size: 1.5rem; font-weight: 800; color: #1e293b; margin-top: 2.5rem; margin-bottom: 1.25rem; }
+        .prose p { margin-bottom: 1.5rem; line-height: 1.8; color: #475569; text-align: justify; }
     </style>
 </head>
 <body class="text-slate-800">
@@ -34,13 +37,13 @@
             <div class="flex items-center space-x-2 font-black text-2xl text-blue-600">
                 <a href="/index.html"><span>FinanceHub</span><span class="text-slate-400">2026</span></a>
             </div>
-            <div class="flex items-center space-x-4 md:space-x-8 text-sm font-bold">
-                <div class="hidden md:flex space-x-6">
+            <div class="flex items-center space-x-4 md:space-x-8">
+                <div class="hidden md:flex space-x-6 text-sm font-bold">
                     <a href="/index.html" class="pb-1 hover:text-blue-600 transition" data-zh="汇率转换" data-en="Exchange">汇率转换</a>
                     <a href="/tax-calculator.html" class="nav-active pb-1" data-zh="个税计算" data-en="Tax Calc">个税计算</a>
                     <a href="/mortgage-calculator.html" class="pb-1 hover:text-blue-600 transition" data-zh="房贷计算" data-en="Mortgage">房贷计算</a>
                 </div>
-                <button id="langSwitcher" onclick="toggleLang()" class="bg-slate-100 px-4 py-2 rounded-full text-[10px] font-black hover:bg-blue-50 hover:text-blue-600 transition uppercase tracking-tighter border border-slate-200">
+                <button id="langSwitcher" onclick="toggleLang()" class="bg-slate-100 px-4 py-2 rounded-full text-[10px] font-black border border-slate-200 uppercase transition hover:bg-blue-50">
                     EN / 中文
                 </button>
             </div>
@@ -53,14 +56,14 @@
                 <h2 class="text-xl font-black mb-6 text-blue-600 italic" data-zh="2026 个税试算 (新规)" data-en="2026 Tax Calculator">2026 个税试算 (新规)</h2>
                 <div class="space-y-4">
                     <label class="block text-xs font-bold text-slate-400 uppercase ml-1" data-zh="月收入 (起征点 5000)" data-en="Monthly Income (Min 5000)">月收入 (起征点 5000)</label>
-                    <input type="number" id="taxIncome" value="15000" class="w-full p-4 bg-slate-50 border rounded-2xl text-xl font-bold focus:ring-2 focus:ring-blue-500 outline-none transition">
-                    <button onclick="calculateTax()" class="w-full bg-blue-600 text-white py-4 rounded-xl font-bold shadow-lg hover:bg-blue-700 active:scale-95 transition-all" data-zh="计算税后收入" data-en="Calculate Net Income">计算税后收入</button>
+                    <input type="number" id="taxIncome" value="15000" class="w-full p-4 bg-slate-50 border rounded-2xl text-xl font-bold focus:ring-2 focus:ring-blue-500 outline-none">
+                    <button onclick="calculateTax()" class="w-full bg-blue-600 text-white py-4 rounded-xl font-bold shadow-lg hover:bg-blue-700 transition" data-zh="计算税后收入" data-en="Calculate Net Income">计算税后收入</button>
                     <div id="taxResult" class="hidden mt-4 p-4 bg-green-50 text-green-700 rounded-xl space-y-2"></div>
                     <div class="p-4 bg-blue-50 rounded-xl text-[10px] text-slate-500 leading-relaxed" data-zh="联动说明：若您符合右侧扣除标准，请手动减去相应额度。本工具已同步 2026 标准。" data-en="Note: Subtract deductions manually based on right guide. Updated for 2026 standards.">
-                        <strong>联动说明：</strong> 若您符合右侧文章表中的扣除标准，请手动在上述收入中减去相应额度。本工具已根据 2026 最新计税标准同步更新。
+                        <strong>联动说明：</strong> 若您符合右侧文章表中的扣除标准，请手动在上述收入中减去相应额度。
                     </div>
                 </div>
-                <div class="mt-8 pt-8 border-t border-dashed border-slate-200">
+                <div class="mt-8 pt-8 border-t border-dashed">
                     <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-2700554011244473" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
                     <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
                 </div>
@@ -71,73 +74,79 @@
             <div class="bg-white p-10 rounded-3xl shadow-sm border border-slate-100 relative">
                 <div id="article-wrapper">
                     <article class="prose max-w-none text-sm text-slate-600 leading-relaxed">
-                        <h1 class="text-3xl font-black text-slate-900 leading-tight mb-2" data-zh="个税优化实战手册：2026 家庭现金流提升指南" data-en="Tax Optimization 2026: Enhancing Family Cash Flow">个税优化实战手册：2026 家庭现金流提升指南</h1>
-                        <p class="text-blue-600 font-bold mb-8 italic" data-zh="解析李锐一家的节税案例，挖掘您的“隐形财富”" data-en="Case Study: Finding your 'Hidden Wealth' with smart tax planning.">解析李锐一家的节税案例，挖掘您的“隐形财富”</p>
+                        <h1 data-zh="个税优化实战手册：2026 家庭现金流提升指南" data-en="Tax Optimization 2026: Enhancing Family Cash Flow">个税优化实战手册：2026 家庭现金流提升指南</h1>
+                        <p class="text-blue-600 font-bold mb-8 italic" data-zh="解析李锐一家的节税案例，挖掘您的“隐形财富”" data-en="Analyzing case studies to uncover your 'Hidden Wealth'.">解析李锐一家的节税案例，挖掘您的“隐形财富”</p>
 
-                        <div class="bg-blue-50 p-6 rounded-2xl mb-8 border-l-4 border-blue-500" data-zh="核心导读：2026年个税优化已从被动扣除转向主动规划。理解专项附加扣除与全球收入申报，是为家庭留住更多现金流的关键。" data-en="Core Guide: Tax optimization in 2026 is about active planning. Understanding deductions is key to retaining more household income.">
-                            <strong>核心导读：</strong> 2026年个税优化已从被动扣除转向主动规划。理解专项附加扣除与全球收入申报，是为家庭留住更多现金流的关键。
+                        <div class="bg-blue-50 p-6 rounded-2xl mb-8 border-l-4 border-blue-500" data-zh="核心导读：2026年个税优化已从被动扣除转向主动规划。随着个税法修正案落地，家庭个税筹划进入“精准化+合规化”双轮驱动时代。" data-en="Core Guide: Tax optimization in 2026 has shifted to active planning. Household tax planning is now driven by precision and compliance.">
+                            <strong>核心导读：</strong> 2026年个税优化已从被动扣除转向主动规划。随着个税法修正案落地深化，家庭个税筹划进入“精准化+合规化”双轮驱动时代。
                         </div>
 
-                        <h2 class="text-xl font-bold text-slate-800 mb-4 font-mono" data-zh="01 个税优化的核心逻辑" data-en="01 Core Logic of Tax Planning">01 个税优化的核心逻辑</h2>
-                        <p data-zh="2026年的优化逻辑建立在三个支点上：5000元基本减除标准、七项专项附加扣除，以及汇算清缴的“多退少补”机制。" data-en="Optimization in 2026 rests on three pillars: 5000 RMB exemption, 7 categories of deductions, and the annual reconciliation process.">2026年的优化逻辑建立在三个支点上：5000元基本减除标准、七项专项附加扣除，以及汇算清缴的“多退少补”机制。</p>
+                        <h2 data-zh="01 个税优化的核心逻辑：三大支点撑起家庭节税框架" data-en="01 Core Logic: Three Pillars of Family Tax Saving">01 个税优化的核心逻辑：三大支点撑起家庭节税框架</h2>
+                        <p data-zh="2026年个人所得税优化的核心逻辑，建立在“基础保障+精准扣除+动态结算”三大支点之上。第一个支点是5000元/月的基本减除标准。第二个支点是七项专项附加扣除。第三个支点是年度汇算清缴机制。" data-en="The 2026 tax optimization logic rests on 'Basic Protection + Precision Deduction + Dynamic Settlement'. The three pillars are the 5000 RMB exemption, seven special deductions, and annual reconciliation.">2026年个人所得税优化的核心逻辑，建立在“基础保障+精准扣除+动态结算”三大支点之上。第一个支点是5000元/月的基本减除标准。第二个支点是七项专项附加扣除。第三个支点是年度汇算清缴机制。</p>
+                        
+                        <p data-zh="以李锐一家为例，通过精准配置专项附加扣除，年度个税可从1.89万元降至1.02万元，全年节税8700元，现金流提升效果显著。" data-en="For Li's family, precise deduction configurations dropped annual tax from 18,900 to 10,200 RMB, saving 8,700 RMB yearly.">以李锐一家为例，夫妻二人通过精准配置专项附加扣除，年度个税可从1.89万元降至1.02万元，全年节税8700元，现金流提升效果显著。</p>
 
-                        <h2 class="text-xl font-bold text-slate-800 mb-4 font-mono" data-zh="02 专项附加扣除深度解析" data-en="02 Deep Dive into Special Deductions">02 专项附加扣除深度解析</h2>
+                        <h2 data-zh="02 专项附加扣除深度解析：按家庭定制最优方案" data-en="02 Special Deductions: Customizing Your Plan">02 专项附加扣除深度解析：按家庭定制最优方案</h2>
                         <div class="overflow-x-auto rounded-xl border border-slate-200 my-6">
                             <table>
-                                <thead class="bg-slate-50">
-                                    <tr class="font-bold">
+                                <thead class="bg-slate-50 font-bold">
+                                    <tr>
                                         <th data-zh="扣除项目" data-en="Item">扣除项目</th>
-                                        <th data-zh="2026标准" data-en="2026 Std">2026标准</th>
+                                        <th data-zh="2026年标准" data-en="2026 Standard">2026年标准</th>
                                         <th data-zh="关键规则" data-en="Key Rules">关键规则</th>
                                         <th data-zh="策略建议" data-en="Strategy">策略建议</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr><td data-zh="子女教育" data-en="Children Edu">子女教育</td><td>2k/月</td><td data-zh="父母协商比例" data-en="Parental split">父母协商比例</td><td data-zh="由高收入方扣除" data-en="Claim by higher earner">由高收入方100%扣除</td></tr>
-                                    <tr><td data-zh="婴幼儿照护" data-en="Infant Care">婴幼儿照护</td><td>2k/月</td><td data-zh="至满3周岁前" data-en="Under 3 yrs">出生当月至满3周岁前</td><td data-zh="选择全额扣除" data-en="Claim 100% deduction">李锐家选择全额扣除</td></tr>
-                                    <tr><td data-zh="赡养老人" data-en="Elderly Support">赡养老人</td><td>3k/月</td><td data-zh="年满60岁" data-en="Age 60+">年满60岁；非独生需分摊</td><td data-zh="与手足商定" data-en="Agree with siblings">与兄弟姐妹商定协议</td></tr>
-                                    <tr><td data-zh="住房利息" data-en="Housing Loan">住房利息</td><td>1k/月</td><td data-zh="首套房贷" data-en="First home">首套房贷；最长240个月</td><td data-zh="一方100%扣除" data-en="100% on one person">约定由一方100%扣除</td></tr>
+                                    <tr>
+                                        <td data-zh="子女教育" data-en="Child Education">子女教育</td>
+                                        <td data-zh="2000元/月/孩" data-en="2k/Month/Child">2000元/月/孩</td>
+                                        <td data-zh="父母可协商比例" data-en="Negotiable split">父母可协商比例</td>
+                                        <td data-zh="由高收入方扣除" data-en="Claim by higher earner">由高收入方100%扣除</td>
+                                    </tr>
+                                    <tr>
+                                        <td data-zh="婴幼儿照护" data-en="Infant Care">婴幼儿照护</td>
+                                        <td data-zh="2000元/月/孩" data-en="2k/Month/Child">2000元/月/孩</td>
+                                        <td data-zh="至满3周岁前" data-en="Under age 3">至满3周岁前</td>
+                                        <td data-zh="避免税率浪费" data-en="Avoid tax wastage">集中由高薪方扣除</td>
+                                    </tr>
+                                    <tr>
+                                        <td data-zh="赡养老人" data-en="Elderly Care">赡养老人</td>
+                                        <td data-zh="3000元/月" data-en="3k/Month">3000元/月</td>
+                                        <td data-zh="父母年满60岁" data-en="Parents age 60+">父母年满60岁</td>
+                                        <td data-zh="独生子女全额扣除" data-en="100% for only child">独生子女可直接扣除</td>
+                                    </tr>
                                 </tbody>
                             </table>
                         </div>
 
-                        <h2 class="text-xl font-bold text-slate-800 mb-4 font-mono" data-zh="03 跨境合规：创作者必修" data-en="03 Cross-border Compliance">03 跨境合规：创作者的必修课</h2>
-                        <p data-zh="随着 CRS 2.0 框架实施，税务机关对居民全球所得掌控力增强。合规申报是保护资产安全的基石。" data-en="Under CRS 2.0, authorities have more insight into global income. Compliance is the foundation of asset safety.">随着 CRS 2.0 框架的深入实施，中国税务机关对居民全球所得的掌控力空前增强。对于有海外项目收入的创作者，合规申报不仅是法律义务，更是保护资产安全的基石。</p>
+                        <h2 data-zh="03 跨境合规：创作者与高净值家庭的必修课题" data-en="03 Cross-border: Must-know for Creators">03 跨境合规：创作者与高净值家庭的必修课题</h2>
+                        <p data-zh="随着CRS 2.0框架全面实施，税务机关对全球收入监管力度提升。跨境收入申报已从“可选项”变为“必选项”。" data-en="With CRS 2.0 implementation, authorities have increased scrutiny on global income. Declaring cross-border income is now mandatory.">随着CRS 2.0（共同申报准则）框架的全面实施，2026年税务机关对居民纳税人全球收入的监管力度显著提升，跨境收入的合规申报已从“可选项”变为“必选项”。</p>
+                        
+                        <p data-zh="针对跨境收入，建议：梳理海外创作收益、合理利用税收协定避免双重征税、借助 FinanceHub 2026 计算器精准测算税额。" data-en="For cross-border income: Audit your overseas earnings, utilize tax treaties to avoid double taxation, and use FinanceHub to calculate dues.">针对跨境收入的合规申报，给出三点建议：梳理海外收益、利用税收协定、借助专业工具精准测算。</p>
+
+                        <p class="pt-8 border-t mt-12 font-bold" data-zh="结语：2026年个税优化的核心在于“主动规划+合规落地”。希望本文能帮你找到适合自家的节税路径。" data-en="Conclusion: 2026 tax optimization is about active planning and compliance. We hope this guide helps you find your path.">结语：2026年个税优化的核心，在于“主动规划+合规落地”。希望本文案例与策略，能帮你找到适合自家的个税优化路径。</p>
                     </article>
                     <div class="read-more-overlay"></div>
                 </div>
                 <div class="text-center mt-6">
-                    <button onclick="expandArticle()" id="read-more-btn" class="bg-blue-600 text-white px-10 py-3 rounded-full font-bold shadow-lg hover:bg-blue-700 transition" data-zh="阅读全文" data-en="Read Full Guide">阅读全文</button>
+                    <button onclick="expandArticle()" id="read-more-btn" class="bg-blue-600 text-white px-10 py-3 rounded-full font-bold shadow-lg hover:bg-blue-700 transition" data-zh="阅读全文内容" data-en="Read Full Article">阅读全文内容</button>
                 </div>
             </div>
         </div>
     </main>
 
-    <section class="max-w-6xl mx-auto px-6 mb-10">
-        <div class="bg-slate-900 rounded-3xl p-8 flex flex-col md:flex-row items-center justify-between gap-6 shadow-2xl">
-            <div class="text-center md:text-left">
-                <h3 class="text-white text-xl font-black italic" data-zh="FinanceHub 2026 资源中心" data-en="Resource Center">FinanceHub 2026 资源中心</h3>
-                <p class="text-slate-400 text-xs" data-zh="探索更多深度金融工具与历史研报" data-en="Explore professional financial tools and reports.">探索更多深度金融工具与历史研报</p>
-            </div>
-            <div class="flex flex-wrap justify-center gap-3">
-                <a href="/archive.html" class="px-5 py-2 bg-blue-600 text-white rounded-full hover:bg-blue-700 transition text-sm font-bold" data-zh="文章存档" data-en="Archive">文章存档</a>
-                <a href="/about.html" class="px-5 py-2 bg-white/10 text-white rounded-full hover:bg-white/20 transition text-sm" data-zh="关于我们" data-en="About Us">关于我们</a>
-                <a href="/index.html" class="px-5 py-2 bg-white/10 text-white rounded-full hover:bg-white/20 transition text-sm" data-zh="汇率终端" data-en="Currency">汇率终端</a>
-            </div>
-        </div>
-    </section>
-
     <footer class="bg-white border-t py-12 text-center text-[10px] text-slate-300">
-        <div class="max-w-6xl mx-auto px-6 mb-6 flex justify-center space-x-6 text-slate-400 font-bold">
-            <a href="/privacy-policy.html" class="hover:text-blue-600" data-zh="隐私政策" data-en="Privacy">隐私政策</a>
-            <a href="/disclaimer.html" class="hover:text-blue-600" data-zh="免责声明" data-en="Disclaimer">免责声明</a>
-            <a href="/about.html" class="hover:text-blue-600" data-zh="联系我们" data-en="Contact">联系我们</a>
+        <div class="max-w-6xl mx-auto px-6 mb-6 flex justify-center space-x-6 text-slate-400 font-bold uppercase">
+            <a href="/privacy-policy.html" data-zh="隐私政策" data-en="Privacy">隐私政策</a>
+            <a href="/disclaimer.html" data-zh="免责声明" data-en="Disclaimer">免责声明</a>
+            <a href="/about.html" data-zh="联系我们" data-en="Contact">联系我们</a>
         </div>
-        <p data-zh="© 2026 FinanceHub Pro. 致力于提供原创且具实质价值的金融资讯。" data-en="© 2026 FinanceHub Pro. Original financial insights and professional tools.">© 2026 FinanceHub Pro. 致力于提供原创且具实质价值的金融资讯。</p>
+        <p data-zh="© 2026 FinanceHub Pro. 致力于高质量原创金融资讯。" data-en="© 2026 FinanceHub Pro. Committed to high-quality original finance content.">© 2026 FinanceHub Pro. 致力于高质量原创金融资讯。</p>
     </footer>
 
     <script>
-        // 全局语言同步逻辑 (同步读取 LocalStorage)
+        // 全局多语言同步逻辑
         function applyLang(lang) {
             document.querySelectorAll('[data-zh]').forEach(el => {
                 el.innerText = el.getAttribute(`data-${lang}`);
@@ -146,12 +155,10 @@
             const btn = document.getElementById('langSwitcher');
             if(btn) btn.innerText = lang === 'zh' ? 'EN / 中文' : '中文 / EN';
         }
-
         function toggleLang() {
             const current = localStorage.getItem('site_lang') === 'en' ? 'zh' : 'en';
             applyLang(current);
         }
-
         window.addEventListener('DOMContentLoaded', () => {
             const savedLang = localStorage.getItem('site_lang') || 'zh';
             applyLang(savedLang);
@@ -162,12 +169,14 @@
             const resBox = document.getElementById('taxResult');
             let tax = (inc - 5000) * 0.1;
             const lang = localStorage.getItem('site_lang') || 'zh';
-            const resText = lang === 'zh' ? '参考税后' : 'Estimated Net';
-            const subText = lang === 'zh' ? '* 基于2026最新计税标准' : '* Based on 2026 Tax Standards';
-            resBox.innerHTML = `<div class='font-bold text-lg text-green-700'>${resText}: ¥${(inc - tax).toFixed(2)}</div><div class='text-xs opacity-70 mt-1'>${subText}</div>`;
+            const resTitle = lang === 'zh' ? '参考税后' : 'Est. Net Income';
+            resBox.innerHTML = `<div class='font-bold text-lg text-green-700'>${resTitle}: ¥${(inc - tax).toFixed(2)}</div>`;
             resBox.classList.remove('hidden');
         }
-        function expandArticle() { document.getElementById('article-wrapper').classList.add('expanded'); document.getElementById('read-more-btn').style.display = 'none'; }
+        function expandArticle() { 
+            document.getElementById('article-wrapper').classList.add('expanded'); 
+            document.getElementById('read-more-btn').style.display = 'none'; 
+        }
     </script>
 </body>
 </html>
