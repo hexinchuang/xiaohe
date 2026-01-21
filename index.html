@@ -35,11 +35,11 @@
             </div>
             <div class="flex items-center space-x-4 md:space-x-8">
                 <div class="hidden md:flex space-x-6 text-sm font-bold">
-                    <a href="/index.html" class="nav-active pb-1" data-t="nav1">汇率转换</a>
-                    <a href="/tax-calculator.html" class="pb-1 hover:text-blue-600 transition" data-t="nav2">个税计算</a>
-                    <a href="/mortgage-calculator.html" class="pb-1 hover:text-blue-600 transition" data-t="nav3">房贷计算</a>
+                    <a href="/index.html" class="nav-active pb-1" id="t-nav-ex">汇率转换</a>
+                    <a href="/tax-calculator.html" class="pb-1 hover:text-blue-600 transition" id="t-nav-tax">个税计算</a>
+                    <a href="/mortgage-calculator.html" class="pb-1 hover:text-blue-600 transition" id="t-nav-mort">房贷计算</a>
                 </div>
-                <button onclick="toggleLang()" class="bg-slate-100 px-4 py-2 rounded-full text-[10px] font-black hover:bg-blue-50 hover:text-blue-600 transition uppercase tracking-tighter border border-slate-200">
+                <button onclick="doTranslate()" class="bg-slate-100 px-4 py-2 rounded-full text-[10px] font-black hover:bg-blue-50 hover:text-blue-600 transition uppercase tracking-tighter border border-slate-200">
                     EN / 中文
                 </button>
             </div>
@@ -49,90 +49,64 @@
     <main class="max-w-6xl mx-auto px-6 py-10 grid lg:grid-cols-12 gap-10">
         <div class="lg:col-span-5">
             <div class="bg-white p-8 rounded-3xl shadow-xl border border-slate-100 sticky top-24">
-                <h2 class="text-xl font-black mb-6" data-t="tool-title">实时汇率转换器</h2>
+                <h2 class="text-xl font-black mb-6" id="t-tool-h">实时汇率转换器</h2>
                 <div class="space-y-4">
                     <input type="number" id="rateAmount" value="100" class="w-full p-4 bg-slate-50 border rounded-2xl text-xl font-bold">
                     <div class="grid grid-cols-2 gap-4">
                         <select id="fromCurrency" class="p-4 bg-slate-100 rounded-xl font-bold"></select>
                         <select id="toCurrency" class="p-4 bg-slate-100 rounded-xl font-bold"></select>
                     </div>
-                    <button onclick="convertCurrency()" class="w-full bg-blue-600 text-white py-4 rounded-xl font-bold shadow-lg hover:bg-blue-700 transition" data-t="btn-quote">获取实时报价</button>
+                    <button onclick="convertCurrency()" id="t-btn-quote" class="w-full bg-blue-600 text-white py-4 rounded-xl font-bold shadow-lg hover:bg-blue-700 transition">获取实时报价</button>
                     <div id="rateResult" class="hidden mt-4 p-4 bg-blue-50 text-blue-700 rounded-xl text-center font-black text-2xl animate-pulse"></div>
-                </div>
-                <div class="mt-8 pt-8 border-t border-dashed border-slate-200 text-center">
-                    <p class="text-[10px] text-slate-400 mb-4" data-t="ads-text">赞助内容</p>
-                    <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-2700554011244473" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
-                    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
                 </div>
             </div>
         </div>
 
         <div class="lg:col-span-7">
             <div class="bg-white p-10 rounded-3xl shadow-sm border border-slate-100 relative">
-                <div id="article-wrapper">
-                    <article class="prose max-w-none text-sm leading-relaxed text-slate-600">
-                        <h1 class="text-3xl font-black text-slate-900 mb-2" data-t="art-h1">2026 全球货币体系重构：汇率对冲深度解析</h1>
-                        <p class="text-blue-600 font-bold mb-6 italic" data-t="art-sub">左侧转换终端捕捉波动，下文深度拆解逻辑</p>
-                        
-                        <p class="mb-4" data-t="art-p1">进入 2026 年，延续多年的美联储紧缩周期画上句号。全球货币体系正处于一场深刻而静默的重构之中。</p>
-                        
-                        <h2 class="text-xl font-bold text-slate-800 mt-6 mb-4 font-mono" data-t="art-h2-1">01 旧秩序瓦解与新力量崛起</h2>
-                        <p class="mb-4" data-t="art-p2">2026 年是美元信用的压力测试年。美国联邦政府债务占 GDP 比重已超 123%，高企的利息支出正侵蚀其制度基础。</p>
-                        
-                        <h2 class="text-xl font-bold text-slate-800 mt-6 mb-4 font-mono" data-t="art-h2-2">02 汇率波动：分化世界中的众生相</h2>
-                        <p class="mb-4" data-t="art-p3">美元：降息周期开启，波动中枢下移。人民币：展现出更强的“脱敏”能力，有望保持温和升值。</p>
-                    </article>
-                    <div class="read-more-overlay"></div>
-                </div>
-                <div class="text-center mt-6">
-                    <button onclick="expandArticle()" id="read-more-btn" class="bg-blue-600 text-white px-10 py-3 rounded-full font-bold shadow-lg hover:bg-blue-700 transition" data-t="btn-more">展开阅读全文</button>
-                </div>
+                <article class="prose max-w-none text-sm leading-relaxed text-slate-600">
+                    <h1 class="text-3xl font-black text-slate-900 mb-2" id="t-art-h1">2026 全球货币体系重构：汇率对冲深度解析</h1>
+                    <p class="text-blue-600 font-bold mb-6 italic" id="t-art-sub">左侧转换终端捕捉波动，下文深度拆解逻辑</p>
+                    <p class="mb-4" id="t-art-p1">进入 2026 年，延续多年的美联储紧缩周期画上句号。全球货币体系正处于一场深刻而静默的重构之中。</p>
+                </article>
             </div>
         </div>
     </main>
 
     <script>
-        // 1. 翻译词典
-        const langData = {
+        // 内置翻译字典
+        const dictionary = {
             'zh': {
-                'nav1': '汇率转换', 'nav2': '个税计算', 'nav3': '房贷计算',
-                'tool-title': '实时汇率转换器', 'btn-quote': '获取实时报价',
-                'art-h1': '2026 全球货币体系重构：汇率对冲深度解析',
-                'art-sub': '左侧转换终端捕捉波动，下文深度拆解逻辑',
-                'btn-more': '展开阅读全文'
+                't-nav-ex': '汇率转换', 't-nav-tax': '个税计算', 't-nav-mort': '房贷计算',
+                't-tool-h': '实时汇率转换器', 't-btn-quote': '获取实时报价',
+                't-art-h1': '2026 全球货币体系重构：汇率对冲深度解析',
+                't-art-sub': '左侧转换终端捕捉波动，下文深度拆解逻辑'
             },
             'en': {
-                'nav1': 'Exchange', 'nav2': 'Tax Calc', 'nav3': 'Mortgage',
-                'tool-title': 'Real-time Converter', 'btn-quote': 'Get Live Quote',
-                'art-h1': '2026 Global Currency Reset: Deep Analysis',
-                'art-sub': 'Terminal on the left captures volatility, analysis below.',
-                'btn-more': 'Read Full Article'
+                't-nav-ex': 'Exchange', 't-nav-tax': 'Tax Calculator', 't-nav-mort': 'Mortgage',
+                't-tool-h': 'Currency Converter', 't-btn-quote': 'Get Live Quote',
+                't-art-h1': '2026 Global Currency Reset: Deep Analysis',
+                't-art-sub': 'Terminal on the left captures volatility, analysis below.'
             }
         };
 
         let currentLang = 'zh';
 
-        // 2. 切换逻辑
-        function toggleLang() {
-            currentLang = (currentLang === 'zh') ? 'en' : 'zh';
-            document.querySelectorAll('[data-t]').forEach(el => {
-                const key = el.getAttribute('data-t');
-                if (langData[currentLang][key]) {
-                    el.innerText = langData[currentLang][key];
-                }
+        function doTranslate() {
+            currentLang = currentLang === 'zh' ? 'en' : 'zh';
+            // 遍历所有 ID 匹配字典进行替换
+            Object.keys(dictionary[currentLang]).forEach(id => {
+                const el = document.getElementById(id);
+                if (el) el.innerText = dictionary[currentLang][id];
             });
-            document.documentElement.lang = (currentLang === 'zh') ? 'zh-CN' : 'en';
-            console.log("Language switched to: " + currentLang);
+            console.log("Switched to " + currentLang);
         }
 
-        // 3. 原有功能逻辑
+        // 汇率计算原始逻辑
         const curs = ['CNY', 'USD', 'EUR', 'HKD', 'JPY', 'GBP', 'AUD', 'BTC'];
         const fromSel = document.getElementById('fromCurrency');
         const toSel = document.getElementById('toCurrency');
-        curs.forEach(c => { 
-            fromSel.innerHTML += `<option value="${c}">${c}</option>`; 
-            toSel.innerHTML += `<option value="${c}">${c}</option>`; 
-        });
+        curs.forEach(c => { fromSel.innerHTML += `<option value="${c}">${c}</option>`; toSel.innerHTML += `<option value="${c}">${c}</option>`; });
         fromSel.value = 'CNY'; toSel.value = 'USD';
         
         async function convertCurrency() {
@@ -143,12 +117,7 @@
                 const d = await r.json();
                 resBox.innerText = `${(amt * d.rates[toSel.value]).toFixed(2)} ${toSel.value}`;
                 resBox.classList.remove('hidden');
-            } catch (e) { alert("Network Error"); }
-        }
-
-        function expandArticle() { 
-            document.getElementById('article-wrapper').classList.add('expanded'); 
-            document.getElementById('read-more-btn').style.display = 'none'; 
+            } catch (e) { alert("Error"); }
         }
     </script>
 </body>
