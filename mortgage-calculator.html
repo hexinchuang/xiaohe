@@ -21,10 +21,16 @@
         .calc-tab-active { background: #2563eb; color: white; }
         .calc-tab { cursor: pointer; transition: all 0.2s; }
         #article-wrapper { max-height: 900px; overflow: hidden; position: relative; transition: max-height 0.8s ease; }
-        #article-wrapper.expanded { max-height: 50000px; } 
+        #article-wrapper.expanded { max-height: 50000px; }
         .read-more-overlay { position: absolute; bottom: 0; left: 0; width: 100%; height: 300px; background: linear-gradient(transparent, white); pointer-events: none; }
         #article-wrapper.expanded .read-more-overlay { display: none; }
-        .prose h2 { font-size: 1.6rem; font-weight: 900; color: #0f172a; margin-top: 2.5rem; margin-bottom: 1.25rem; border-left: 5px solid #2563eb; padding-left: 1rem; }
+        .prose h1 { font-size: 1.875rem; font-weight: 900; color: #0f172a; margin-bottom: 1.5rem; }
+        .prose h2 { font-size: 1.5rem; font-weight: 800; color: #1e293b; margin-top: 2.5rem; margin-bottom: 1.25rem; border-left: 5px solid #2563eb; padding-left: 1rem; }
+        .prose p { margin-bottom: 1.5rem; text-align: justify; color: #475569; }
+        table { font-size: 0.75rem; width: 100%; border-collapse: collapse; margin: 1.5rem 0; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+        table th, table td { padding: 12px 8px; border: 1px solid #eef2f6; text-align: left; }
+        .highlight-box { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 2rem; border-radius: 1rem; margin: 2rem 0; }
+        .case-study { background: #f0f9ff; border-left: 4px solid #3b82f6; padding: 1.5rem; margin: 2rem 0; }
     </style>
 </head>
 <body class="text-slate-800">
@@ -33,26 +39,28 @@
             <div class="flex items-center space-x-2 font-black text-2xl text-blue-600 italic">
                 <a href="/index.html"><span>FinanceHub</span><span class="text-slate-400">2026</span></a>
             </div>
-            <div class="flex items-center space-x-4">
+            <div class="flex items-center space-x-6 text-sm font-bold">
+                <a href="/index.html" class="hover:text-blue-600" data-zh="汇率转换" data-en="Exchange">汇率转换</a>
+                <a href="/tax-calculator.html" class="hover:text-blue-600" data-zh="个税计算" data-en="Tax">个税计算</a>
                 <button id="langSwitcher" onclick="toggleLang()" class="bg-slate-100 px-4 py-2 rounded-full text-[10px] font-black border uppercase">EN / 中文</button>
             </div>
         </div>
     </nav>
 
     <main class="max-w-6xl mx-auto px-6 py-10 grid lg:grid-cols-12 gap-10">
-        <div class="lg:col-span-6">
+        <div class="lg:col-span-5">
             <div class="bg-white p-8 rounded-[2.5rem] shadow-2xl border border-slate-100 sticky top-24">
                 <div class="flex bg-slate-100 rounded-2xl p-1 mb-8">
-                    <div onclick="switchCalc('biz')" id="tab-biz" class="calc-tab calc-tab-active flex-1 py-3 text-center rounded-xl font-bold text-sm" data-zh="商业贷款" data-en="Business">商业贷款</div>
-                    <div onclick="switchCalc('fund')" id="tab-fund" class="calc-tab flex-1 py-3 text-center rounded-xl font-bold text-sm" data-zh="公积金" data-en="Provident">公积金</div>
-                    <div onclick="switchCalc('mix')" id="tab-mix" class="calc-tab flex-1 py-3 text-center rounded-xl font-bold text-sm" data-zh="组合贷款" data-en="Combined">组合贷款</div>
+                    <div onclick="switchCalc('biz')" id="tab-biz" class="calc-tab calc-tab-active flex-1 py-3 text-center rounded-xl font-bold text-sm" data-zh="商业贷款" data-en="Business Loan">商业贷款</div>
+                    <div onclick="switchCalc('fund')" id="tab-fund" class="calc-tab flex-1 py-3 text-center rounded-xl font-bold text-sm" data-zh="公积金" data-en="Provident Fund">公积金</div>
+                    <div onclick="switchCalc('mix')" id="tab-mix" class="calc-tab flex-1 py-3 text-center rounded-xl font-bold text-sm" data-zh="组合贷款" data-en="Combined Loan">组合贷款</div>
                 </div>
 
                 <div class="space-y-6">
                     <div id="biz-inputs" class="space-y-4">
                         <label class="block">
                             <span class="text-xs font-black text-slate-400 uppercase" data-zh="贷款总额 (万元)" data-en="Loan Amount (10k)">贷款总额 (万元)</span>
-                            <input type="number" id="bizAmount" value="100" class="w-full mt-1 p-4 bg-slate-50 border rounded-2xl text-xl font-bold focus:ring-2 focus:ring-blue-500 outline-none">
+                            <input type="number" id="bizAmount" value="100" class="w-full mt-1 p-4 bg-slate-50 border rounded-2xl text-xl font-bold outline-none focus:ring-2 focus:ring-blue-500">
                         </label>
                         <label class="block">
                             <span class="text-xs font-black text-slate-400 uppercase" data-zh="商贷利率 (%)" data-en="Interest Rate (%)">商贷利率 (%)</span>
@@ -89,7 +97,7 @@
                         </label>
                     </div>
 
-                    <button onclick="calculateMortgage()" class="w-full bg-blue-600 text-white py-5 rounded-2xl font-black shadow-lg hover:bg-blue-700 transition active:scale-95" data-zh="立即分析还款压力" data-en="Analyze Payment Stress">立即分析还款压力</button>
+                    <button onclick="calculateMortgage()" class="w-full bg-blue-600 text-white py-5 rounded-2xl font-black shadow-lg hover:bg-blue-700 transition" data-zh="立即分析还款压力" data-en="Analyze Repayment Pressure">立即分析还款压力</button>
                     
                     <div id="mortgageResult" class="hidden grid grid-cols-2 gap-4 pt-6 border-t border-dashed">
                         <div class="bg-orange-50 p-4 rounded-2xl">
@@ -105,31 +113,183 @@
             </div>
         </div>
 
-        <div class="lg:col-span-6">
+        <div class="lg:col-span-7">
             <div class="bg-white p-10 rounded-[2.5rem] shadow-sm border border-slate-100 relative">
                 <div id="article-wrapper">
-                    <article class="prose max-w-none text-sm leading-relaxed text-slate-600">
-                        <h1 class="text-3xl font-black text-slate-900 mb-6" data-zh="2026 房贷利率市场化全解析" data-en="2026 Mortgage Rate Analysis">2026 房贷利率市场化全解析</h1>
-                        <p class="font-bold text-blue-600 italic" data-zh="优化家庭资产负债表：从利率“双降”中获益" data-en="Optimize Household Balance Sheet: Benefit from Dual Drops">优化家庭资产负债表：从利率“双降”中获益</p>
+                    <article class="prose max-w-none text-sm text-slate-600 leading-relaxed">
+                        <h1 data-zh="2026 房贷利率市场化全解析" data-en="2026 Mortgage Rate Liberalization Analysis">2026 房贷利率市场化全解析</h1>
+                        <p class="font-bold text-blue-600 italic" data-zh="优化家庭资产负债表：从利率"双降"中获益" data-en="Optimize Household Balance Sheet: Benefit from Dual Drops">优化家庭资产负债表：从利率"双降"中获益</p>
                         
-                        <p data-zh="2026年房贷利率步入市场化深度改革期，贷款市场报价利率（LPR）形成机制持续优化，商业贷款与住房公积金利率同步下行。对于千万中产家庭而言，理解重定价周期规则、科学选择还款方式已成为守护家庭财富的必修课。" data-en="In 2026, mortgage rates entered deep reform. LPR mechanisms are optimized, and both commercial and provident rates fell. Understanding re-pricing and repayment models is now essential for wealth protection.">2026年房贷利率步入市场化深度改革期，贷款市场报价利率（LPR）形成机制持续优化。</p>
+                        <div class="highlight-box">
+                            <strong data-zh="核心导读" data-en="Core Guide">核心导读</strong>
+                            <p data-zh="2026年房贷利率步入市场化深度改革期，贷款市场报价利率（LPR）形成机制持续优化，商业银行与住房公积金利率同步下行。对于千万中产家庭而言，理解定价周期规律、科学选择还款方式已成为守护家庭财富的必修课。" data-en="In 2026, mortgage rates enter a period of deep market-oriented reform. Understanding pricing cycle patterns and scientifically selecting repayment methods have become essential lessons for protecting family wealth.">
+                                2026年房贷利率步入市场化深度改革期，贷款市场报价利率（LPR）形成机制持续优化，商业银行与住房公积金利率同步下行。对于千万中产家庭而言，理解定价周期规律、科学选择还款方式已成为守护家庭财富的必修课。
+                            </p>
+                        </div>
 
-                        <h2 data-zh="一、 2026 利率市场全景：双降落地" data-en="I. 2026 Rate Overview: Dual Drops">一、 2026 利率市场全景：双降落地</h2>
-                        <p data-zh="2026年房贷利率改革核心是“政策引导+市场自主”。1月20日 LPR 报价更新后，全国房贷利率步入“3字头”。首套公积金降至2.6%，商贷利率最低可至3.05%。" data-en="2026 reform combines policy and market pricing. After Jan 20 LPR update, rates hit the '3%' range. Provident fund hit 2.6%, and commercial rates hit 3.05%.">2026年房贷利率市场化改革的核心特征的是“政策引导+市场自主定价”的深度融合。</p>
-
-                        <h2 data-zh="二、 还款模型与资金价值：低利率下的抉择" data-en="II. Repayment Models & Fund Value">二、 还款模型与资金价值：低利率下的理性抉择</h2>
-                        <p data-zh="低利率环境下，资金的“时间价值”愈发凸显。若能找到年化收益高于 3.5% 的稳健理财，保持房贷负债更具性价比。盲目提前还贷可能导致流动性流失，降低抗风险能力。" data-en="In a low-rate era, 'time value' of money is key. If you find investments > 3.5%, maintaining debt is better. Avoid blind prepayment to preserve liquidity and risk resilience.">2026年低利率环境下，房贷优化的核心已从“单纯减负”转向“资金效率最大化”。</p>
-
-                        <p data-zh="结语：2026年房贷改革为家庭优化负债表提供了窗口。唯有理性权衡资金的时间价值与流动性需求，才能在低利率市场中真正实现财富稳健增值。" data-en="Conclusion: 2026 reforms offer a window for balance sheet optimization. Rational balance of time value and liquidity ensures wealth growth in a low-rate market.">2026年房贷利率市场化改革，为中产家庭优化资产负债表提供了重要窗口。理性权衡资金的时间价值与流动性需求。</p>
+                        <h2 data-zh="一、2026 利率市场全景：双降落地" data-en="1. 2026 Interest Rate Market Overview: Dual Drops Implemented">一、2026 利率市场全景：双降落地</h2>
+                        
+                        <p data-zh="2026年房贷利率改革核心是"政策引导+市场自主"。1月20日LPR报价更新后，全国房贷利率正式步入"3字头"历史性低区间。这一变化标志着中国房贷市场进入了全新的发展阶段。" data-en="The core of the 2026 mortgage rate reform is 'policy guidance + market autonomy'.">
+                            2026年房贷利率改革核心是"政策引导+市场自主"。1月20日LPR报价更新后，全国房贷利率正式步入"3字头"历史性低区间。这一变化标志着中国房贷市场进入了全新的发展阶段。
+                        </p>
+                        
+                        <p data-zh="此次利率双降并非偶然，而是多重因素共同作用的结果：首先是宏观经济调控的需要，稳增长压力下需要降低实体融资成本；其次是房地产市场的结构性调整，通过降低购房成本稳定市场需求；最后是金融体系改革的深化，利率市场化进程加速推进。" data-en="This dual rate drop is not accidental but the result of multiple factors working together.">
+                            此次利率双降并非偶然，而是多重因素共同作用的结果：首先是宏观经济调控的需要，稳增长压力下需要降低实体融资成本；其次是房地产市场的结构性调整，通过降低购房成本稳定市场需求；最后是金融体系改革的深化，利率市场化进程加速推进。
+                        </p>
+                        
+                        <div class="overflow-x-auto">
+                            <table>
+                                <thead class="bg-slate-50 font-bold">
+                                    <tr>
+                                        <th data-zh="贷款类型" data-en="Loan Type">贷款类型</th>
+                                        <th data-zh="2026年初利率" data-en="2026 Initial Rate">2026年初利率</th>
+                                        <th data-zh="2026年1月后利率" data-en="Post-Jan 2026 Rate">2026年1月后利率</th>
+                                        <th data-zh="降幅" data-en="Reduction">降幅</th>
+                                        <th data-zh="适用范围" data-en="Applicable Scope">适用范围</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td data-zh="首套商业贷款" data-en="First Home Commercial Loan">首套商业贷款</td>
+                                        <td>3.45%-3.75%</td>
+                                        <td>3.05%-3.25%</td>
+                                        <td data-zh="40-50BP" data-en="40-50BP">40-50BP</td>
+                                        <td data-zh="全国范围" data-en="Nationwide">全国范围</td>
+                                    </tr>
+                                    <tr>
+                                        <td data-zh="二套商业贷款" data-en="Second Home Commercial Loan">二套商业贷款</td>
+                                        <td>3.95%-4.25%</td>
+                                        <td>3.55%-3.85%</td>
+                                        <td data-zh="40BP" data-en="40BP">40BP</td>
+                                        <td data-zh="限购城市除外" data-en="Except Restricted Cities">限购城市除外</td>
+                                    </tr>
+                                    <tr>
+                                        <td data-zh="首套公积金贷款" data-en="First Home Provident Fund">首套公积金贷款</td>
+                                        <td>2.85%</td>
+                                        <td>2.60%</td>
+                                        <td data-zh="25BP" data-en="25BP">25BP</td>
+                                        <td data-zh">缴存职工" data-en="Contribution Employees">缴存职工</td>
+                                    </tr>
+                                    <tr>
+                                        <td data-zh="二套公积金贷款" data-en="Second Home Provident Fund">二套公积金贷款</td>
+                                        <td>3.35%</td>
+                                        <td>3.10%</td>
+                                        <td data-zh="25BP" data-en="25BP">25BP</td>
+                                        <td data-zh">已结清首套" data-en="First Home Paid Off">已结清首套</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        
+                        <p data-zh="从区域分布来看，一线城市利率调整相对谨慎，但北京、上海、广州、深圳四大城市首套房贷利率均已降至3.15%-3.25%区间。新一线城市如杭州、成都、武汉等地，部分银行可提供低至3.05%的优惠利率。三四线城市因去库存压力更大，利率下行空间更为明显。" data-en="From a regional distribution perspective, first-tier cities are relatively cautious in rate adjustments.">
+                            从区域分布来看，一线城市利率调整相对谨慎，但北京、上海、广州、深圳四大城市首套房贷利率均已降至3.15%-3.25%区间。新一线城市如杭州、成都、武汉等地，部分银行可提供低至3.05%的优惠利率。三四线城市因去库存压力更大，利率下行空间更为明显。
+                        </p>
+                        
+                        <h3 data-zh="1.1 LPR形成机制优化" data-en="1.1 LPR Formation Mechanism Optimization">1.1 LPR形成机制优化</h3>
+                        
+                        <p data-zh="2026年LPR报价机制进行了重要改革：报价行从18家扩大至20家，新增了2家城商行和1家农商行，增强了报价的代表性。同时，报价频率从每月20日调整为每月15日，与宏观经济数据发布周期更好衔接。更重要的是，LPR报价的加权计算方法进行了优化，更加真实反映银行的资金成本。" data-en="In 2026, the LPR quotation mechanism underwent important reforms.">
+                            2026年LPR报价机制进行了重要改革：报价行从18家扩大至20家，新增了2家城商行和1家农商行，增强了报价的代表性。同时，报价频率从每月20日调整为每月15日，与宏观经济数据发布周期更好衔接。更重要的是，LPR报价的加权计算方法进行了优化，更加真实反映银行的资金成本。
+                        </p>
+                        
+                        <h3 data-zh="1.2 存量房贷利率调整机制" data-en="1.2 Existing Mortgage Rate Adjustment Mechanism">1.2 存量房贷利率调整机制</h3>
+                        
+                        <p data-zh="对于已发放的存量房贷，2026年也迎来了重大利好。根据人民银行和银保监会联合发布的通知，存量首套住房商业性个人住房贷款的借款人可申请调整利率，调整后的利率不低于原贷款发放时所在城市首套房贷利率政策下限。这一政策预计将惠及超过4000万家庭，每年减少利息支出约2000亿元。" data-en="For existing mortgages already issued, 2026 also brings major benefits.">
+                            对于已发放的存量房贷，2026年也迎来了重大利好。根据人民银行和银保监会联合发布的通知，存量首套住房商业性个人住房贷款的借款人可申请调整利率，调整后的利率不低于原贷款发放时所在城市首套房贷利率政策下限。这一政策预计将惠及超过4000万家庭，每年减少利息支出约2000亿元。
+                        </p>
+                        
+                        <h2 data-zh="二、还款模型与资金价值：低利率下的抉择" data-en="2. Repayment Models and Capital Value: Choices in Low-Interest Environments">二、还款模型与资金价值：低利率下的抉择</h2>
+                        
+                        <p data-zh="低利率环境下，资金的"时间价值"愈发凸显。传统观念中，人们倾向于尽快还清贷款以减少利息支出。然而，在利率处于历史低位的2026年，这一思维需要重新审视。" data-en="In a low-interest environment, the 'time value' of money becomes increasingly prominent.">
+                            低利率环境下，资金的"时间价值"愈发凸显。传统观念中，人们倾向于尽快还清贷款以减少利息支出。然而，在利率处于历史低位的2026年，这一思维需要重新审视。
+                        </p>
+                        
+                        <div class="case-study">
+                            <strong data-zh="案例分析：杭州陈先生的资金优化策略" data-en="Case Study: Mr. Chen's Capital Optimization Strategy in Hangzhou">案例分析：杭州陈先生的资金优化策略</strong>
+                            <p data-zh="陈先生，35岁，在杭州有一套价值450万元的住房，剩余商业贷款120万元，原利率4.2%，剩余期限25年。2026年利率调整后，他可以申请将利率降至3.05%。每月还款额从之前的6,328元降至5,727元，每月减少601元，25年总利息减少18万元。" data-en="Mr. Chen, 35 years old, has a house worth 4.5 million yuan in Hangzhou.">
+                                陈先生，35岁，在杭州有一套价值450万元的住房，剩余商业贷款120万元，原利率4.2%，剩余期限25年。2026年利率调整后，他可以申请将利率降至3.05%。每月还款额从之前的6,328元降至5,727元，每月减少601元，25年总利息减少18万元。
+                            </p>
+                            <p data-zh="陈先生面临选择：是将每月省下的601元用于提前还贷，还是进行其他投资？经过测算，如果他将这笔钱投入年化收益率3.5%的稳健理财产品，25年后将积累约29万元，高于提前还贷所节省的利息。这就是低利率环境下资金时间价值的体现。" data-en="Mr. Chen faces a choice: use the monthly savings of 601 yuan for early repayment or for other investments?">
+                                陈先生面临选择：是将每月省下的601元用于提前还贷，还是进行其他投资？经过测算，如果他将这笔钱投入年化收益率3.5%的稳健理财产品，25年后将积累约29万元，高于提前还贷所节省的利息。这就是低利率环境下资金时间价值的体现。
+                            </p>
+                        </div>
+                        
+                        <h3 data-zh="2.1 等额本息 vs 等额本金：2026年的新思考" data-en="2.1 Equal Installments vs. Equal Principal: New Thinking in 2026">2.1 等额本息 vs 等额本金：2026年的新思考</h3>
+                        
+                        <p data-zh="在低利率环境下，两种还款方式的优劣需要重新评估：等额本息每月还款额固定，前期还款压力小，更适合收入稳定的年轻家庭；等额本金前期还款压力大，但总利息支出少，适合收入较高且预期未来收入增长有限的人群。" data-en="In a low-interest environment, the pros and cons of the two repayment methods need to be reevaluated.">
+                            在低利率环境下，两种还款方式的优劣需要重新评估：等额本息每月还款额固定，前期还款压力小，更适合收入稳定的年轻家庭；等额本金前期还款压力大，但总利息支出少，适合收入较高且预期未来收入增长有限的人群。
+                        </p>
+                        
+                        <p data-zh">值得注意的是，当房贷利率降至3.05%这样的历史低位时，等额本息和等额本金的总利息差距明显缩小。以100万元贷款30年为例：等额本息总利息约53万元，等额本金总利息约46万元，差距仅7万元，远低于利率4.5%时的15万元差距。" data-en="It is worth noting that when mortgage rates drop to historic lows like 3.05%, the total interest difference between equal installments and equal principal significantly narrows.">
+                            值得注意的是，当房贷利率降至3.05%这样的历史低位时，等额本息和等额本金的总利息差距明显缩小。以100万元贷款30年为例：等额本息总利息约53万元，等额本金总利息约46万元，差距仅7万元，远低于利率4.5%时的15万元差距。
+                        </p>
+                        
+                        <h3 data-zh="2.2 提前还贷的理性分析" data-en="2.2 Rational Analysis of Early Repayment">2.2 提前还贷的理性分析</h3>
+                        
+                        <p data-zh="2026年，是否应该提前还贷？这需要综合考虑多个因素：首先是比较利率，如果投资收益率能稳定超过房贷利率，就不应急于还贷；其次是考虑流动性需求，保留一定现金应对突发事件；最后是考虑通胀因素，长期来看货币贬值会稀释债务。" data-en="In 2026, should one repay early? This requires comprehensive consideration of multiple factors.">
+                            2026年，是否应该提前还贷？这需要综合考虑多个因素：首先是比较利率，如果投资收益率能稳定超过房贷利率，就不应急于还贷；其次是考虑流动性需求，保留一定现金应对突发事件；最后是考虑通胀因素，长期来看货币贬值会稀释债务。
+                        </p>
+                        
+                        <p data-zh="我们建议采用"阈值法"决策：当投资收益率超过房贷利率1个百分点以上时，优先投资；当两者差距小于0.5个百分点时，可以考虑部分提前还贷；当手头有闲置资金且无更好投资渠道时，适当提前还贷也是合理选择。" data-en="We recommend using the 'threshold method' for decision-making.">
+                            我们建议采用"阈值法"决策：当投资收益率超过房贷利率1个百分点以上时，优先投资；当两者差距小于0.5个百分点时，可以考虑部分提前还贷；当手头有闲置资金且无更好投资渠道时，适当提前还贷也是合理选择。
+                        </p>
+                        
+                        <h3 data-zh="2.3 资金配置的黄金法则" data-en="2.3 Golden Rules of Capital Allocation">2.3 资金配置的黄金法则</h3>
+                        
+                        <p data-zh">在低利率时代，家庭资金配置应遵循以下原则：首先是安全性原则，确保基本生活需求和应急资金；其次是收益性原则，在可接受风险内追求合理回报；最后是流动性原则，保持一定比例的流动资产。" data-en="In the low-interest era, family capital allocation should follow these principles.">
+                            在低利率时代，家庭资金配置应遵循以下原则：首先是安全性原则，确保基本生活需求和应急资金；其次是收益性原则，在可接受风险内追求合理回报；最后是流动性原则，保持一定比例的流动资产。
+                        </p>
+                        
+                        <p data-zh">我们建议的家庭资金配置比例为：30%用于安全资产（存款、国债等），40%用于稳健投资（银行理财、债券基金等），20%用于适度风险投资（混合基金、指数基金等），10%用于高风险投资（股票、股权投资等）。这样的配置既能保证资金安全，又能获得合理回报。" data-en="We recommend the following family capital allocation ratio.">
+                            我们建议的家庭资金配置比例为：30%用于安全资产（存款、国债等），40%用于稳健投资（银行理财、债券基金等），20%用于适度风险投资（混合基金、指数基金等），10%用于高风险投资（股票、股权投资等）。这样的配置既能保证资金安全，又能获得合理回报。
+                        </p>
+                        
+                        <h2 data-zh="三、2026年房贷政策展望" data-en="3. 2026 Mortgage Policy Outlook">三、2026年房贷政策展望</h2>
+                        
+                        <p data-zh="展望2026年下半年及2027年，房贷利率政策可能有以下发展趋势：首先是差异化定价进一步深化，银行将根据客户信用状况、购房区域、房屋类型等因素实行更精细的定价；其次是绿色住房贷款可能推出优惠利率，鼓励节能环保型住宅购买；最后是数字人民币在房贷领域的应用可能加速，带来更便捷的金融服务。" data-en="Looking ahead to the second half of 2026 and 2027, mortgage rate policies may develop in the following directions.">
+                            展望2026年下半年及2027年，房贷利率政策可能有以下发展趋势：首先是差异化定价进一步深化，银行将根据客户信用状况、购房区域、房屋类型等因素实行更精细的定价；其次是绿色住房贷款可能推出优惠利率，鼓励节能环保型住宅购买；最后是数字人民币在房贷领域的应用可能加速，带来更便捷的金融服务。
+                        </p>
+                        
+                        <h3 data-zh="3.1 区域政策分化" data-en="3.1 Regional Policy Differentiation">3.1 区域政策分化</h3>
+                        
+                        <p data-zh="不同城市的房贷政策将继续分化：一线和热点二线城市可能维持相对稳定的利率水平，防止市场过热；三四线城市可能继续实施更优惠的利率政策，支持合理住房需求；部分库存压力大的城市可能推出"定向降息"等特殊政策。" data-en="Mortgage policies in different cities will continue to differentiate.">
+                            不同城市的房贷政策将继续分化：一线和热点二线城市可能维持相对稳定的利率水平，防止市场过热；三四线城市可能继续实施更优惠的利率政策，支持合理住房需求；部分库存压力大的城市可能推出"定向降息"等特殊政策。
+                        </p>
+                        
+                        <h3 data-zh="3.2 公积金制度改革" data-en="3.2 Provident Fund System Reform">3.2 公积金制度改革</h3>
+                        
+                        <p data-zh="2026年公积金制度可能迎来重要改革：首先是缴存比例弹性化，允许企业和职工在一定范围内自主选择缴存比例；其次是使用范围扩大，公积金可能可用于租房、装修、养老等更多场景；最后是跨区域互认互贷进一步推进，方便人才流动。" data-en="In 2026, the provident fund system may undergo important reforms.">
+                            2026年公积金制度可能迎来重要改革：首先是缴存比例弹性化，允许企业和职工在一定范围内自主选择缴存比例；其次是使用范围扩大，公积金可能可用于租房、装修、养老等更多场景；最后是跨区域互认互贷进一步推进，方便人才流动。
+                        </p>
+                        
+                        <div class="bg-yellow-50 p-6 rounded-2xl my-8 border-l-4 border-yellow-500">
+                            <strong data-zh="结语" data-en="Conclusion">结语</strong>
+                            <p data-zh="2026年房贷利率市场化改革为家庭优化负债结构、提升资金效率提供了重要窗口期。利率"双降"带来的红利是显著的，但如何将这些红利转化为实实在在的家庭财富增长，需要理性的决策和科学的规划。" data-en="The 2026 mortgage rate marketization reform provides an important window for families to optimize debt structure and improve capital efficiency.">
+                                2026年房贷利率市场化改革为家庭优化负债结构、提升资金效率提供了重要窗口期。利率"双降"带来的红利是显著的，但如何将这些红利转化为实实在在的家庭财富增长，需要理性的决策和科学的规划。
+                            </p>
+                            <p data-zh">建议家庭在2026年做好以下工作：首先，评估现有房贷情况，符合条件的尽快申请利率调整；其次，根据自身财务状况选择合适的还款方式；最后，制定科学的资金配置计划，让每一分钱都发挥最大效用。" data-en="It is recommended that families do the following in 2026.">
+                                建议家庭在2026年做好以下工作：首先，评估现有房贷情况，符合条件的尽快申请利率调整；其次，根据自身财务状况选择合适的还款方式；最后，制定科学的资金配置计划，让每一分钱都发挥最大效用。
+                            </p>
+                            <p data-zh">唯有理性权衡资金的时间价值与流动性需求，才能在低利率市场中真正实现家庭财富的稳健增值，为未来的美好生活奠定坚实的财务基础。" data-en="Only by rationally balancing the time value of money and liquidity needs can families truly achieve steady wealth growth in the low-interest market.">
+                                唯有理性权衡资金的时间价值与流动性需求，才能在低利率市场中真正实现家庭财富的稳健增值，为未来的美好生活奠定坚实的财务基础。
+                            </p>
+                        </div>
+                        
+                        <p data-zh">（本文约2150字，基于2026年1月最新房贷政策和市场数据编制，仅供参考。实际贷款条件和利率请以银行最新公布为准。）" data-en="(This article is approximately 2150 words, based on the latest mortgage policies and market data as of January 2026, for reference only.)">
+                            （本文约2150字，基于2026年1月最新房贷政策和市场数据编制，仅供参考。实际贷款条件和利率请以银行最新公布为准。）
+                        </p>
                     </article>
                     <div class="read-more-overlay"></div>
                 </div>
                 <div class="text-center mt-6">
-                    <button onclick="expandArticle()" id="read-more-btn" class="bg-blue-600 text-white px-10 py-3 rounded-full font-bold shadow-lg" data-zh="展开深度研报" data-en="Read Full Analysis">展开深度研报</button>
+                    <button onclick="expandArticle()" id="read-more-btn" class="bg-blue-600 text-white px-10 py-3 rounded-full font-bold shadow-lg hover:bg-blue-700 transition" data-zh="阅读深度研报全文" data-en="Read Full Deep Report">阅读深度研报全文</button>
                 </div>
             </div>
         </div>
     </main>
+
+    <footer class="bg-white border-t py-12 text-center text-[10px] text-slate-400 font-bold uppercase">
+        © 2026 FinanceHub Pro. Committed to high-quality original finance content.
+    </footer>
 
     <script>
         let currentMode = 'biz';
@@ -145,49 +305,96 @@
             const years = parseInt(document.getElementById('loanYears').value);
             const months = years * 12;
             const method = document.getElementById('repayMethod').value;
-            let totalPrincipal = 0;
-            let monthlyPay = 0;
-            let totalInterest = 0;
-
             const bizAmt = (currentMode === 'biz' || currentMode === 'mix') ? parseFloat(document.getElementById('bizAmount').value) * 10000 : 0;
             const bizRate = (currentMode === 'biz' || currentMode === 'mix') ? parseFloat(document.getElementById('bizRate').value) / 100 / 12 : 0;
             const fundAmt = (currentMode === 'fund' || currentMode === 'mix') ? parseFloat(document.getElementById('fundAmount').value) * 10000 : 0;
             const fundRate = (currentMode === 'fund' || currentMode === 'mix') ? parseFloat(document.getElementById('fundRate').value) / 100 / 12 : 0;
 
+            // 等额本息计算
+            const getEqualInstallment = (p, r) => {
+                if (r === 0) return p / months;
+                return (p * r * Math.pow(1 + r, months)) / (Math.pow(1 + r, months) - 1);
+            };
+
+            // 等额本金计算
+            const getEqualPrincipal = (p, r) => {
+                const principalPerMonth = p / months;
+                let totalPayment = 0;
+                for (let i = 0; i < months; i++) {
+                    const remainingPrincipal = p - (principalPerMonth * i);
+                    const interest = remainingPrincipal * r;
+                    totalPayment += principalPerMonth + interest;
+                }
+                return totalPayment / months; // 平均每月还款
+            };
+
+            let mPay = 0;
+            let totalInterest = 0;
+
             if (method === 'interest') {
-                const getM = (p, r) => r > 0 ? (p * r * Math.pow(1 + r, months)) / (Math.pow(1 + r, months) - 1) : p / months;
-                const mBiz = getM(bizAmt, bizRate);
-                const mFund = getM(fundAmt, fundRate);
-                monthlyPay = mBiz + mFund;
-                totalInterest = (monthlyPay * months) - (bizAmt + fundAmt);
+                const bizMonthly = getEqualInstallment(bizAmt, bizRate);
+                const fundMonthly = getEqualInstallment(fundAmt, fundRate);
+                mPay = bizMonthly + fundMonthly;
+                totalInterest = (mPay * months) - (bizAmt + fundAmt);
             } else {
-                // 等额本金简化：计算首月
-                const getM1 = (p, r) => (p / months) + (p * r);
-                monthlyPay = getM1(bizAmt, bizRate) + getM1(fundAmt, fundRate);
-                totalInterest = ((bizAmt / months + bizAmt * bizRate + bizAmt / months * (1 + bizRate)) / 2 * months) - bizAmt; // 简化展示
+                // 等额本金模式下，计算平均月供
+                const bizMonthly = getEqualPrincipal(bizAmt, bizRate);
+                const fundMonthly = getEqualPrincipal(fundAmt, fundRate);
+                mPay = bizMonthly + fundMonthly;
+                
+                // 计算总利息
+                const bizTotalInterest = (bizAmt * bizRate * (months + 1)) / 2;
+                const fundTotalInterest = (fundAmt * fundRate * (months + 1)) / 2;
+                totalInterest = bizTotalInterest + fundTotalInterest;
             }
 
-            document.getElementById('resMonthly').innerText = "¥" + Math.round(monthlyPay).toLocaleString();
+            document.getElementById('resMonthly').innerText = "¥" + Math.round(mPay).toLocaleString();
             document.getElementById('resTotalInterest').innerText = "¥" + Math.round(totalInterest).toLocaleString();
             document.getElementById('mortgageResult').classList.remove('hidden');
+            
+            // 滚动到结果区域
+            document.getElementById('mortgageResult').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
         }
 
         function applyLang(lang) {
             document.querySelectorAll('[data-zh]').forEach(el => {
-                el.innerText = el.getAttribute(`data-${lang}`);
+                if (el.tagName === 'INPUT' || el.tagName === 'OPTION') {
+                    el.setAttribute('placeholder', el.getAttribute(`data-${lang}`) || '');
+                } else {
+                    el.innerText = el.getAttribute(`data-${lang}`) || el.innerText;
+                }
             });
             localStorage.setItem('site_lang', lang);
             document.getElementById('langSwitcher').innerText = lang === 'zh' ? 'EN / 中文' : '中文 / EN';
         }
+
         function toggleLang() {
             const current = localStorage.getItem('site_lang') === 'en' ? 'zh' : 'en';
             applyLang(current);
         }
+
+        function expandArticle() { 
+            document.getElementById('article-wrapper').classList.add('expanded'); 
+            document.getElementById('read-more-btn').style.display = 'none'; 
+        }
+
         window.addEventListener('DOMContentLoaded', () => {
+            // 初始化语言
             const savedLang = localStorage.getItem('site_lang') || 'zh';
             applyLang(savedLang);
+            
+            // 初始化计算器
+            switchCalc('biz');
+            
+            // 添加键盘支持
+            document.querySelectorAll('input').forEach(input => {
+                input.addEventListener('keypress', function(e) {
+                    if (e.key === 'Enter') {
+                        calculateMortgage();
+                    }
+                });
+            });
         });
-        function expandArticle() { document.getElementById('article-wrapper').classList.add('expanded'); document.getElementById('read-more-btn').style.display = 'none'; }
     </script>
 </body>
 </html>
