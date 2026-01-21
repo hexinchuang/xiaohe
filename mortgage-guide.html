@@ -2,38 +2,92 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-    <title>2026 中国房贷市场白皮书：还款模型与税务抵扣策略 - FinanceHub</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-zh="2026 中国房贷市场白皮书 - FinanceHub" data-en="2026 China Mortgage Market Whitepaper - FinanceHub">2026 中国房贷市场白皮书：还款模型与税务抵扣策略 - FinanceHub</title>
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+    
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-QFB52C47T2"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-QFB52C47T2');
-</script>
+    
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-QFB52C47T2"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-QFB52C47T2');
+    </script>
+    
+    <style>
+        body { background: #f8fafc; font-family: 'Inter', system-ui, sans-serif; line-height: 1.8; }
+    </style>
 </head>
-<body class="bg-slate-50 p-8 text-slate-800 font-sans">
-    <div class="max-w-4xl mx-auto bg-white p-12 rounded-3xl shadow-xl border border-slate-100">
-        <a href="/" class="text-blue-600 font-bold mb-8 inline-block">← 返回主页</a>
-        <h1 class="text-3xl font-black mb-8">中国家庭资产负债表优化：2026 房贷利率市场化全解析</h1>
-        
-        <div class="space-y-6 leading-loose text-slate-700">
-            <h3 class="text-xl font-bold text-slate-900">1. LPR 报价机制的深层变动</h3>
-            <p>2026 年，个人住房贷款利率与 LPR 的加点系数进入了动态调整期。对于存量房贷用户，如何选择重定价周期（1个月或1年）成为了资产管理的关键。通过本站的等额本息计算器，您可以直观感受利率下调 10 个基点对总利息支出的具体影响。</p>
+<body class="bg-slate-50 p-8 text-slate-800">
+    <div class="max-w-4xl mx-auto bg-white p-8 md:p-12 rounded-[2.5rem] shadow-xl border border-slate-100">
+        <div class="flex justify-between items-center mb-10">
+            <a href="/" class="text-blue-600 font-bold hover:underline" data-zh="← 返回主页" data-en="← Back to Home">← 返回主页</a>
+            <button id="langSwitcher" onclick="toggleLang()" class="bg-slate-100 px-4 py-2 rounded-full text-[10px] font-black hover:bg-blue-50 transition border border-slate-200 uppercase">
+                EN / 中文
+            </button>
+        </div>
 
-            <h3 class="text-xl font-bold text-slate-900">2. 等额本息 vs 等额本金：数学模型的博弈</h3>
-            <p>许多购房者误认为等额本金总能“省钱”，但忽略了资金的时间价值（TVM）。在通胀预期存在的 2026 年，前期较高的月供压力可能会挤压个税抵扣后的家庭现金流净值。利用 FinanceHub 的房贷终端，建议用户根据未来三年的收入预期进行现金流压力测试。</p>
+        <h1 class="text-3xl font-black mb-8 text-slate-900" data-zh="中国家庭资产负债表优化：2026 房贷利率市场化全解析" data-en="China Household Balance Sheet Optimization: 2026 Mortgage Analysis">
+            中国家庭资产负债表优化：2026 房贷利率市场化全解析
+        </h1>
+        
+        <div class="space-y-8 leading-loose text-slate-600">
+            <section>
+                <h3 class="text-xl font-bold text-slate-900 mb-4" data-zh="1. LPR 报价机制的深层变动" data-en="1. Deep Changes in LPR Mechanism">1. LPR 报价机制的深层变动</h3>
+                <p data-zh="2026 年，个人住房贷款利率进入动态调整期。选择重定价周期成为了资产管理的关键。通过本站计算器，可直观感受利率变动影响。" data-en="In 2026, mortgage rates entered a dynamic adjustment period. Choosing re-pricing cycles is now key. Use our tools to visualize interest impacts.">
+                    2026 年，个人住房贷款利率与 LPR 的加点系数进入了动态调整期。对于存量房贷用户，如何选择重定价周期（1个月或1年）成为了资产管理的关键。通过本站的等额本息计算器，您可以直观感受利率下调 10 个基点对总利息支出的具体影响。
+                </p>
+            </section>
+
+            <section>
+                <h3 class="text-xl font-bold text-slate-900 mb-4" data-zh="2. 还款模型博弈：等额本息 vs 等额本金" data-en="2. Repayment Models: Principal vs. Interest">2. 等额本息 vs 等额本金：数学模型的博弈</h3>
+                <p data-zh="许多人误以为等额本金总能省钱，但忽略了资金时间价值。在 2026 年，建议根据收入预期进行现金流压力测试。" data-en="Many assume equal principal is always better, ignoring the time value of money. In 2026, we suggest stress testing based on income expectations.">
+                    许多购房者误认为等额本金总能“省钱”，但忽略了资金的时间价值（TVM）。在通胀预期存在的 2026 年，前期较高的月供压力可能会挤压个税抵扣后的家庭现金流净值。利用 FinanceHub 的房贷终端，建议用户根据未来三年的收入预期进行现金流压力测试。
+                </p>
+            </section>
 
             <div class="p-8 bg-slate-900 text-white rounded-3xl my-8">
-                <p class="font-mono text-sm opacity-70 mb-4">// 计算公式参考：</p>
-                <p class="text-lg font-bold">月供 = [贷款本金 × 月利率 × (1+月利率)^还款月数] ÷ [(1+月利率)^还款月数 - 1]</p>
+                <p class="font-mono text-xs opacity-50 mb-4">// Formula Reference:</p>
+                <p class="text-lg font-bold" data-zh="月供 = [贷款本金 × 月利率 × (1+月利率)^还款月数] ÷ [(1+月利率)^还款月数 - 1]" data-en="Payment = [P × r × (1+r)^n] ÷ [(1+r)^n - 1]">
+                    月供 = [贷款本金 × 月利率 × (1+月利率)^还款月数] ÷ [(1+月利率)^还款月数 - 1]
+                </p>
             </div>
 
-            <h3 class="text-xl font-bold text-slate-900">3. 个税抵扣与住房贷款的协同效应</h3>
-            <p>在 2026 年个税新规下，住房贷款利息专项附加扣除标准有所优化。将个税计算器与房贷计算器结合使用，可以计算出家庭的最优节税方案，从而最大化提升可支配收入水平。</p>
+            <section>
+                <h3 class="text-xl font-bold text-slate-900 mb-4" data-zh="3. 个税抵扣与房贷的协同效应" data-en="3. Synergy: Tax Deduction & Mortgage">3. 个税抵扣与住房贷款的协同效应</h3>
+                <p data-zh="在 2026 年个税新规下，房贷利息抵扣有所优化。结合个税与房贷计算器，可计算出家庭最优节税方案。" data-en="Under 2026 tax rules, mortgage interest deductions are optimized. Combine our calculators to find your family's best tax-saving plan.">
+                    在 2026 年个税新规下，住房贷款利息专项附加扣除标准有所优化。将个税计算器与房贷计算器结合使用，可以计算出家庭的最优节税方案，从而最大化提升可支配收入水平。
+                </p>
+            </section>
         </div>
+        
+        <footer class="mt-16 pt-8 border-t border-slate-100 text-center text-[10px] text-slate-300 uppercase tracking-widest font-bold">
+            © 2026 FinanceHub Pro | Financial Decision Support Terminal
+        </footer>
     </div>
+
+    <script>
+        // 全局语言同步逻辑 (支持 LocalStorage)
+        function applyLang(lang) {
+            document.querySelectorAll('[data-zh]').forEach(el => {
+                el.innerText = el.getAttribute(`data-${lang}`);
+            });
+            localStorage.setItem('site_lang', lang);
+            const btn = document.getElementById('langSwitcher');
+            if(btn) btn.innerText = lang === 'zh' ? 'EN / 中文' : '中文 / EN';
+        }
+
+        function toggleLang() {
+            const current = localStorage.getItem('site_lang') === 'en' ? 'zh' : 'en';
+            applyLang(current);
+        }
+
+        window.addEventListener('DOMContentLoaded', () => {
+            const savedLang = localStorage.getItem('site_lang') || 'zh';
+            applyLang(savedLang);
+        });
+    </script>
 </body>
 </html>
