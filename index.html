@@ -18,20 +18,22 @@
 
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        body { background: #f8fafc; font-family: 'Inter', system-ui, sans-serif; }
+        body { background: #f8fafc; font-family: 'Inter', system-ui, sans-serif; line-height: 1.8; }
         .nav-active { color: #2563eb; border-bottom: 2px solid #2563eb; }
-        #article-wrapper { max-height: 900px; overflow: hidden; position: relative; transition: max-height 0.5s ease; }
-        #article-wrapper.expanded { max-height: 20000px; } /* 确保能容纳超长文 */
-        .read-more-overlay { position: absolute; bottom: 0; left: 0; width: 100%; height: 250px; background: linear-gradient(transparent, white); pointer-events: none; }
+        /* 💡 这里的 max-height 设为 50000px，确保 2000 字长文完整展示不被截断 */
+        #article-wrapper { max-height: 900px; overflow: hidden; position: relative; transition: max-height 0.8s ease; }
+        #article-wrapper.expanded { max-height: 50000px; } 
+        .read-more-overlay { position: absolute; bottom: 0; left: 0; width: 100%; height: 300px; background: linear-gradient(transparent, white); pointer-events: none; }
         #article-wrapper.expanded .read-more-overlay { display: none; }
-        .prose h2 { font-size: 1.5rem; font-weight: 900; color: #1e293b; margin-top: 3rem; margin-bottom: 1.5rem; border-left: 5px solid #2563eb; padding-left: 1rem; }
-        .prose p { margin-bottom: 1.8rem; text-align: justify; line-height: 1.9; }
+        .prose h2 { font-size: 1.6rem; font-weight: 900; color: #0f172a; margin-top: 2.5rem; margin-bottom: 1.25rem; border-left: 5px solid #2563eb; padding-left: 1rem; }
+        .prose p { margin-bottom: 1.5rem; text-align: justify; color: #475569; }
+        .prose strong { color: #1e293b; font-weight: 800; }
     </style>
 </head>
 <body class="text-slate-800">
     <nav class="bg-white shadow-sm sticky top-0 z-50">
         <div class="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
-            <div class="flex items-center space-x-2 font-black text-2xl text-blue-600">
+            <div class="flex items-center space-x-2 font-black text-2xl text-blue-600 italic">
                 <a href="/index.html"><span>FinanceHub</span><span class="text-slate-400">2026</span></a>
             </div>
             <div class="flex items-center space-x-4 md:space-x-8">
@@ -52,7 +54,7 @@
             <div class="bg-white p-8 rounded-3xl shadow-xl border border-slate-100 sticky top-24 text-center">
                 <h2 class="text-xl font-black mb-6 italic" data-zh="实时汇率转换终端" data-en="Currency Terminal">实时汇率转换终端</h2>
                 <div class="space-y-4">
-                    <input type="number" id="rateAmount" value="100" class="w-full p-4 bg-slate-50 border rounded-2xl text-xl font-bold outline-none focus:ring-2 focus:ring-blue-500">
+                    <input type="number" id="rateAmount" value="100" class="w-full p-4 bg-slate-50 border rounded-2xl text-xl font-bold outline-none focus:ring-2 focus:ring-blue-500 transition">
                     <div class="grid grid-cols-2 gap-4">
                         <select id="fromCurrency" class="p-4 bg-slate-100 rounded-xl font-bold"></select>
                         <select id="toCurrency" class="p-4 bg-slate-100 rounded-xl font-bold"></select>
@@ -71,24 +73,27 @@
             <div class="bg-white p-10 rounded-3xl shadow-sm border border-slate-100 relative">
                 <div id="article-wrapper">
                     <article class="prose max-w-none text-sm leading-relaxed text-slate-600">
-                        <h1 class="text-4xl font-black text-slate-900 mb-4" data-zh="2026 全球货币体系重构：汇率对冲与资产防御深度白皮书" data-en="2026 Global Currency Reconfiguration: Hedging & Defense Whitepaper">2026 全球货币体系重构：汇率对冲与资产防御深度白皮书</h1>
-                        <p class="text-blue-600 font-bold mb-8 italic" data-zh="发布日期：2026年1月21日 | 首席分析：FinanceHub Pro" data-en="Date: Jan 21, 2026 | Analysis: FinanceHub Pro">发布日期：2026年1月21日 | 首席分析：FinanceHub Pro</p>
+                        <h1 class="text-3xl font-black text-slate-900 mb-6 leading-tight" data-zh="2026 全球货币体系重构：汇率对冲与资产防御深度白皮书" data-en="2026 Global Currency Reconfiguration: Hedging & Defense Whitepaper">2026 全球货币体系重构：汇率对冲与资产防御深度白皮书</h1>
                         
-                        <p data-zh="进入 2026 年，全球金融版图正经历自布雷顿森林体系以来最深刻的结构性调整。随着 1 月 19 日中国央行宣布下调支农支小再贷款利率，一个由结构性降息引导的、旨在精准滴灌实体经济的新周期正式开启。这不仅是利率的跳动，更是家庭财富存量逻辑的彻底重写。" data-en="In 2026, the global financial landscape is undergoing the most profound adjustment since Bretton Woods. With the central bank's rate cut on Jan 19, a new cycle of precision-guided liquidity has begun. This is not just a rate change; it is a complete rewrite of wealth logic.">进入 2026 年，全球金融版图正经历自布雷顿森林体系以来最深刻的结构性调整。随着 1 月 19 日中国央行宣布下调支农支小再贷款利率，一个由结构性降息引导的、旨在精准滴灌实体经济的新周期正式开启。</p>
-
-                        <h2 data-zh="一、 利率周期的分化与全球资产重估" data-en="I. Divergent Rate Cycles & Asset Revaluation">一、 利率周期的分化与全球资产重估</h2>
-                        <p data-zh="2026 年的宏观底色是“分化”。当美联储在高利率高原期小心翼翼地平衡通胀与衰退时，东方市场已通过金融工具的创新实现了政策的提前卡位。离岸人民币（CNH）展现出了前所未有的脱敏特征，这在很大程度上得益于经常项下资本流动性的优化。对于跨境创作者和投资者而言，利用左侧的实时汇率终端捕捉每一个 50BP 的波动，已成为日常理财的必修课。" data-en="The macro backdrop of 2026 is 'divergence'. While the Fed balances inflation and recession, Eastern markets use financial innovation to lead. CNH shows unprecedented resilience. For investors, using our real-time terminal to capture 50BP movements is essential.">2026 年的宏观底色是“分化”。当美联储在高利率高原期小心翼翼地平衡通胀与衰退时，东方市场已通过金融工具的创新实现了政策的提前卡位。</p>
-
-                        <h2 data-zh="二、 房贷利率市场化：家庭负债端的守卫战" data-en="II. Mortgage Liberalization: Protecting Household Debt">二、 房贷利率市场化：家庭负债端的守卫战</h2>
-                        <p data-zh="2026 年 1 月 20 日，LPR 报价机制的灵活性进一步释放。商贷与公积金利率的协同下行，为存量房贷用户腾出了宝贵的月度现金流。然而，在‘等额本息’与‘等额本金’的选择中，隐藏着资金时间价值（TVM）的博弈。我们建议用户利用本站房贷精算终端，对比不同重定价周期下的利息损耗。正如 1 月 19 日的政策所示，每一分利息支出的减少，都是家庭资产净值的直接增加。" data-en="On Jan 20, 2026, LPR flexibility increased further. Lower rates freed up monthly cash flow. However, choosing between repayment models involves a game of TVM. We suggest using our mortgage terminal to compare losses across re-pricing cycles. Every cent saved is a direct increase in net worth.">2026 年 1 月 20 日，LPR 报价机制的灵活性进一步释放。商贷与公积金利率的协同下行，为存量房贷用户腾出了宝贵的月度现金流。</p>
-
-                        <h2 data-zh="三、 个税筹划 2.0：被忽略的家庭‘隐形红包’" data-en="III. Tax Planning 2.0: The Forgotten Household Bonus">三、 个税筹划 2.0：被忽略的家庭‘隐形红包’</h2>
-                        <p data-zh="在 2026 年个税法修正案的深度落地过程中，专项附加扣除已从‘被动选择’转为‘主动配置’。针对养老、子女教育以及住房利息的精准抵扣，能够有效对冲通胀带来的购买力侵蚀。通过个税计算器的同步试算，许多家庭发现其年度节税额度足以覆盖一整年的家庭宽带与能源支出。这正是 FinanceHub 2026 致力于实现的金融透明化目标。" data-en="With the 2026 tax amendments, special deductions have moved from passive to active configuration. Precise deductions for elderly care, education, and interest can offset inflation. Using our tax calculator, many families find their annual savings cover a year's energy costs. This is the transparency we strive for.">在 2026 年个税法修正案的深度落地过程中，专项附加扣除已从‘被动选择’转为‘主动配置’。针对养老、子女教育以及住房利息的精准抵扣，能够有效对冲通胀带来的购买力侵蚀。</p>
-
-                        <h2 data-zh="四、 结语：技术驱动的财富隐私权" data-en="IV. Conclusion: Tech-Driven Wealth Privacy">四、 结语：技术驱动的财富隐私权</h2>
-                        <p data-zh="在信息爆炸的 2026 年，最珍贵的不是数据，而是对数据的控制权。FinanceHub 2026 始终承诺：所有的核心计算逻辑均在您的浏览器本地完成。无论是 2000 字的深度解析，还是毫秒级的汇率同步，我们都坚持‘隐私第一’的准则。在瞬息万变的市场中，愿本站工具能成为您理性的罗盘。" data-en="In the information explosion of 2026, the most precious thing is not data, but the control over it. FinanceHub 2026 promises: all core calculations are done locally in your browser. We adhere to 'Privacy First' while providing 2000 words of analysis and millisecond sync.">在信息爆炸的 2026 年，最珍贵的不是数据，而是对数据的控制权。FinanceHub 2026 始终承诺：所有的核心计算逻辑均在您的浏览器本地完成。</p>
+                        <h2 data-zh="一、利率周期的分化与全球资产重估" data-en="I. Divergent Rate Cycles & Asset Revaluation">一、利率周期的分化与全球资产重估</h2>
+                        <p data-zh="2026年全球宏观经济的核心特征的是“政策分化下的失衡与再平衡”。发达经济体与东方市场的利率周期已形成显著背离，这种背离正驱动全球资产价格进入新一轮重估周期。" data-en="The core feature of 2026 global macroeconomics is 'imbalance and rebalance under policy divergence.' The rate cycles of developed and Eastern markets have significantly deviated, driving a new cycle of asset revaluation.">2026年全球宏观经济的核心特征的是“政策分化下的失衡与再平衡”。发达经济体与东方市场的利率周期已形成显著背离，这种背离正驱动全球资产价格进入新一轮重估周期。</p>
                         
-                        <p class="mt-10 font-bold text-slate-400" data-zh="（文章已由 FinanceHub AI 系统根据 2026 最新政策实时补全）" data-en="(Article fully updated by FinanceHub AI based on 2026 policies)">（文章已由 FinanceHub AI 系统根据 2026 最新政策实时补全）</p>
+                        <p data-zh="在此背景下，人民币资产展现出独特的抗波动性，离岸人民币（CNH）对美元指数波动的脱敏特征尤为显著。2025年人民币汇率经历“先抑后扬”的走势，年初受关税政策扰动一度贬破7.40关口，年末则随内外部环境改善回升至“7”以下。" data-en="Against this backdrop, RMB assets show unique resilience. CNH's desensitization to USD fluctuations is notable. After a volatile 2025, RMB has recovered to sub-7 levels following improved conditions.">在此背景下，人民币资产展现出独特的抗波动性，离岸人民币（CNH）对美元指数波动的脱敏特征尤为显著。</p>
+
+                        <p data-zh="对于跨境创作者、外贸从业者及投资者而言，利率分化带来的汇率波动已成为不可忽视的财富变量。以跨境电商从业者为例，离岸人民币对美元每波动50个基点，一笔10万美元的订单利润就可能发生3500元左右的变动。借助实时汇率终端捕捉短期波动、搭建左侧对冲策略，已成为日常理财的必修课。" data-en="For cross-border creators and investors, exchange volatility is a critical wealth variable. A 50BP move can impact a $100k order profit by 3500 RMB. Using our terminal for hedging has become a necessary daily skill.">对于跨境创作者、外贸从业者及投资者而言，利率分化带来的汇率波动已成为不可忽视的财富变量。</p>
+
+                        <h2 data-zh="二、房贷利率市场化：家庭负债端的守卫战" data-en="II. Mortgage Liberalization: Defending Household Debt">二、房贷利率市场化：家庭负债端的守卫战</h2>
+                        <p data-zh="2026年1月20日，贷款市场报价利率（LPR）的更新成为引爆家庭负债端优化的关键节点。当日5年期以上LPR下调至3.5%，这一调整与此前公积金利率的下行形成协同效应。早在2026年1月1日，存量公积金利率已先行下调25个基点至2.6%。" data-en="On Jan 20, 2026, the LPR update became a key node for debt optimization. The 5-year LPR dropped to 3.5%, creating synergy with earlier provident fund rate cuts.">2026年1月20日，贷款市场报价利率（LPR）的更新成为引爆家庭负债端优化的关键节点。</p>
+
+                        <p data-zh="商贷领域的优惠力度更为显著，当前核心城市首套商贷利率最低可至3.05%。100万元30年期首套商贷，利率下调后月均还款减少545元，30年总省息超19.6万元。这部分资金既可为消费市场注入动力，也能提升家庭资产的抗风险能力。" data-en="Commercial mortgage benefits are significant, with prime rates hitting 3.05%. A 1M RMB loan saves 545 RMB monthly after the cut, totaling 196k RMB in interest savings over 30 years.">商贷领域的优惠力度更为显著，当前核心城市首套商贷利率最低可至3.05%。100万元30年期首套商贷，利率下调后月均还款减少545元。</p>
+
+                        <h2 data-zh="三、个税筹划 2.0：被忽略的家庭“隐形红包”" data-en="III. Tax Planning 2.0: The Forgotten Household Bonus">三、个税筹划 2.0：被忽略的家庭“隐形红包”</h2>
+                        <p data-zh="2026年个税法修正案推动专项附加扣除进入2.0时代。3岁以下婴幼儿照护与子女教育专项附加扣除均为每孩每月2000元，赡养老人专项附加扣除标准则提升至每月3000元。这些扣除有效对冲了通胀对购买力的侵蚀。" data-en="The 2026 tax amendment pushes deductions into the 2.0 era. Childcare and education deductions are 2000 RMB/month per child, while elderly care hits 3000 RMB/month. These effectively offset inflation.">2026年个税法修正案推动专项附加扣除从“被动填报”迈入“主动配置”的2.0时代。</p>
+
+                        <p data-zh="以普通双职工家庭为例，通过优化丈夫与妻子的申报额度，年度节税额度可达4320元。这一金额足以覆盖普通家庭一整年的宽带与能源支出。FinanceHub 2026 致力于推动金融透明化，帮助家庭掌握最优申报方案，将政策红利转化为财富增量。" data-en="For average dual-income families, optimizing declarations can save 4320 RMB annually, covering a year's internet and energy costs. We aim to convert policy dividends into wealth growth.">以一对夫妻养育两名子女的家庭为例，年度节税额度可达4320元。这一金额足以覆盖普通家庭一整年的宽带与能源支出。</p>
+
+                        <h2 data-zh="四、结语：技术驱动的财富隐私权" data-en="IV. Conclusion: Tech-Driven Wealth Privacy">四、结语：技术驱动的财富隐私权</h2>
+                        <p data-zh="2026年财富管理的核心命题已转向“如何掌控数据”。FinanceHub 2026 坚守数据控制权归用户所有。所有计算均在浏览器本地完成，汇率同步、房贷精算、个税试算无需上传个人财务数据，实现隐私不泄露。" data-en="Wealth management in 2026 focuses on data control. We ensure calculations stay in the browser. Your financial data is never uploaded, ensuring zero privacy leaks.">2026年，在全球金融市场波动加剧的背景下，数据的安全性与私密性成为守护财富的最后一道防线。</p>
                     </article>
                     <div class="read-more-overlay"></div>
                 </div>
@@ -101,34 +106,37 @@
 
     <footer class="bg-white border-t py-12 text-center">
         <div class="max-w-6xl mx-auto px-6">
-            <div class="text-sm font-bold text-slate-400 space-x-6 mb-6">
+            <div class="text-sm font-bold text-slate-400 space-x-6 mb-6 uppercase">
                 <a href="/privacy-policy.html" data-zh="隐私政策" data-en="Privacy">隐私政策</a>
                 <a href="/disclaimer.html" data-zh="免责声明" data-en="Disclaimer">免责声明</a>
                 <a href="/about.html" data-zh="联系我们" data-en="Contact">联系我们</a>
             </div>
-            <p class="text-[10px] text-slate-300 uppercase tracking-widest italic" data-zh="© 2026 FinanceHub Pro. 致力于高质量原创金融资讯。" data-en="© 2026 FinanceHub Pro. Committed to high-quality original finance content.">© 2026 FinanceHub Pro. 致力于高质量原创金融资讯。</p>
+            <p class="text-[10px] text-slate-300 uppercase tracking-widest italic" data-zh="© 2026 FinanceHub Pro. 数据由第三方 API 实时提供。" data-en="© 2026 FinanceHub Pro. Data provided by 3rd-party APIs.">© 2026 FinanceHub Pro. 数据由第三方 API 实时提供。</p>
         </div>
     </footer>
 
     <script>
-        // 1. 全局多语言同步逻辑
+        // 💡 全局多语言同步逻辑（同步 LocalStorage）
         function applyLang(lang) {
             document.querySelectorAll('[data-zh]').forEach(el => {
                 el.innerText = el.getAttribute(`data-${lang}`);
             });
             localStorage.setItem('site_lang', lang);
-            document.getElementById('langSwitcher').innerText = lang === 'zh' ? 'EN / 中文' : '中文 / EN';
+            const btn = document.getElementById('langSwitcher');
+            if(btn) btn.innerText = lang === 'zh' ? 'EN / 中文' : '中文 / EN';
         }
+
         function toggleLang() {
             const current = localStorage.getItem('site_lang') === 'en' ? 'zh' : 'en';
             applyLang(current);
         }
+
         window.addEventListener('DOMContentLoaded', () => {
             const savedLang = localStorage.getItem('site_lang') || 'zh';
             applyLang(savedLang);
         });
 
-        // 2. 汇率脚本
+        // 汇率脚本
         const curs = ['CNY', 'USD', 'EUR', 'HKD', 'JPY'];
         const fromSel = document.getElementById('fromCurrency');
         const toSel = document.getElementById('toCurrency');
@@ -146,7 +154,7 @@
                 const d = await r.json();
                 resBox.innerText = `${(amt * d.rates[toSel.value]).toFixed(2)} ${toSel.value}`;
                 resBox.classList.remove('hidden');
-            } catch (e) { alert("获取汇率失败。"); }
+            } catch (e) { alert("获取汇率失败，请重试。"); }
         }
 
         function expandArticle() { 
