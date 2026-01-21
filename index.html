@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>2026 全球汇率 analysis 与实时转换终端 - FinanceHub</title>
+    <title id="page-title">2026 全球汇率分析与实时转换终端 - FinanceHub</title>
     
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2700554011244473" crossorigin="anonymous"></script>
     
@@ -35,9 +35,9 @@
             </div>
             <div class="flex items-center space-x-4 md:space-x-8">
                 <div class="hidden md:flex space-x-6 text-sm font-bold">
-                    <a href="/index.html" class="nav-active pb-1">汇率转换</a>
-                    <a href="/tax-calculator.html" class="pb-1 hover:text-blue-600 transition">个税计算</a>
-                    <a href="/mortgage-calculator.html" class="pb-1 hover:text-blue-600 transition">房贷计算</a>
+                    <a href="/index.html" class="nav-active pb-1" data-t="nav1">汇率转换</a>
+                    <a href="/tax-calculator.html" class="pb-1 hover:text-blue-600 transition" data-t="nav2">个税计算</a>
+                    <a href="/mortgage-calculator.html" class="pb-1 hover:text-blue-600 transition" data-t="nav3">房贷计算</a>
                 </div>
                 <button onclick="toggleLang()" class="bg-slate-100 px-4 py-2 rounded-full text-[10px] font-black hover:bg-blue-50 hover:text-blue-600 transition uppercase tracking-tighter border border-slate-200">
                     EN / 中文
@@ -49,17 +49,18 @@
     <main class="max-w-6xl mx-auto px-6 py-10 grid lg:grid-cols-12 gap-10">
         <div class="lg:col-span-5">
             <div class="bg-white p-8 rounded-3xl shadow-xl border border-slate-100 sticky top-24">
-                <h2 class="text-xl font-black mb-6">实时汇率转换器</h2>
+                <h2 class="text-xl font-black mb-6" data-t="tool-title">实时汇率转换器</h2>
                 <div class="space-y-4">
                     <input type="number" id="rateAmount" value="100" class="w-full p-4 bg-slate-50 border rounded-2xl text-xl font-bold">
                     <div class="grid grid-cols-2 gap-4">
                         <select id="fromCurrency" class="p-4 bg-slate-100 rounded-xl font-bold"></select>
                         <select id="toCurrency" class="p-4 bg-slate-100 rounded-xl font-bold"></select>
                     </div>
-                    <button onclick="convertCurrency()" class="w-full bg-blue-600 text-white py-4 rounded-xl font-bold shadow-lg hover:bg-blue-700 transition">获取实时报价</button>
+                    <button onclick="convertCurrency()" class="w-full bg-blue-600 text-white py-4 rounded-xl font-bold shadow-lg hover:bg-blue-700 transition" data-t="btn-quote">获取实时报价</button>
                     <div id="rateResult" class="hidden mt-4 p-4 bg-blue-50 text-blue-700 rounded-xl text-center font-black text-2xl animate-pulse"></div>
                 </div>
-                <div class="mt-8 pt-8 border-t border-dashed border-slate-200">
+                <div class="mt-8 pt-8 border-t border-dashed border-slate-200 text-center">
+                    <p class="text-[10px] text-slate-400 mb-4" data-t="ads-text">赞助内容</p>
                     <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-2700554011244473" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
                     <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
                 </div>
@@ -70,65 +71,68 @@
             <div class="bg-white p-10 rounded-3xl shadow-sm border border-slate-100 relative">
                 <div id="article-wrapper">
                     <article class="prose max-w-none text-sm leading-relaxed text-slate-600">
-                        <h1 class="text-3xl font-black text-slate-900 mb-2">2026 全球货币体系重构：汇率对冲深度解析</h1>
-                        <p class="text-blue-600 font-bold mb-6 italic">左侧转换终端捕捉波动，下文深度拆解逻辑</p>
+                        <h1 class="text-3xl font-black text-slate-900 mb-2" data-t="art-h1">2026 全球货币体系重构：汇率对冲深度解析</h1>
+                        <p class="text-blue-600 font-bold mb-6 italic" data-t="art-sub">左侧转换终端捕捉波动，下文深度拆解逻辑</p>
                         
-                        <p class="mb-4">进入 2026 年，延续多年的美联储紧缩周期画上句号。全球货币体系正处于一场深刻而静默的重构之中。重构的驱动力不再是单一的经济周期，而是主权债务阴云与“向内看”政策的合力。</p>
+                        <p class="mb-4" data-t="art-p1">进入 2026 年，延续多年的美联储紧缩周期画上句号。全球货币体系正处于一场深刻而静默的重构之中。</p>
                         
-                        <h2 class="text-xl font-bold text-slate-800 mt-6 mb-4 font-mono">01 旧秩序瓦解与新力量崛起</h2>
-                        <p class="mb-4">2026 年是美元信用的压力测试年。美国联邦政府债务占 GDP 比重已超 123%，高企的利息支出正侵蚀其制度基础。全球资本避险逻辑正在转向，黄金占全球官方储备的比重已接近 20%。</p>
+                        <h2 class="text-xl font-bold text-slate-800 mt-6 mb-4 font-mono" data-t="art-h2-1">01 旧秩序瓦解与新力量崛起</h2>
+                        <p class="mb-4" data-t="art-p2">2026 年是美元信用的压力测试年。美国联邦政府债务占 GDP 比重已超 123%，高企的利息支出正侵蚀其制度基础。</p>
                         
-                        <h2 class="text-xl font-bold text-slate-800 mt-6 mb-4 font-mono">02 汇率波动：分化世界中的众生相</h2>
-                        <p class="mb-4"><strong>美元：</strong> 降息周期开启，波动中枢下移。2026 年适逢美国中期选举，不确定性导致其“比烂”特征明显。<strong>人民币：</strong> 展现出更强的“脱敏”能力，在美元走弱和利息收敛的背景下，有望保持温和升值。</p>
-
-                        <h2 class="text-xl font-bold text-slate-800 mt-6 mb-4 font-mono">03 家庭财务对冲：构建防御工事</h2>
-                        <ul class="list-disc pl-5 space-y-2 mb-6 text-sm">
-                            <li>分批定投换汇，摒弃择时幻想。</li>
-                            <li>海外债券全额对冲，股票资产保留敞口。</li>
-                            <li>关注与法币体系弱相关的实物资产配置。</li>
-                        </ul>
+                        <h2 class="text-xl font-bold text-slate-800 mt-6 mb-4 font-mono" data-t="art-h2-2">02 汇率波动：分化世界中的众生相</h2>
+                        <p class="mb-4" data-t="art-p3">美元：降息周期开启，波动中枢下移。人民币：展现出更强的“脱敏”能力，有望保持温和升值。</p>
                     </article>
                     <div class="read-more-overlay"></div>
                 </div>
                 <div class="text-center mt-6">
-                    <button onclick="expandArticle()" id="read-more-btn" class="bg-blue-600 text-white px-10 py-3 rounded-full font-bold shadow-lg hover:bg-blue-700 transition">展开阅读全文</button>
+                    <button onclick="expandArticle()" id="read-more-btn" class="bg-blue-600 text-white px-10 py-3 rounded-full font-bold shadow-lg hover:bg-blue-700 transition" data-t="btn-more">展开阅读全文</button>
                 </div>
             </div>
         </div>
     </main>
 
-    <section class="max-w-6xl mx-auto px-6 mb-10">
-        <div class="bg-slate-900 rounded-3xl p-8 flex flex-col md:flex-row items-center justify-between gap-6 shadow-2xl">
-            <div class="space-y-2 text-center md:text-left">
-                <h3 class="text-white text-xl font-black italic">FinanceHub 2026 资源中心</h3>
-                <p class="text-slate-400 text-xs">探索更多深度金融工具与历史研报</p>
-            </div>
-            <div class="flex flex-wrap justify-center gap-3">
-                <a href="/index.html" class="px-5 py-2 bg-white/10 text-white rounded-full hover:bg-white/20 transition text-sm">汇率终端</a>
-                <a href="/tax-calculator.html" class="px-5 py-2 bg-white/10 text-white rounded-full hover:bg-white/20 transition text-sm">个税筹划</a>
-                <a href="/mortgage-calculator.html" class="px-5 py-2 bg-white/10 text-white rounded-full hover:bg-white/20 transition text-sm">房贷配置</a>
-                <a href="/archive.html" class="px-5 py-2 bg-blue-600 text-white rounded-full hover:bg-blue-700 transition text-sm font-bold">文章存档</a>
-                <a href="/about.html" class="px-5 py-2 bg-slate-700 text-white rounded-full hover:bg-slate-600 transition text-sm">关于本站</a>
-            </div>
-        </div>
-    </section>
-
-    <footer class="bg-white border-t py-12 text-center">
-        <div class="max-w-6xl mx-auto px-6">
-            <div class="text-sm font-bold text-slate-400 space-x-6 mb-6">
-                <a href="/privacy-policy.html" class="hover:text-blue-600 transition">隐私政策</a>
-                <a href="/disclaimer.html" class="hover:text-blue-600 transition">免责声明</a>
-                <a href="/about.html" class="hover:text-blue-600 transition">联系我们</a>
-            </div>
-            <p class="text-[10px] text-slate-300">© 2026 FinanceHub Pro. 数据由 Open Exchange API 提供。</p>
-        </div>
-    </footer>
-
     <script>
+        // 1. 翻译词典
+        const langData = {
+            'zh': {
+                'nav1': '汇率转换', 'nav2': '个税计算', 'nav3': '房贷计算',
+                'tool-title': '实时汇率转换器', 'btn-quote': '获取实时报价',
+                'art-h1': '2026 全球货币体系重构：汇率对冲深度解析',
+                'art-sub': '左侧转换终端捕捉波动，下文深度拆解逻辑',
+                'btn-more': '展开阅读全文'
+            },
+            'en': {
+                'nav1': 'Exchange', 'nav2': 'Tax Calc', 'nav3': 'Mortgage',
+                'tool-title': 'Real-time Converter', 'btn-quote': 'Get Live Quote',
+                'art-h1': '2026 Global Currency Reset: Deep Analysis',
+                'art-sub': 'Terminal on the left captures volatility, analysis below.',
+                'btn-more': 'Read Full Article'
+            }
+        };
+
+        let currentLang = 'zh';
+
+        // 2. 切换逻辑
+        function toggleLang() {
+            currentLang = (currentLang === 'zh') ? 'en' : 'zh';
+            document.querySelectorAll('[data-t]').forEach(el => {
+                const key = el.getAttribute('data-t');
+                if (langData[currentLang][key]) {
+                    el.innerText = langData[currentLang][key];
+                }
+            });
+            document.documentElement.lang = (currentLang === 'zh') ? 'zh-CN' : 'en';
+            console.log("Language switched to: " + currentLang);
+        }
+
+        // 3. 原有功能逻辑
         const curs = ['CNY', 'USD', 'EUR', 'HKD', 'JPY', 'GBP', 'AUD', 'BTC'];
         const fromSel = document.getElementById('fromCurrency');
         const toSel = document.getElementById('toCurrency');
-        curs.forEach(c => { fromSel.innerHTML += `<option value="${c}">${c}</option>`; toSel.innerHTML += `<option value="${c}">${c}</option>`; });
+        curs.forEach(c => { 
+            fromSel.innerHTML += `<option value="${c}">${c}</option>`; 
+            toSel.innerHTML += `<option value="${c}">${c}</option>`; 
+        });
         fromSel.value = 'CNY'; toSel.value = 'USD';
         
         async function convertCurrency() {
@@ -139,18 +143,12 @@
                 const d = await r.json();
                 resBox.innerText = `${(amt * d.rates[toSel.value]).toFixed(2)} ${toSel.value}`;
                 resBox.classList.remove('hidden');
-            } catch (e) { alert("同步失败"); }
+            } catch (e) { alert("Network Error"); }
         }
 
         function expandArticle() { 
             document.getElementById('article-wrapper').classList.add('expanded'); 
             document.getElementById('read-more-btn').style.display = 'none'; 
-        }
-
-        // 优化后的语言切换逻辑
-        function toggleLang() {
-            console.log("Language switch attempt detected.");
-            alert("English version is being synchronized for 2026 financial data. Please refer to the Chinese deep analysis for current compliance.");
         }
     </script>
 </body>
