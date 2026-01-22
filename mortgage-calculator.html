@@ -1,210 +1,252 @@
-// 等待DOM加载完成
-document.addEventListener('DOMContentLoaded', function() {
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-zh="房贷计算器 - FinanceHub" data-en="Mortgage Calculator - FinanceHub">房贷计算器 - FinanceHub</title>
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
     
-    // 初始化Chart.js
-    let paymentChart = null;
-    
-    // 获取DOM元素
-    const readMoreBtn = document.getElementById('read-more');
-    const fullContent = document.getElementById('full-content');
-    const toolCards = document.querySelectorAll('.tool-card');
-    const calculateBtn = document.getElementById('calculate-mortgage');
-    const calculationResults = document.getElementById('calculation-results');
-    
-    // 阅读全文按钮功能
-    if (readMoreBtn && fullContent) {
-        readMoreBtn.addEventListener('click', function() {
-            fullContent.classList.toggle('expanded');
-            
-            // 更新按钮文本和图标
-            if (fullContent.classList.contains('expanded')) {
-                this.innerHTML = '<i class="fas fa-chevron-up"></i> 收起全文';
-                this.classList.add('expanded');
-            } else {
-                this.innerHTML = '<i class="fas fa-book-open"></i> 阅读全文';
-                this.classList.remove('expanded');
-            }
-        });
-    }
-    
-    // 左侧工具按钮功能
-    toolCards.forEach(card => {
-        card.addEventListener('click', function() {
-            // 移除所有工具的active状态
-            toolCards.forEach(c => c.classList.remove('active'));
-            // 给当前点击的工具添加active状态
-            this.classList.add('active');
-            
-            const toolId = this.id;
-            console.log(`工具按钮被点击: ${toolId}`);
-            
-            // 根据按钮ID执行不同功能
-            switch(toolId) {
-                case 'exchange-rate':
-                    alert('汇率转换功能正在开发中...');
-                    break;
-                case 'tax-calc':
-                    alert('个税计算功能正在开发中...');
-                    break;
-                case 'mortgage-calc':
-                    // 滚动到房贷计算器
-                    document.getElementById('mortgage-calculator').scrollIntoView({ 
-                        behavior: 'smooth' 
-                    });
-                    break;
-                case 'history':
-                    alert('历史存档功能正在开发中...');
-                    break;
-            }
-        });
-    });
-    
-    // 连接输入框和滑块
-    const loanAmountInput = document.getElementById('loan-amount');
-    const loanAmountSlider = document.getElementById('loan-amount-slider');
-    const loanRateInput = document.getElementById('loan-rate');
-    const loanRateSlider = document.getElementById('loan-rate-slider');
-    
-    if (loanAmountInput && loanAmountSlider) {
-        loanAmountInput.addEventListener('input', function() {
-            loanAmountSlider.value = this.value;
-        });
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2700554011244473" crossorigin="anonymous"></script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-QFB52C47T2"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-QFB52C47T2');
+    </script>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body { background: #f8fafc; font-family: 'Inter', system-ui, sans-serif; line-height: 1.8; }
+        .calc-tab-active { background: #2563eb; color: white; }
+        .calc-tab { cursor: pointer; transition: all 0.2s; }
+        .prose h1 { font-size: 1.875rem; font-weight: 900; color: #0f172a; margin-bottom: 1.5rem; }
+        .prose h2 { font-size: 1.5rem; font-weight: 800; color: #1e293b; margin-top: 2.5rem; margin-bottom: 1.25rem; border-left: 5px solid #2563eb; padding-left: 1rem; }
+        .prose p { margin-bottom: 1.5rem; text-align: justify; color: #475569; }
+        table { font-size: 0.75rem; width: 100%; border-collapse: collapse; margin: 1.5rem 0; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+        table th, table td { padding: 12px 8px; border: 1px solid #eef2f6; text-align: left; }
+        .highlight-box { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 2rem; border-radius: 1rem; margin: 2rem 0; }
+        .case-study { background: #f0f9ff; border-left: 4px solid #3b82f6; padding: 1.5rem; margin: 2rem 0; }
         
-        loanAmountSlider.addEventListener('input', function() {
-            loanAmountInput.value = this.value;
-        });
-    }
-    
-    if (loanRateInput && loanRateSlider) {
-        loanRateInput.addEventListener('input', function() {
-            loanRateSlider.value = this.value;
-        });
-        
-        loanRateSlider.addEventListener('input', function() {
-            loanRateInput.value = this.value;
-        });
-    }
-    
-    // 房贷计算功能
-    if (calculateBtn) {
-        calculateBtn.addEventListener('click', calculateMortgage);
-    }
-    
-    // 房贷计算函数
-    function calculateMortgage() {
-        // 获取输入值
-        const loanAmount = parseFloat(loanAmountInput.value) * 10000; // 转换为元
-        const annualRate = parseFloat(loanRateInput.value) / 100; // 转换为小数
-        const monthlyRate = annualRate / 12;
-        
-        // 获取贷款年限
-        const loanTermRadios = document.querySelectorAll('input[name="loan-term"]:checked');
-        let loanTermYears = 30; // 默认30年
-        if (loanTermRadios.length > 0) {
-            loanTermYears = parseInt(loanTermRadios[0].value);
+        /* 💡 阅读全文新增样式 */
+        #article-wrapper { max-height: 800px; overflow: hidden; position: relative; transition: max-height 0.8s ease; }
+        #article-wrapper.expanded { max-height: 50000px; }
+        .read-more-overlay {
+            position: absolute; bottom: 0; left: 0; width: 100%; height: 250px;
+            background: linear-gradient(to top, rgba(255,255,255,1) 20%, rgba(255,255,255,0) 100%);
+            display: flex; align-items: flex-end; justify-content: center; padding-bottom: 40px; pointer-events: none;
         }
-        const loanTermMonths = loanTermYears * 12;
-        
-        // 获取还款方式
-        const repaymentRadios = document.querySelectorAll('input[name="repayment-type"]:checked');
-        let repaymentType = 'equal-principal-interest'; // 默认等额本息
-        if (repaymentRadios.length > 0) {
-            repaymentType = repaymentRadios[0].value;
+        .read-more-btn { pointer-events: auto; }
+    </style>
+</head>
+<body class="text-slate-800">
+    <nav class="bg-white shadow-sm sticky top-0 z-50">
+        <div class="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="flex items-center space-x-2 font-black text-2xl text-blue-600 italic">
+                <a href="/index.html"><span>FinanceHub</span><span class="text-slate-400">2026</span></a>
+            </div>
+            <div class="flex items-center space-x-6 text-sm font-bold">
+                <a href="/index.html" class="hover:text-blue-600" data-zh="汇率转换" data-en="Exchange">汇率转换</a>
+                <a href="/tax-calculator.html" class="hover:text-blue-600" data-zh="个税计算" data-en="Tax">个税计算</a>
+                <a href="/mortgage-calculator.html" class="text-blue-600 border-b-2 border-blue-600" data-zh="房贷计算" data-en="Mortgage">房贷计算</a>
+                <a href="/archive.html" class="pb-1 hover:text-blue-600 transition" data-zh="历史存档" data-en="Archive">历史存档</a>
+                <button id="langSwitcher" onclick="toggleLang()" class="bg-slate-100 px-4 py-2 rounded-full text-[10px] font-black border uppercase">EN / 中文</button>
+            </div>
+        </div>
+    </nav>
+
+    <main class="max-w-6xl mx-auto px-6 py-8">
+        <div class="mb-10">
+            <h1 class="text-3xl font-black text-slate-800 mb-2" data-zh="2026 房贷利率精算终端" data-en="2026 Mortgage Actuary Terminal">2026 房贷利率精算终端</h1>
+            <p class="text-slate-500" data-zh="专业分析您的还款压力，优化家庭资产负债表" data-en="Professional analysis of your repayment pressure, optimize household balance sheet">专业分析您的还款压力，优化家庭资产负债表</p>
+        </div>
+
+        <div class="grid lg:grid-cols-2 gap-10">
+            <div class="bg-white p-8 rounded-[2rem] shadow-lg border border-slate-100">
+                <div class="flex bg-slate-100 rounded-2xl p-1 mb-8">
+                    <div onclick="switchCalc('biz')" id="tab-biz" class="calc-tab calc-tab-active flex-1 py-3 text-center rounded-xl font-bold text-sm" data-zh="商业贷款" data-en="Business Loan">商业贷款</div>
+                    <div onclick="switchCalc('fund')" id="tab-fund" class="calc-tab flex-1 py-3 text-center rounded-xl font-bold text-sm" data-zh="公积金" data-en="Provident Fund">公积金</div>
+                    <div onclick="switchCalc('mix')" id="tab-mix" class="calc-tab flex-1 py-3 text-center rounded-xl font-bold text-sm" data-zh="组合贷款" data-en="Combined Loan">组合贷款</div>
+                </div>
+
+                <div class="space-y-6">
+                    <div id="biz-inputs" class="space-y-4">
+                        <label class="block">
+                            <span class="text-xs font-black text-slate-400 uppercase" data-zh="贷款总额 (万元)" data-en="Loan Amount (10k)">贷款总额 (万元)</span>
+                            <input type="number" id="bizAmount" value="100" class="w-full mt-1 p-4 bg-slate-50 border rounded-2xl text-xl font-bold outline-none focus:ring-2 focus:ring-blue-500">
+                        </label>
+                        <label class="block">
+                            <span class="text-xs font-black text-slate-400 uppercase" data-zh="商贷利率 (%)" data-en="Interest Rate (%)">商贷利率 (%)</span>
+                            <input type="number" id="bizRate" value="3.05" step="0.01" class="w-full mt-1 p-4 bg-slate-50 border rounded-2xl font-bold">
+                        </label>
+                    </div>
+
+                    <div id="fund-inputs" class="space-y-4 hidden">
+                        <label class="block">
+                            <span class="text-xs font-black text-slate-400 uppercase" data-zh="公积金总额 (万元)" data-en="Fund Amount (10k)">公积金总额 (万元)</span>
+                            <input type="number" id="fundAmount" value="50" class="w-full mt-1 p-4 bg-slate-50 border rounded-2xl text-xl font-bold">
+                        </label>
+                        <label class="block">
+                            <span class="text-xs font-black text-slate-400 uppercase" data-zh="公积金利率 (%)" data-en="Fund Rate (%)">公积金利率 (%)</span>
+                            <input type="number" id="fundRate" value="2.6" step="0.01" class="w-full mt-1 p-4 bg-slate-50 border rounded-2xl font-bold">
+                        </label>
+                    </div>
+
+                    <div class="grid grid-cols-2 gap-4">
+                        <label class="block">
+                            <span class="text-xs font-black text-slate-400 uppercase" data-zh="按揭年限" data-en="Years">按揭年限</span>
+                            <select id="loanYears" class="w-full mt-1 p-4 bg-slate-50 border rounded-2xl font-bold">
+                                <option value="30">30年 (360期)</option>
+                                <option value="20">20年 (240期)</option>
+                                <option value="10">10年 (120期)</option>
+                            </select>
+                        </label>
+                        <label class="block">
+                            <span class="text-xs font-black text-slate-400 uppercase" data-zh="还款方式" data-en="Method">还款方式</span>
+                            <select id="repayMethod" class="w-full mt-1 p-4 bg-slate-50 border rounded-2xl font-bold">
+                                <option value="interest" data-zh="等额本息" data-en="Equal P+I">等额本息</option>
+                                <option value="principal" data-zh="等额本金" data-en="Equal Principal">等额本金</option>
+                            </select>
+                        </label>
+                    </div>
+
+                    <button onclick="calculateMortgage()" class="w-full bg-blue-600 text-white py-5 rounded-2xl font-black shadow-lg hover:bg-blue-700 transition" data-zh="立即分析还款压力" data-en="Analyze Repayment Pressure">立即分析还款压力</button>
+                    
+                    <div id="mortgageResult" class="hidden space-y-4 pt-6 border-t border-dashed">
+                        <div class="grid grid-cols-2 gap-4">
+                            <div class="bg-orange-50 p-4 rounded-2xl">
+                                <span class="block text-[10px] font-black text-orange-400 uppercase" data-zh="月均还款" data-en="Monthly Pay">月均还款</span>
+                                <span id="resMonthly" class="text-2xl font-black text-orange-600">¥0</span>
+                            </div>
+                            <div class="bg-blue-50 p-4 rounded-2xl">
+                                <span class="block text-[10px] font-black text-blue-400 uppercase" data-zh="利息总额" data-en="Total Interest">利息总额</span>
+                                <span id="resTotalInterest" class="text-2xl font-black text-blue-600">¥0</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-white p-8 rounded-[2rem] shadow-lg border border-slate-100 relative">
+                <div id="article-wrapper">
+                    <article class="prose max-w-none">
+                        <h1 data-zh="2026 房贷利率市场化全解析" data-en="2026 Mortgage Rate Liberalization Analysis">2026 房贷利率市场化全解析</h1>
+                        <p class="font-bold text-blue-600 italic" data-zh="优化家庭资产负债表：从利率'双降'中获益" data-en="Optimize Household Balance Sheet: Benefit from Dual Drops">优化家庭资产负债表：从利率'双降'中获益</p>
+                        
+                        <div class="highlight-box">
+                            <strong data-zh="核心导读" data-en="Core Guide">核心导读</strong>
+                            <p data-zh="2026年房贷利率步入市场化深度改革期，贷款市场报价利率（LPR）形成机制持续优化。对于千万中产家庭而言，理解定价周期规律已成为守护家庭财富的必修课。" data-en="In 2026, mortgage rates enter deep market reform. Understanding pricing patterns is essential for wealth protection.">
+                                2026年房贷利率步入市场化深度改革期...
+                            </p>
+                        </div>
+
+                        <h2 data-zh="一、2026 利率市场全景：双降落地" data-en="1. 2026 Interest Rate Market Overview">一、2026 利率市场全景：双降落地</h2>
+                        <div class="overflow-x-auto">
+                            <table>
+                                <thead class="bg-slate-50 font-bold">
+                                    <tr>
+                                        <th data-zh="贷款类型" data-en="Loan Type">贷款类型</th>
+                                        <th data-zh="2026年初利率" data-en="2026 Initial Rate">2026年初利率</th>
+                                        <th data-zh="降幅" data-en="Reduction">降幅</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr><td data-zh="首套商业贷款" data-en="First Home">首套商业贷款</td><td>3.05%-3.25%</td><td>40-50BP</td></tr>
+                                    <tr><td data-zh="首套公积金贷款" data-en="Provident Fund">首套公积金贷款</td><td>2.60%</td><td>25BP</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <div class="case-study">
+                            <strong data-zh="案例分析：陈先生的资金优化" data-en="Case Study: Mr. Chen's Optimization">案例分析：陈先生的资金优化</strong>
+                            <p data-zh="陈先生将每月节省的601元投资于年化收益4%的理财账户，25年后可积累约30万元。这一案例展示了利率下降的乘数效应。" data-en="Mr. Chen invested 601 yuan monthly savings into 4% return account, accumulating 300k in 25 years.">
+                                陈先生将每月节省的601元投资于理财账户...
+                            </p>
+                        </div>
+
+                        <h2 data-zh="二、还款模型与资金价值" data-en="2. Repayment Models & Capital Value">二、还款模型与资金价值</h2>
+                        <p data-zh="低利率环境下，资金的'时间价值'愈发凸显。等额本息适合收入稳健家庭，而等额本金虽总利息少但前期压力大。" data-en="Time value of money is key in low-rate era. Equal P+I fits stable families.">低利率环境下，资金的"时间价值"愈发凸显...</p>
+                        
+                        <h2 data-zh="三、优化策略：三大原则" data-en="3. Optimization Strategies: 3 Principles">三、优化策略：三大原则</h2>
+                        <p data-zh="原则一：锁定长期低利率。原则二：匹配现金流。原则三：动态调整负债结构。合理负债不是负担，而是财务弹性的工具。" data-en="1. Lock low rates. 2. Match cash flow. 3. Adjust structure. Debt is a tool for flexibility.">基于2026年市场特征，我们提炼出三大核心原则...</p>
+                    </article>
+
+                    <div id="read-more-overlay" class="read-more-overlay">
+                        <button onclick="expandArticle()" class="read-more-btn bg-blue-600 text-white px-10 py-4 rounded-full font-black shadow-2xl hover:bg-blue-700 hover:scale-105 transition transform" data-zh="展开阅读全文" data-en="Read Full Article">展开阅读全文</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="bg-white border-t mt-16 py-10">
+        <div class="max-w-6xl mx-auto px-6 text-center">
+            <div class="flex justify-center space-x-10 mb-8">
+                <a href="/privacy-policy.html" class="text-slate-600 hover:text-blue-600 text-sm font-medium" data-zh="隐私政策" data-en="Privacy Policy">隐私政策</a>
+                <a href="/about.html" class="text-slate-600 hover:text-blue-600 text-sm font-medium" data-zh="联系我们" data-en="Contact Us">联系我们</a>
+                <a href="/disclaimer.html" class="text-slate-600 hover:text-blue-600 text-sm font-medium" data-zh="免责声明" data-en="Disclaimer">免责声明</a>
+            </div>
+            <div class="text-slate-400 text-xs font-bold uppercase">
+                <p>© 2026 FinanceHub Pro. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        let currentMode = 'biz';
+        function switchCalc(mode) {
+            currentMode = mode;
+            document.querySelectorAll('.calc-tab').forEach(t => t.classList.remove('calc-tab-active'));
+            document.getElementById(`tab-${mode}`).classList.add('calc-tab-active');
+            document.getElementById('biz-inputs').style.display = (mode === 'biz' || mode === 'mix') ? 'block' : 'none';
+            document.getElementById('fund-inputs').style.display = (mode === 'fund' || mode === 'mix') ? 'block' : 'none';
         }
-        
-        let monthlyPayment = 0;
-        let totalInterest = 0;
-        let totalPayment = 0;
-        let interestRatio = 0;
-        
-        // 根据还款方式计算
-        if (repaymentType === 'equal-principal-interest') {
-            // 等额本息计算
-            monthlyPayment = loanAmount * monthlyRate * Math.pow(1 + monthlyRate, loanTermMonths) / 
-                            (Math.pow(1 + monthlyRate, loanTermMonths) - 1);
-            totalPayment = monthlyPayment * loanTermMonths;
-            totalInterest = totalPayment - loanAmount;
-        } else {
-            // 等额本金计算
-            const monthlyPrincipal = loanAmount / loanTermMonths;
-            let remainingPrincipal = loanAmount;
-            totalPayment = 0;
-            
-            for (let i = 1; i <= loanTermMonths; i++) {
-                const monthlyInterest = remainingPrincipal * monthlyRate;
-                const currentMonthlyPayment = monthlyPrincipal + monthlyInterest;
-                totalPayment += currentMonthlyPayment;
-                remainingPrincipal -= monthlyPrincipal;
-            }
-            
-            totalInterest = totalPayment - loanAmount;
-            // 等额本金第一个月的月供
-            monthlyPayment = loanAmount / loanTermMonths + loanAmount * monthlyRate;
+
+        function calculateMortgage() {
+            const years = parseInt(document.getElementById('loanYears').value);
+            const months = years * 12;
+            const method = document.getElementById('repayMethod').value;
+            const bizAmt = (currentMode === 'biz' || currentMode === 'mix') ? parseFloat(document.getElementById('bizAmount').value) * 10000 : 0;
+            const bizRate = (currentMode === 'biz' || currentMode === 'mix') ? parseFloat(document.getElementById('bizRate').value) / 100 / 12 : 0;
+            const fundAmt = (currentMode === 'fund' || currentMode === 'mix') ? parseFloat(document.getElementById('fundAmount').value) * 10000 : 0;
+            const fundRate = (currentMode === 'fund' || currentMode === 'mix') ? parseFloat(document.getElementById('fundRate').value) / 100 / 12 : 0;
+
+            const totalPrincipal = bizAmt + fundAmt;
+            const getEqualInstallment = (p, r) => r === 0 ? p / months : (p * r * Math.pow(1 + r, months)) / (Math.pow(1 + r, months) - 1);
+
+            let mPay = getEqualInstallment(bizAmt, bizRate) + getEqualInstallment(fundAmt, fundRate);
+            let totalInterest = (mPay * months) - totalPrincipal;
+
+            document.getElementById('resMonthly').innerText = "¥" + Math.round(mPay).toLocaleString();
+            document.getElementById('resTotalInterest').innerText = "¥" + Math.round(totalInterest).toLocaleString();
+            document.getElementById('mortgageResult').classList.remove('hidden');
         }
-        
-        interestRatio = (totalInterest / totalPayment) * 100;
-        
-        // 更新显示结果
-        document.getElementById('monthly-payment').textContent = `¥${monthlyPayment.toFixed(2)}`;
-        document.getElementById('total-interest').textContent = `¥${totalInterest.toFixed(2)}`;
-        document.getElementById('total-payment').textContent = `¥${totalPayment.toFixed(2)}`;
-        document.getElementById('interest-ratio').textContent = `${interestRatio.toFixed(2)}%`;
-        
-        // 显示结果区域
-        calculationResults.style.display = 'block';
-        
-        // 更新图表
-        updateChart(loanAmount, totalInterest, repaymentType);
-    }
-    
-    // 更新图表函数
-    function updateChart(principal, interest, repaymentType) {
-        const ctx = document.getElementById('payment-chart').getContext('2d');
-        
-        // 如果已有图表实例，先销毁
-        if (paymentChart) {
-            paymentChart.destroy();
+
+        // 💡 阅读全文脚本
+        function expandArticle() {
+            document.getElementById('article-wrapper').classList.add('expanded');
+            document.getElementById('read-more-overlay').style.display = 'none';
         }
-        
-        // 创建新图表
-        paymentChart = new Chart(ctx, {
-            type: 'doughnut',
-            data: {
-                labels: ['贷款本金', '总利息'],
-                datasets: [{
-                    data: [principal, interest],
-                    backgroundColor: [
-                        '#1a3a8f',
-                        '#ff6b6b'
-                    ],
-                    borderWidth: 1
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                plugins: {
-                    legend: {
-                        position: 'bottom',
-                    },
-                    tooltip: {
-                        callbacks: {
-                            label: function(context) {
-                                let label = context.label || '';
-                                if (label) {
-                                    label += ': ';
-                                }
-                                const value = context.raw;
-                                label += `¥${(value/10000).toFixed(2)}万元`;
-                                return label;
-                            }
-                        }
-                    }
-                }
-            }
+
+        function applyLang(lang) {
+            document.querySelectorAll('[data-zh]').forEach(el => {
+                const val = el.getAttribute(`data-${lang}`);
+                if (el.tagName === 'INPUT' || el.tagName === 'OPTION') el.innerText = val;
+                else el.innerText = val;
+            });
+            localStorage.setItem('site_lang', lang);
+            document.getElementById('langSwitcher').innerText = lang === 'zh' ? 'EN / 中文' : '中文 / EN';
+        }
+
+        function toggleLang() {
+            const current = localStorage.getItem('site_lang') === 'en' ? 'zh' : 'en';
+            applyLang(current);
+        }
+
+        window.addEventListener('DOMContentLoaded', () => {
+            applyLang(localStorage.getItem('site_lang') || 'zh');
+            switchCalc('biz');
         });
-    }
-    
-    // 页面加载后自动计算一次
-    calculateMortgage();
-});
+    </script>
+</body>
+</html>
