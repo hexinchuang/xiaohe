@@ -3,16 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title data-zh="文章存档中心 - FinanceHub 2026 金融研报库" data-en="Article Archive - FinanceHub 2026 Financial Reports">文章存档中心 - FinanceHub 2026 金融研报库</title>
+    <title data-zh="金融研报中心 - FinanceHub 2026" data-en="Financial Report Center - FinanceHub 2026">金融研报中心 - FinanceHub 2026</title>
     <link rel="icon" href="/favicon.ico" type="image/x-icon">
     
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2700554011244473" crossorigin="anonymous"></script>
-    <script src="https://cdn.tailwindcss.com"></script>
-    
-    <style>
-        body { background: #f8fafc; font-family: 'Inter', system-ui, sans-serif; }
-    </style>
-
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-QFB52C47T2"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
@@ -20,85 +13,88 @@
       gtag('js', new Date());
       gtag('config', 'G-QFB52C47T2');
     </script>
-</head>
 
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body { background: #f8fafc; font-family: 'Inter', system-ui, sans-serif; line-height: 1.8; }
+        .report-card { transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
+        .report-card:hover { transform: translateY(-4px); box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.05); border-color: #2563eb; }
+    </style>
+</head>
 <body class="text-slate-800">
-    <nav class="bg-white shadow-sm sticky top-0 z-50">
+    <nav class="bg-white shadow-sm sticky top-0 z-50 border-b border-slate-100">
         <div class="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
             <div class="flex items-center space-x-2 font-black text-2xl text-blue-600">
                 <a href="/index.html"><span>FinanceHub</span><span class="text-slate-400">2026</span></a>
             </div>
-            <div class="flex items-center space-x-6 text-sm font-bold text-slate-500">
-                <a href="/index.html" class="hover:text-blue-600 transition" data-zh="汇率终端" data-en="Exchange">汇率终端</a>
-                <a href="/tax-calculator.html" class="hover:text-blue-600 transition" data-zh="个税筹划" data-en="Tax">个税筹划</a>
-                <a href="/mortgage-calculator.html" class="hover:text-blue-600 transition" data-zh="房贷配置" data-en="Mortgage">房贷配置</a>
-                <button id="langSwitcher" onclick="toggleLang()" class="bg-slate-100 px-4 py-2 rounded-full text-[10px] font-black hover:bg-blue-50 transition border border-slate-200 uppercase">
-                    EN / 中文
-                </button>
+            <div class="flex items-center space-x-6 text-sm font-bold">
+                <a href="/index.html" class="hover:text-blue-600 transition" data-zh="返回主页" data-en="Home">返回主页</a>
+                <button id="langSwitcher" onclick="toggleLang()" class="bg-slate-100 px-4 py-2 rounded-full text-[10px] font-black border uppercase">EN / 中文</button>
             </div>
         </div>
     </nav>
 
     <main class="max-w-4xl mx-auto px-6 py-16">
-        <header class="mb-12">
-            <h1 class="text-4xl font-black text-slate-900 mb-4 italic" data-zh="文章存档中心" data-en="Article Archive">文章存档中心</h1>
-            <p class="text-slate-500 font-medium border-l-4 border-blue-600 pl-4" data-zh="集成 2026 全球宏观分析与个人理财实战指南" data-en="2026 Global Macro Analysis & Personal Finance Guide">集成 2026 全球宏观分析与个人理财实战指南</p>
+        <header class="mb-12 border-l-4 border-blue-600 pl-6">
+            <h1 class="text-4xl font-black text-slate-900 mb-4 italic" data-zh="金融研报中心" data-en="Report Archive">金融研报中心</h1>
+            <p class="text-slate-500 font-medium" data-zh="集成 2026 全球宏观分析、个税优化及房贷利率市场化深度指南。" data-en="2026 Global macro analysis, tax optimization, and mortgage market guides.">集成 2026 全球宏观分析、个税优化及房贷利率市场化深度指南。</p>
         </header>
 
-        <div class="space-y-6">
-            <a href="/interest-rate-2026.html" class="group block p-8 bg-white rounded-3xl border border-blue-100 shadow-md hover:shadow-xl hover:border-blue-400 transition-all ring-1 ring-blue-50">
-                <div class="flex justify-between items-start mb-4">
-                    <span class="px-3 py-1 bg-red-100 text-red-600 text-[10px] font-black rounded-full uppercase tracking-tighter animate-pulse" data-zh="最新发布 / 降息专题" data-en="New / Interest Rates">最新发布 / 降息专题</span>
-                    <span class="text-xs text-slate-400 font-mono font-bold">2026.01.19</span>
+        <div class="grid gap-8">
+            <a href="/index.html#article-wrapper" class="report-card block p-8 bg-white rounded-[2rem] border border-slate-100 shadow-sm">
+                <div class="flex items-center gap-3 mb-4">
+                    <span class="px-3 py-1 bg-blue-100 text-blue-600 text-[10px] font-black rounded-full uppercase" data-zh="核心研报" data-en="Core Report">核心研报</span>
+                    <span class="text-xs text-slate-400 font-mono font-bold">2026.01.21</span>
                 </div>
-                <h2 class="text-xl font-black text-slate-900 group-hover:text-blue-600 transition mb-2" data-zh="2026 结构性降息启幕：家庭资产配置的攻守道" data-en="2026 Structural Rate Cuts: Asset Allocation Strategy">2026 结构性降息启幕：家庭资产配置的攻守道</h2>
-                <p class="text-sm text-slate-500 leading-relaxed line-clamp-2" data-zh="深度拆解 2026 年 1 月 19 日央行政策影响。探讨如何利用计算工具优化负债端并构建避险组合。" data-en="In-depth analysis of the Jan 19, 2026 policy. Learn to optimize debt and build hedge portfolios.">
-                    深度拆解 2026 年 1 月 19 日央行下调再贷款利率 0.25 个百分点的影响。探讨在金价破纪录背景下，如何利用计算工具优化负债端并构建 ETF 避险组合。
-                </p>
+                <h2 class="text-2xl font-black text-slate-900 mb-3" data-zh="2026 全球货币体系重构：汇率对冲深度白皮书" data-en="2026 Global Currency Reconfiguration Whitepaper">2026 全球货币体系重构：汇率对冲深度白皮书</h2>
+                <p class="text-slate-500 text-sm leading-relaxed" data-zh="深度剖析政策分化下的失衡与再平衡，为跨境投资者提供科学的资产防御策略。" data-en="Analyzing policy imbalance and rebalance to provide strategic defense for investors.">深度剖析政策分化下的失衡与再平衡，为跨境投资者提供科学的资产防御策略。</p>
             </a>
 
-            <a href="/index.html" class="group block p-8 bg-white rounded-3xl border border-slate-100 shadow-sm hover:shadow-xl hover:border-blue-200 transition-all">
-                <div class="flex justify-between items-start mb-4">
-                    <span class="px-3 py-1 bg-blue-100 text-blue-600 text-[10px] font-black rounded-full uppercase tracking-tighter" data-zh="核心研报 / 汇率" data-en="Report / Exchange">核心研报 / 汇率</span>
-                    <span class="text-xs text-slate-300 font-mono">2026.01.18</span>
+            <a href="/tax-calculator.html#article-wrapper" class="report-card block p-8 bg-white rounded-[2rem] border border-slate-100 shadow-sm">
+                <div class="flex items-center gap-3 mb-4">
+                    <span class="px-3 py-1 bg-green-100 text-green-600 text-[10px] font-black rounded-full uppercase" data-zh="实战手册" data-en="Practical Guide">实战手册</span>
+                    <span class="text-xs text-slate-400 font-mono font-bold">2026.01.20</span>
                 </div>
-                <h2 class="text-xl font-black text-slate-900 group-hover:text-blue-600 transition mb-2" data-zh="2026 全球货币体系重构：汇率对冲深度解析" data-en="2026 Currency Reconfiguration: Hedging Analysis">2026 全球货币体系重构：汇率对冲深度解析</h2>
-                <p class="text-sm text-slate-500 leading-relaxed line-clamp-2" data-zh="深入探讨美联储紧缩周期结束后的全球信用重构逻辑。" data-en="Exploring global credit reconfiguration after the Fed tightening cycle.">
-                    深入探讨美联储紧缩周期结束后的全球信用重构逻辑，以及家庭财务如何在分化世界中构建防御工事。
-                </p>
+                <h2 class="text-2xl font-black text-slate-900 mb-3" data-zh="个税优化实战手册：2026 家庭现金流提升指南" data-en="Tax Optimization 2026: Enhancing Family Cash Flow">个税优化实战手册：2026 家庭现金流提升指南</h2>
+                <p class="text-slate-500 text-sm leading-relaxed" data-zh="通过李锐一家真实案例，拆解专项附加扣除的最优配置逻辑，盘活“隐形财富”。" data-en="Using real cases to break down special deduction strategies and revive 'hidden wealth'.">通过李锐一家真实案例，拆解专项附加扣除的最优配置逻辑，盘活“隐形财富”。</p>
             </a>
 
-            <a href="/tax-calculator.html" class="group block p-8 bg-white rounded-3xl border border-slate-100 shadow-sm hover:shadow-xl hover:border-blue-200 transition-all">
-                <div class="flex justify-between items-start mb-4">
-                    <span class="px-3 py-1 bg-green-100 text-green-600 text-[10px] font-black rounded-full uppercase tracking-tighter" data-zh="实战手册 / 个税" data-en="Guide / Tax">实战手册 / 个税</span>
-                    <span class="text-xs text-slate-300 font-mono">2026.01.18</span>
+            <a href="/mortgage-calculator.html#article-wrapper" class="report-card block p-8 bg-white rounded-[2rem] border border-slate-100 shadow-sm">
+                <div class="flex items-center gap-3 mb-4">
+                    <span class="px-3 py-1 bg-orange-100 text-orange-600 text-[10px] font-black rounded-full uppercase" data-zh="政策解析" data-en="Policy Analysis">政策解析</span>
+                    <span class="text-xs text-slate-400 font-mono font-bold">2026.01.20</span>
                 </div>
-                <h2 class="text-xl font-black text-slate-900 group-hover:text-blue-600 transition mb-2" data-zh="个税优化实战手册：2026 家庭现金流提升指南" data-en="Tax Optimization 2026: Household Cash Flow Guide">个税优化实战手册：2026 家庭现金流提升指南</h2>
-                <p class="text-sm text-slate-500 leading-relaxed line-clamp-2" data-zh="解析节税案例，挖掘专项附加扣除中的隐形财富。" data-en="Analyzing tax-saving cases and uncovering hidden wealth in deductions.">
-                    解析李锐一家的节税案例，挖掘专项附加扣除中的“隐形财富”，涵盖跨境创作者的合规之道。
-                </p>
+                <h2 class="text-2xl font-black text-slate-900 mb-3" data-zh="2026 房贷利率市场化全解析：优化家庭资产负债表" data-en="2026 Mortgage Rate Liberalization: Optimizing Debt">2026 房贷利率市场化全解析：优化家庭资产负债表</h2>
+                <p class="text-slate-500 text-sm leading-relaxed" data-zh="解读 LPR 动态调整机制，平衡“房贷利率”与“稳健理财收益”的临界点。" data-en="Interpreting LPR mechanisms to balance mortgage rates and investment returns.">解读 LPR 动态调整机制，平衡“房贷利率”与“稳健理财收益”的临界点。</p>
             </a>
 
             <div class="pt-10 border-t border-dashed border-slate-200">
-                <h3 class="text-xs font-black text-slate-400 uppercase tracking-widest mb-6 text-center" data-zh="早期历史存档" data-en="Historic Archive">早期历史存档</h3>
+                <h3 class="text-xs font-black text-slate-400 uppercase tracking-widest mb-6 text-center" data-zh="已收录历史研报" data-en="Indexed Historical Reports">已收录历史研报</h3>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <a href="/currency-trends.html" class="p-4 bg-slate-50 rounded-2xl border border-transparent hover:border-slate-200 hover:bg-white transition text-xs font-bold text-slate-600" data-zh="2026 货币趋势早期简报 →" data-en="Early Currency Trends 2026 →">
-                        2026 货币趋势早期简报 →
+                    <a href="/interest-rate-2026.html" class="p-5 bg-slate-50 rounded-2xl border border-transparent hover:border-blue-200 hover:bg-white transition text-xs font-bold text-slate-600">
+                        2026 结构性降息启幕：资产配置攻守道 →
                     </a>
-                    <a href="/mortgage-guide.html" class="p-4 bg-slate-50 rounded-2xl border border-transparent hover:border-slate-200 hover:bg-white transition text-xs font-bold text-slate-600" data-zh="房贷利率市场化初步思路 →" data-en="Mortgage Market Preliminary Thoughts →">
-                        房贷利率市场化初步思路 →
+                    <a href="/currency-trends.html" class="p-5 bg-slate-50 rounded-2xl border border-transparent hover:border-blue-200 hover:bg-white transition text-xs font-bold text-slate-600">
+                        2026 全球汇率波动与离岸对冲报告 →
                     </a>
                 </div>
             </div>
         </div>
     </main>
 
-    <footer class="py-12 text-center border-t bg-white">
-        <p class="text-[10px] text-slate-300 uppercase tracking-widest italic" data-zh="© 2026 FinanceHub Pro | 致力于高质量金融原创内容" data-en="© 2026 FinanceHub Pro | High-Quality Financial Content">© 2026 FinanceHub Pro | 致力于高质量金融原创内容</p>
+    <footer class="bg-white border-t py-12 text-center">
+        <div class="max-w-6xl mx-auto px-6">
+            <div class="flex justify-center space-x-8 mb-6 text-sm font-bold text-slate-400">
+                <a href="/privacy-policy.html" class="hover:text-blue-600 transition" data-zh="隐私政策" data-en="Privacy">隐私政策</a>
+                <a href="/disclaimer.html" class="hover:text-blue-600 transition" data-zh="免责声明" data-en="Disclaimer">免责声明</a>
+                <a href="/about.html" class="hover:text-blue-600 transition" data-zh="关于我们" data-en="About">关于我们</a>
+            </div>
+            <p class="text-[10px] text-slate-300 uppercase tracking-[0.2em] italic font-bold">© 2026 FinanceHub Pro | All Rights Reserved</p>
+        </div>
     </footer>
 
     <script>
-        // 1. 全局多语言同步逻辑 (支持 LocalStorage)
+        // 全局语言同步逻辑
         function applyLang(lang) {
             document.querySelectorAll('[data-zh]').forEach(el => {
                 el.innerText = el.getAttribute(`data-${lang}`);
